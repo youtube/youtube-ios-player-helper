@@ -22,13 +22,13 @@ After installing in your project and opening the workspace, to use the library:
   2. Change the UIView's class in the Identity Inspector tab to YTPlayerView
   3. Import "YTPlayerView.h" in your ViewController.
   4. Add the following property to your ViewController's header file:
-
+```objc
     @property(nonatomic, strong) IBOutlet YTPlayerView *playerView;
-
+```
   5. Load the video into the player in your controller's code with the following code:
-
+```objc
     [self.playerView loadWithVideoId:@"M7lc1UVf-VE"];
-
+```
   6. Run your code!
 
 See the sample project for more advanced uses, including passing additional player parameters and

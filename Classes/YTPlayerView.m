@@ -14,6 +14,8 @@
 
 #import "YTPlayerView.h"
 
+NSString *const YTPlayerErrorDomain = @"YTPlayerErrorDomain";
+
 // These are instances of NSString because we get them from parsing a URL. It would be silly to
 // convert these into an integer just to have to convert the URL query string value into an integer
 // as well for the sake of doing a value comparison. A full list of response error codes can be
@@ -551,19 +553,19 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
     }
   } else if ([action isEqual:kYTPlayerCallbackOnError]) {
     if ([self.delegate respondsToSelector:@selector(playerView:receivedError:)]) {
-      YTPlayerError error = kYTPlayerErrorUnknown;
+      YTPlayerErrorCode errorCode = kYTPlayerErrorUnknown;
 
       if ([data isEqual:kYTPlayerErrorInvalidParamErrorCode]) {
-        error = kYTPlayerErrorInvalidParam;
+        errorCode = kYTPlayerErrorInvalidParam;
       } else if ([data isEqual:kYTPlayerErrorHTML5ErrorCode]) {
-        error = kYTPlayerErrorHTML5Error;
+        errorCode = kYTPlayerErrorHTML5Error;
       } else if ([data isEqual:kYTPlayerErrorNotEmbeddableErrorCode]) {
-        error = kYTPlayerErrorNotEmbeddable;
+        errorCode = kYTPlayerErrorNotEmbeddable;
       } else if ([data isEqual:kYTPlayerErrorVideoNotFoundErrorCode] ||
                  [data isEqual:kYTPlayerErrorCannotFindVideoErrorCode]) {
-        error = kYTPlayerErrorVideoNotFound;
+        errorCode = kYTPlayerErrorVideoNotFound;
       }
-
+      NSError *error = [NSError errorWithDomain:YTPlayerErrorDomain code:errorCode userInfo:nil];
       [self.delegate playerView:self receivedError:error];
     }
   }

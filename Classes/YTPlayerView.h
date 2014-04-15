@@ -17,7 +17,7 @@
 @class YTPlayerView;
 
 /** These enums represent the state of the current video in the player. */
-typedef enum {
+typedef NS_ENUM(NSInteger, YTPlayerState) {
     kYTPlayerStateUnstarted,
     kYTPlayerStateEnded,
     kYTPlayerStatePlaying,
@@ -25,10 +25,10 @@ typedef enum {
     kYTPlayerStateBuffering,
     kYTPlayerStateQueued,
     kYTPlayerStateUnknown
-} YTPlayerState;
+};
 
 /** These enums represent the resolution of the currently loaded video. */
-typedef enum {
+typedef NS_ENUM(NSInteger, YTPlaybackQuality) {
     kYTPlaybackQualitySmall,
     kYTPlaybackQualityMedium,
     kYTPlaybackQualityLarge,
@@ -36,17 +36,18 @@ typedef enum {
     kYTPlaybackQualityHD1080,
     kYTPlaybackQualityHighRes,
     kYTPlaybackQualityUnknown /** This should never be returned. It is here for future proofing. */
-} YTPlaybackQuality;
+};
 
 /** These enums represent error codes thrown by the player. */
-typedef enum {
+extern NSString *const YTPlayerErrorDomain;
+typedef NS_ENUM(NSInteger, YTPlayerErrorCode) {
     kYTPlayerErrorInvalidParam,
     kYTPlayerErrorHTML5Error,
     kYTPlayerErrorVideoNotFound, // Functionally equivalent error codes 100 and
     // 105 have been collapsed into |kYTPlayerErrorVideoNotFound|.
     kYTPlayerErrorNotEmbeddable,
     kYTPlayerErrorUnknown
-} YTPlayerError;
+};
 
 /**
  * A delegate for ViewControllers to respond to YouTube player events outside
@@ -85,9 +86,9 @@ typedef enum {
  * Callback invoked when an error has occured.
  *
  * @param playerView The YTPlayerView instance where the error has occurred.
- * @param error YTPlayerError containing the error state.
+ * @param error An NSError object of YTPlayerErrorDomain which represents the error state as error code.
  */
-- (void)playerView:(YTPlayerView *)playerView receivedError:(YTPlayerError)error;
+- (void)playerView:(YTPlayerView *)playerView receivedError:(NSError *)error;
 @end
 
 /**

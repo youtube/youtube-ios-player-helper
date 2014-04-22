@@ -502,7 +502,7 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 #pragma mark - Private methods
 
 /**
- * Private method to handle "navigation" to a callback URL of the format 
+ * Private method to handle "navigation" to a callback URL of the format
  * http://ytplayer/action?data=someData
  * This is how the UIWebView communicates with the containing Objective-C code.
  * Side effects of this method are that it calls methods on this class's delegate.
@@ -560,7 +560,7 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
       } else if ([data isEqual:kYTPlayerErrorNotEmbeddableErrorCode]) {
         error = kYTPlayerErrorNotEmbeddable;
       } else if ([data isEqual:kYTPlayerErrorVideoNotFoundErrorCode] ||
-                 [data isEqual:kYTPlayerErrorCannotFindVideoErrorCode]) {
+          [data isEqual:kYTPlayerErrorCannotFindVideoErrorCode]) {
         error = kYTPlayerErrorVideoNotFound;
       }
 
@@ -576,13 +576,13 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   //     http(s)://www.youtube.com/embed/[VIDEO ID]?[PARAMETERS]
   NSError *error = NULL;
   NSRegularExpression *regex =
-  [NSRegularExpression regularExpressionWithPattern:kYTPlayerEmbedUrlRegexPattern
-                                            options:NSRegularExpressionCaseInsensitive
-                                              error:&error];
+      [NSRegularExpression regularExpressionWithPattern:kYTPlayerEmbedUrlRegexPattern
+                                                options:NSRegularExpressionCaseInsensitive
+                                                  error:&error];
   NSTextCheckingResult *match =
-  [regex firstMatchInString:url.absoluteString
-                    options:0
-                      range:NSMakeRange(0, [url.absoluteString length])];
+      [regex firstMatchInString:url.absoluteString
+                        options:0
+                          range:NSMakeRange(0, [url.absoluteString length])];
   if (match) {
     return YES;
   } else {
@@ -747,6 +747,7 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 
 - (UIWebView *)createNewWebView {
   UIWebView *webView = [[UIWebView alloc] initWithFrame:self.bounds];
+  webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
   webView.scrollView.scrollEnabled = NO;
   webView.scrollView.bounces = NO;
   return webView;

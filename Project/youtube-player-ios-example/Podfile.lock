@@ -1,17 +1,17 @@
 PODS:
   - OCMock (2.2.3)
-  - YouTube-Player-iOS-Helper (0.1.0)
+  - youtube-ios-player-helper (0.1.1)
 
 DEPENDENCIES:
   - OCMock (= 2.2.3)
-  - YouTube-Player-iOS-Helper (from `../../YouTube-Player-iOS-Helper.podspec`)
+  - youtube-ios-player-helper (from `../../youtube-ios-player-helper.podspec`)
 
 EXTERNAL SOURCES:
-  YouTube-Player-iOS-Helper:
-    :path: ../../YouTube-Player-iOS-Helper.podspec
+  youtube-ios-player-helper:
+    :path: ../../youtube-ios-player-helper.podspec
 
 SPEC CHECKSUMS:
-  OCMock: 74e4ddbcef134170dcc844f91c691f13868075d7
-  YouTube-Player-iOS-Helper: 4178f4492557ddedf39d0c0e2b89dae84c0d8b01
+  OCMock: ea7fe30ee99e4e3186ad47d032a301fa7e8793ec
+  youtube-ios-player-helper: 1fad794b7c6a0d00d98e77f7b98726fabfc6b209
 
 COCOAPODS: 0.29.0

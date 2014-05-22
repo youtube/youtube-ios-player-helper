@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../../youtube-ios-player-helper.podspec
 
 SPEC CHECKSUMS:
-  OCMock: ea7fe30ee99e4e3186ad47d032a301fa7e8793ec
-  youtube-ios-player-helper: 1fad794b7c6a0d00d98e77f7b98726fabfc6b209
+  OCMock: 807b6904818c42b86f42f36352ce7615b816e61a
+  youtube-ios-player-helper: 1fb0557ee343b9dd3353906ab4ff60306aeffdcc
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1

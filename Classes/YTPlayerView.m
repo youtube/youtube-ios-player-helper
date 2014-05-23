@@ -63,11 +63,21 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 }
 
 - (BOOL)loadWithVideoId:(NSString *)videoId playerVars:(NSDictionary *)playerVars {
-  if (!playerVars) {
-    playerVars = @{};
-  }
-  NSDictionary *playerParams = @{ @"videoId" : videoId, @"playerVars" : playerVars };
-  return [self loadWithPlayerParams:playerParams];
+  return [self loadWithVideoId:videoId playerVars:playerVars width:nil andHeight:nil];
+}
+
+- (BOOL)loadWithVideoId:(NSString *)videoId playerVars:(NSDictionary *)playerVars width:(NSString *)width andHeight:(NSString *)height {
+    if (!playerVars) {
+        playerVars = @{};
+    }
+    NSMutableDictionary *playerParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:videoId, @"videoId", playerVars, @"playerVars", nil];
+    if (width) {
+        [playerParams setObject:width forKey:@"width"];
+    }
+    if (height) {
+        [playerParams setObject:height forKey:@"height"];
+    }
+    return [self loadWithPlayerParams:playerParams];
 }
 
 - (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars {
@@ -609,8 +619,12 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   };
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
   [playerParams addEntriesFromDictionary:additionalPlayerParams];
-  [playerParams setValue:@"100%" forKey:@"height"];
-  [playerParams setValue:@"100%" forKey:@"width"];
+    if (![playerParams objectForKey:@"height"]) {
+        [playerParams setValue:@"100%" forKey:@"height"];
+    }
+    if (![playerParams objectForKey:@"width"]) {
+        [playerParams setValue:@"100%" forKey:@"width"];
+    }
   [playerParams setValue:playerCallbacks forKey:@"events"];
 
   // This must not be empty so we can render a '{}' in the output JSON

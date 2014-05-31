@@ -52,6 +52,12 @@ NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIfr
 
 NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtube.com/embed/(.*)$";
 
+@interface YTPlayerView()
+
+@property(nonatomic, strong) NSURL *originURL;
+
+@end
+
 @implementation YTPlayerView
 
 - (BOOL)loadWithVideoId:(NSString *)videoId {

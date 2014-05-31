@@ -101,8 +101,6 @@ typedef enum {
 
 @property(nonatomic, strong, readonly) UIWebView *webView;
 
-@property(nonatomic, strong) NSURL *originURL;
-
 /** A delegate to be notified on playback events. */
 @property(nonatomic, weak) id<YTPlayerViewDelegate> delegate;
 
@@ -158,7 +156,6 @@ typedef enum {
  */
 - (BOOL)loadWithVideoId:(NSString *)videoId playerVars:(NSDictionary *)playerVars;
 
-- (BOOL)loadWithVideoId:(NSString *)videoId playerVars:(NSDictionary *)playerVars width:(NSString *)width andHeight:(NSString *)height;
 /**
  * This method loads the player with the given playlist ID and player variables. Player variables
  * specify optional parameters for video playback. For instance, to play a YouTube

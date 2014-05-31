@@ -101,6 +101,8 @@ typedef enum {
 
 @property(nonatomic, strong, readonly) UIWebView *webView;
 
+@property(nonatomic, strong) NSURL *originURL;
+
 /** A delegate to be notified on playback events. */
 @property(nonatomic, weak) id<YTPlayerViewDelegate> delegate;
 
@@ -180,6 +182,8 @@ typedef enum {
  * @return YES if player has been configured correctly, NO otherwise.
  */
 - (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars;
+
+- (BOOL)loadWithPlayerParams:(NSDictionary *)additionalPlayerParams;
 
 #pragma mark - Player controls
 

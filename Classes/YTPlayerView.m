@@ -624,6 +624,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
     [playerParams setValue:@"100%" forKey:@"width"];
   }
   if (![playerParams objectForKey:@"origin"]) {
+    self.originURL = [NSURL URLWithString:@"about:blank"];
+  } else {
     self.originURL = [NSURL URLWithString: [playerParams objectForKey:@"origin"]];
   }
     
@@ -667,9 +669,7 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
       [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
-  NSURL *baseURL = self.originURL != nil ? self.originURL :[NSURL URLWithString:@"about:blank"];
-    
-  [self.webView loadHTMLString:embedHTML baseURL: baseURL];
+  [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
   [self.webView setDelegate:self];
   self.webView.allowsInlineMediaPlayback = YES;
   self.webView.mediaPlaybackRequiresUserAction = NO;

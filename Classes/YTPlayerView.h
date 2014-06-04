@@ -43,7 +43,7 @@ typedef enum {
     kYTPlayerErrorInvalidParam,
     kYTPlayerErrorHTML5Error,
     kYTPlayerErrorVideoNotFound, // Functionally equivalent error codes 100 and
-    // 105 have been collapsed into |kYTPlayerErrorVideoNotFound|.
+                                 // 105 have been collapsed into |kYTPlayerErrorVideoNotFound|.
     kYTPlayerErrorNotEmbeddable,
     kYTPlayerErrorUnknown
 } YTPlayerError;
@@ -58,6 +58,13 @@ typedef enum {
 @protocol YTPlayerViewDelegate<NSObject>
 
 @optional
+/**
+ * Invoked when the player view starts loading its contents but not necessarily buffering.
+ *
+ * @param playerView The YTPlayerView instance that has started loading.
+ */
+- (void)playerStartedLoading:(YTPlayerView *)playerView;
+
 /**
  * Invoked when the player view is ready to receive API calls.
  *
@@ -100,6 +107,9 @@ typedef enum {
 @interface YTPlayerView : UIView<UIWebViewDelegate>
 
 @property(nonatomic, strong, readonly) UIWebView *webView;
+
+/** Tells the player to adapt to the full height and width of the view. Will only have effect the next time a video is loaded. */
+@property(nonatomic, getter = shouldFillBounds) BOOL fillBounds;
 
 /** A delegate to be notified on playback events. */
 @property(nonatomic, weak) id<YTPlayerViewDelegate> delegate;

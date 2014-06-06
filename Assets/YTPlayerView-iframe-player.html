@@ -18,10 +18,30 @@
 <head>
     <style>
     body { margin: 0; }
+
+    .embed-container {
+        position: relative;
+        padding-bottom: 56.25%%; /* 16/9 ratio */
+        padding-top: 30px; /* IE6 workaround*/
+        height: 0;
+        overflow: hidden;
+    }
+
+    .embed-container iframe,
+    .embed-container object,
+    .embed-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%% !important;
+        height: 100%% !important;
+    }
     </style>
 </head>
 <body>
-    <div id="player"></div>
+    <div class="embed-container">
+        <div id="player"></div>
+    </div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
     var player;

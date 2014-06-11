@@ -44,6 +44,7 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
     var player;
+    var error = false;
     YT.ready(function() {
       player = new YT.Player('player', %@);
       window.location.href = 'ytplayer://onYouTubeIframeAPIReady';
@@ -52,13 +53,20 @@
         window.location.href = 'ytplayer://onReady?data=' + event.data;
     }
     function onStateChange(event) {
-        window.location.href = 'ytplayer://onStateChange?data=' + event.data;
+        if (!error) {
+            window.location.href = 'ytplayer://onStateChange?data=' + event.data;
+        } else {
+            error = false;
+        }
     }
 
     function onPlaybackQualityChange(event) {
         window.location.href = 'ytplayer://onPlaybackQualityChange?data=' + event.data;
     }
     function onPlayerError(event) {
+        if (event.data == 100) {
+            error = true;
+        }
         window.location.href = 'ytplayer://onError?data=' + event.data;
     }
     </script>

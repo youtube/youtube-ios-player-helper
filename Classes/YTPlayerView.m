@@ -319,8 +319,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 
 #pragma mark - Video information methods
 
-- (int)duration {
-  return [[self stringFromEvaluatingJavaScript:@"player.getDuration();"] intValue];
+- (NSTimeInterval)duration {
+  return [[self stringFromEvaluatingJavaScript:@"player.getDuration();"] doubleValue];
 }
 
 - (NSURL *)videoUrl {
@@ -628,7 +628,7 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   } else {
     self.originURL = [NSURL URLWithString: [playerParams objectForKey:@"origin"]];
   }
-    
+
   [playerParams setValue:playerCallbacks forKey:@"events"];
 
   // This must not be empty so we can render a '{}' in the output JSON

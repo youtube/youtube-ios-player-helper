@@ -54,7 +54,16 @@
     }
     function onStateChange(event) {
         if (!error) {
+          if (event.data != YT.PlayerState.PAUSED) {
             window.location.href = 'ytplayer://onStateChange?data=' + event.data;
+          }
+          else {
+            // Youtube player API tried to pause internaly, do not pause
+            window.setTimeout(function(){
+              player.playVideo();
+              window.location.href = 'ytplayer://onStateChange?data=' + YT.PlayerState.PLAYING;
+            }, 10000);
+          }
         } else {
             error = false;
         }

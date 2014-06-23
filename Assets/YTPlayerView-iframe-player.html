@@ -215,8 +215,6 @@
     function onStateChange(event) {
         if (!error) {
             // Send notification for all states but Paused and for Paused if the user did pause.
-            
-            console.log('------- onStateChange  ' + event.data+' ---- '+ new Date());
             if (event.data != YT.PlayerState.PAUSED) {
                 // The player state has changed and obviously it is not interrupted.
                 // Notify the delegate that the state changed.

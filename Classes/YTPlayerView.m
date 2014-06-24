@@ -95,12 +95,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 }
 
 - (void)pauseVideo {
+  [self notifyDelegateOfYouTubeCallbackUrl:[NSURL URLWithString:[NSString stringWithFormat:@"ytplayer://onStateChange?data=%@", kYTPlayerStatePausedCode]]];
   [self stringFromEvaluatingJavaScript:@"player.pauseVideo();"];
-    
-    // Send pause state change notification only when
-    // initiated by this method, but not internaly from
-    // the JS API player
-    [self notifyDelegateOfYouTubeCallbackUrl:[NSURL URLWithString:[NSString stringWithFormat:@"ytplayer://onStateChange?data=%@", kYTPlayerStatePausedCode]]];
 }
 
 - (void)stopVideo {

@@ -637,4 +637,6 @@ typedef enum {
  */
 - (int)playlistIndex;
 
+- (void)removeWebView;
+
 @end

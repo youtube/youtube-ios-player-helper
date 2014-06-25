@@ -772,4 +772,9 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   return webView;
 }
 
+- (void)removeWebView {
+  [self.webView removeFromSuperview];
+  self.webView = nil;
+}
+
 @end

@@ -45,172 +45,58 @@
     <script>
     var player;
     var error = false;
-    
+
     YT.ready(function() {
-    
-             var wrappedPlayer = new YT.Player('player', %@);
-             
-             var PlayerDecorator = function(wrappedPlayer) {
-             
-             this.wrappedPlayer = wrappedPlayer;
-             this.paused = false;
-             this.interrupted = false;
-             
-             PlayerDecorator.prototype.cueVideoById = function(videoId, startSeconds, suggestedQuality) {
-                this.wrappedPlayer.cueVideoById(videoId, startSeconds, suggestedQuality);
-             }
-             
-             PlayerDecorator.prototype.loadVideoById = function(videoId, startSeconds, suggestedQuality) {
-                this.wrappedPlayer.loadVideoById(videoId, startSeconds, suggestedQuality);
-             }
-             PlayerDecorator.prototype.cueVideoByUrl = function(mediaContentUrl, startSeconds, suggestedQuality) {
-                this.wrappedPlayer.cueVideoByUrl(mediaContentUrl, startSeconds, suggestedQuality);
-             }
-             PlayerDecorator.prototype.loadVideoByUrl = function(mediaContentUrl,startSeconds, suggestedQuality) {
-                this.wrappedPlayer.loadVideoByUrl(mediaContentUrl,startSeconds, suggestedQuality);
-             }
-             PlayerDecorator.prototype.cuePlaylist = function(playlist, index, startSeconds, suggestedQuality) {
-                this.wrappedPlayer.cuePlaylist(playlist, index, startSeconds, suggestedQuality);
-             }
-             PlayerDecorator.prototype.loadPlaylist = function(playlist, index, startSeconds, suggestedQuality) {
-                this.wrappedPlayer.loadPlaylist(playlist, index, startSeconds, suggestedQuality);
-             }
-             // These methods may be needed.
-//             PlayerDecorator.prototype.cuePlaylist = function(listType, list, index, startSeconds, suggestedQuality) {
-//                this.wrappedPlayer.cuePlaylist(listType, list, index, startSeconds, suggestedQuality);
-//             }
-//             PlayerDecorator.prototype.loadPlaylist = function(list, listType, index, startSeconds, suggestedQuality) {
-//                this.wrappedPlayer.loadPlaylist(list, listType, index, startSeconds, suggestedQuality);
-//             }
-             
-             
-             PlayerDecorator.prototype.playVideo = function() {
-                this.paused = false;
-                this.interrupted = false;
-             
-                this.wrappedPlayer.playVideo();
-             }
-             PlayerDecorator.prototype.pauseVideo = function() {
-                this.paused = true;
-                this.interrupted = false;
-             
-                this.wrappedPlayer.pauseVideo();
-             }
-             PlayerDecorator.prototype.stopVideo = function() {
-                // This has to be done on some other place, because if replay is on, it won't work
-                this.paused = false;
-                this.interrupted = false;
-             
-                this.wrappedPlayer.stopVideo();
-             }
-             PlayerDecorator.prototype.seekTo = function(seconds, allowSeekAhead) {
-                this.wrappedPlayer.seekTo(seconds, allowSeekAhead);
-             }
-             PlayerDecorator.prototype.clearVideo = function() {
-                this.paused = false;
-                this.interrupted = false;
-             
-                this.wrappedPlayer.clearVideo();
-             }
-             PlayerDecorator.prototype.nextVideo = function() {
-                this.wrappedPlayer.nextVideo();
-             }
-             PlayerDecorator.prototype.previousVideo = function() {
-                this.wrappedPlayer.previousVideo();
-             }
-             PlayerDecorator.prototype.playVideoAt = function(index) {
-                this.wrappedPlayer.playVideoAt(index);
-             }
-             PlayerDecorator.prototype.mute = function() {
-                this.wrappedPlayer.mute();
-             }
-             PlayerDecorator.prototype.unMute = function() {
-                this.wrappedPlayer.unMute();
-             }
-             PlayerDecorator.prototype.isMuted = function() {
-                return this.wrappedPlayer.isMuted();
-             }
-             PlayerDecorator.prototype.setVolume = function(volume) {
-                this.wrappedPlayer.setVolume(volume);
-             }
-             PlayerDecorator.prototype.getVolume = function() {
-                return this.wrappedPlayer.getVolume();
-             }
-             PlayerDecorator.prototype.getPlaybackRate = function() {
-                return this.wrappedPlayer.getPlaybackRate();
-             }
-             PlayerDecorator.prototype.setPlaybackRate = function(suggestedRate) {
-                this.wrappedPlayer.setPlaybackRate(suggestedRate);
-             }
-             PlayerDecorator.prototype.getAvailablePlaybackRates = function() {
-                return this.wrappedPlayer.getAvailablePlaybackRates();
-             }
-             PlayerDecorator.prototype.setLoop = function(loopPlaylists) {
-                this.wrappedPlayer.setLoop(loopPlaylists);
-             }
-             PlayerDecorator.prototype.setShuffle = function(shufflePlaylist) {
-                this.wrappedPlayer.setShuffle(shufflePlaylist);
-             }
-             PlayerDecorator.prototype.getVideoLoadedFraction = function() {
-                return this.wrappedPlayer.getVideoLoadedFraction();
-             }
-             PlayerDecorator.prototype.getPlayerState = function() {
-                return this.wrappedPlayer.getPlayerState();
-             }
-             PlayerDecorator.prototype.getCurrentTime = function() {
-                return this.wrappedPlayer.getCurrentTime();
-             }
-             PlayerDecorator.prototype.getPlaybackQuality = function() {
-                return this.wrappedPlayer.getPlaybackQuality();
-             }
-             PlayerDecorator.prototype.setPlaybackQuality = function(suggestedQuality) {
-                this.wrappedPlayer.setPlaybackQuality(suggestedQuality);
-             }
-             PlayerDecorator.prototype.getAvailableQualityLevels = function() {
-                return this.wrappedPlayer.getAvailableQualityLevels();
-             }
-             PlayerDecorator.prototype.getDuration = function() {
-                return this.wrappedPlayer.getDuration();
-             }
-             PlayerDecorator.prototype.getVideoUrl = function() {
-                return this.wrappedPlayer.getVideoUrl();
-             }
-             PlayerDecorator.prototype.getVideoEmbedCode = function() {
-                return this.wrappedPlayer.getVideoEmbedCode();
-             }
-             PlayerDecorator.prototype.getPlaylist = function() {
-                return this.wrappedPlayer.getPlaylist();
-             }
-             PlayerDecorator.prototype.getPlaylistIndex = function() {
-                return this.wrappedPlayer.getPlaylistIndex();
-             }
-             PlayerDecorator.prototype.addEventListener = function(event, listener) {
-                this.wrappedPlayer.addEventListener(event, listener);
-             }
-             PlayerDecorator.prototype.removeEventListener = function(event, listener) {
-                this.wrappedPlayer.removeEventListener(event, listener);
-             }
-             
-        }
-             
-       
-             player = new PlayerDecorator(wrappedPlayer);
+
+             player = new YT.Player('player', %@);
              window.location.href = 'ytplayer://onYouTubeIframeAPIReady';
-             
-             function forcePlay() {
-                if (player.interrupted) {
-                    player.wrappedPlayer.playVideo();
-                    window.location.href = 'ytplayer://onStateChange?data=' + YT.PlayerState.PLAYING;
-                }
-             }
-        
-             window.setInterval(forcePlay, 5000);
     });
-        
-        
+
     function onReady(event) {
+        player.paused = false;
+        player.interrupted = false;
+
+        player.oldPlayVideo = player.playVideo;
+        player.playVideo = function() {
+           this.paused = false;
+           this.interrupted = false;
+
+           this.oldPlayVideo();
+        }
+        player.oldPauseVideo = player.pauseVideo;
+        player.pauseVideo = function() {
+           this.paused = true;
+           this.interrupted = false;
+
+           this.oldPauseVideo();
+        }
+        player.oldStopVideo = player.stopVideo;
+        player.stopVideo = function() {
+           // This has to be done on some other place, because if replay is on, it won't work
+           this.paused = false;
+           this.interrupted = false;
+
+           this.oldStopVideo();
+        }
+
+        player.oldClearVideo = player.clearVideo;
+        player.clearVideo = function() {
+           this.paused = false;
+           this.interrupted = false;
+
+           this.oldClearVideo();
+        }
+
+        function forcePlay() {
+           if (player.interrupted) {
+               player.oldPlayVideo();
+               window.location.href = 'ytplayer://onStateChange?data=' + YT.PlayerState.PLAYING;
+           }
+        }
+
+        window.setInterval(forcePlay, 5000);
         window.location.href = 'ytplayer://onReady?data=' + event.data;
-        
+
     }
     function onStateChange(event) {
         if (!error) {
@@ -219,7 +105,7 @@
                 // The player state has changed and obviously it is not interrupted.
                 // Notify the delegate that the state changed.
                 player.interrupted = false;
-                
+
                 window.location.href = 'ytplayer://onStateChange?data=' + event.data;
 
             } else {

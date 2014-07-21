@@ -17,7 +17,7 @@
 @class YTPlayerView;
 
 /** These enums represent the state of the current video in the player. */
-typedef enum {
+typedef NS_ENUM(NSInteger, YTPlayerState) {
     kYTPlayerStateUnstarted,
     kYTPlayerStateEnded,
     kYTPlayerStatePlaying,
@@ -25,10 +25,10 @@ typedef enum {
     kYTPlayerStateBuffering,
     kYTPlayerStateQueued,
     kYTPlayerStateUnknown
-} YTPlayerState;
+};
 
 /** These enums represent the resolution of the currently loaded video. */
-typedef enum {
+typedef NS_ENUM(NSInteger, YTPlaybackQuality) {
     kYTPlaybackQualitySmall,
     kYTPlaybackQualityMedium,
     kYTPlaybackQualityLarge,
@@ -36,17 +36,17 @@ typedef enum {
     kYTPlaybackQualityHD1080,
     kYTPlaybackQualityHighRes,
     kYTPlaybackQualityUnknown /** This should never be returned. It is here for future proofing. */
-} YTPlaybackQuality;
+};
 
 /** These enums represent error codes thrown by the player. */
-typedef enum {
+typedef NS_ENUM(NSInteger, YTPlayerError) {
     kYTPlayerErrorInvalidParam,
     kYTPlayerErrorHTML5Error,
     kYTPlayerErrorVideoNotFound, // Functionally equivalent error codes 100 and
     // 105 have been collapsed into |kYTPlayerErrorVideoNotFound|.
     kYTPlayerErrorNotEmbeddable,
     kYTPlayerErrorUnknown
-} YTPlayerError;
+};
 
 /**
  * A delegate for ViewControllers to respond to YouTube player events outside

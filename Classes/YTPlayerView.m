@@ -609,8 +609,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   };
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
   [playerParams addEntriesFromDictionary:additionalPlayerParams];
-  [playerParams setValue:[NSNumber numberWithFloat:CGRectGetHeight(self.bounds)] forKey:@"height"];
-  [playerParams setValue:[NSNumber numberWithFloat:CGRectGetWidth(self.bounds)] forKey:@"width"];
+  [playerParams setValue:@"100%" forKey:@"height"];
+  [playerParams setValue:@"100%" forKey:@"width"];
   [playerParams setValue:playerCallbacks forKey:@"events"];
 
   // This must not be empty so we can render a '{}' in the output JSON

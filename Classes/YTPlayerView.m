@@ -367,18 +367,10 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 
 - (NSArray *)availableQualityLevels {
   NSString *returnValue =
-      [self stringFromEvaluatingJavaScript:@"player.getAvailableQualityLevels();"];
+      [self stringFromEvaluatingJavaScript:@"player.getAvailableQualityLevels().toString();"];
+  if(!returnValue) return nil;
 
-  NSData *availableQualityLevelsData = [returnValue dataUsingEncoding:NSUTF8StringEncoding];
-  NSError *jsonDeserializationError;
-
-  NSArray *rawQualityValues = [NSJSONSerialization JSONObjectWithData:availableQualityLevelsData
-                                                              options:kNilOptions
-                                                                error:&jsonDeserializationError];
-  if (jsonDeserializationError) {
-    return nil;
-  }
-
+  NSArray *rawQualityValues = [returnValue componentsSeparatedByString:@","];
   NSMutableArray *levels = [[NSMutableArray alloc] init];
   for (NSString *rawQualityValue in rawQualityValues) {
     YTPlaybackQuality quality = [YTPlayerView playbackQualityForString:rawQualityValue];

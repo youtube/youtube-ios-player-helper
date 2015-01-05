@@ -108,6 +108,10 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   [self stringFromEvaluatingJavaScript:@"player.clearVideo();"];
 }
 
+- (void)setFillBounds:(BOOL)fillBounds {
+  _fillBounds = fillBounds;
+}
+
 #pragma mark - Cueing methods
 
 - (void)cueVideoById:(NSString *)videoId
@@ -387,6 +391,12 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   return levels;
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+  if ([self.delegate respondsToSelector:@selector(playerStartedLoading:)]) {
+    [self.delegate playerStartedLoading:self];
+  }
+}
+
 - (BOOL)webView:(UIWebView *)webView
     shouldStartLoadWithRequest:(NSURLRequest *)request
                 navigationType:(UIWebViewNavigationType)navigationType {
@@ -607,12 +617,24 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
         @"onPlaybackQualityChange" : @"onPlaybackQualityChange",
         @"onError" : @"onPlayerError"
   };
+    
+  //100% makes the player fit its bounds without losing its aspect. Video never loses aspect though.
+  //By setting the height to the view limits the player will the view completely.
+  NSString *heightString;
+  NSString *widthString;
+  if (self.shouldFillBounds) {
+    heightString = [NSString stringWithFormat:@"%.0f", self.bounds.size.height];
+    widthString = [NSString stringWithFormat:@"%.0f", self.bounds.size.width];
+  }
+  else {
+  heightString = widthString = @"100%";
+  }
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
   [playerParams addEntriesFromDictionary:additionalPlayerParams];
-  [playerParams setValue:@"100%" forKey:@"height"];
-  [playerParams setValue:@"100%" forKey:@"width"];
+  [playerParams setValue:heightString forKey:@"height"];
+  [playerParams setValue:widthString forKey:@"width"];
   [playerParams setValue:playerCallbacks forKey:@"events"];
-
+    
   // This must not be empty so we can render a '{}' in the output JSON
   if (![playerParams objectForKey:@"playerVars"]) {
     [playerParams setValue:[[NSDictionary alloc] init] forKey:@"playerVars"];

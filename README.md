@@ -16,6 +16,10 @@ it simply add the following line to your Podfile:
 
     pod "youtube-ios-player-helper", "~> 0.1.1"
 
+Or, for this fork:
+
+    pod 'youtube-ios-player-helper', :git => 'https://github.com/scondoo/youtube-ios-player-helper.git'
+
 After installing in your project and opening the workspace, to use the library:
 
   1. Drag a UIView the desired size of your player onto your Storyboard.

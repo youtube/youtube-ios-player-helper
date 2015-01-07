@@ -48,9 +48,9 @@
     var error = false;
 
     YT.ready(function() {
-
-             player = new YT.Player('player', %@);
-             window.location.href = 'ytplayer://onYouTubeIframeAPIReady';
+        player = new YT.Player('player', %@);
+        player.setSize(window.innerWidth, window.innerHeight);
+        window.location.href = 'ytplayer://onYouTubeIframeAPIReady';
     });
 
     function onReady(event) {
@@ -133,6 +133,9 @@
             error = true;
         }
         window.location.href = 'ytplayer://onError?data=' + event.data;
+    }
+    window.onresize = function() {
+        player.setSize(window.innerWidth, window.innerHeight);
     }
     </script>
 </body>

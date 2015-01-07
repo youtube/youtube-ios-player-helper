@@ -446,8 +446,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
       return kYTPlaybackQualityHD1080Quality;
     case kYTPlaybackQualityHighRes:
       return kYTPlaybackQualityHighResQuality;
-    case kYTPlaybackQualityHighRes:
-      return kYTPlaybackQualityHighResQuality;
+    case kYTPlaybackQualityAuto:
+      return kYTPlaybackQualityAutoQuality;
     default:
       return kYTPlaybackQualityUnknownQuality;
   }

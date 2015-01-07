@@ -39,7 +39,7 @@
 }
 
 - (void)playerView:(YTPlayerView *)ytPlayerView didChangeToState:(YTPlayerState)state {
-  NSString *message = [NSString stringWithFormat:@"Player state changed: %u\n", state];
+  NSString *message = [NSString stringWithFormat:@"Player state changed: %ld\n", (long)state];
   [self appendStatusText:message];
 }
 

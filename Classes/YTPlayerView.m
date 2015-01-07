@@ -509,16 +509,16 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 
 /**
  * Private method to handle "navigation" to a callback URL of the format
- * http://ytplayer/action?data=someData
+ * ytplayer://action?data=someData
  * This is how the UIWebView communicates with the containing Objective-C code.
  * Side effects of this method are that it calls methods on this class's delegate.
  *
- * @param url A URL of the format http://ytplayer/action.
+ * @param url A URL of the format ytplayer://action?data=value.
  */
 - (void)notifyDelegateOfYouTubeCallbackUrl: (NSURL *) url {
   NSString *action = url.host;
 
-  // We know the query can only be of the format http://ytplayer?data=SOMEVALUE,
+  // We know the query can only be of the format ytplayer://action?data=SOMEVALUE,
   // so we parse out the value.
   NSString *query = url.query;
   NSString *data;

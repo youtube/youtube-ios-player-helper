@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, YTPlaybackQuality) {
     kYTPlaybackQualityHD720,
     kYTPlaybackQualityHD1080,
     kYTPlaybackQualityHighRes,
+    kYTPlaybackQualityAuto, /** Addition for YouTube Live Events. */
     kYTPlaybackQualityUnknown /** This should never be returned. It is here for future proofing. */
 };
 

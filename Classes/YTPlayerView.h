@@ -180,6 +180,8 @@ typedef enum {
  */
 - (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars;
 
+- (BOOL)loadWithPlayerParams:(NSDictionary *)additionalPlayerParams;
+
 #pragma mark - Player controls
 
 // These methods correspond to their JavaScript equivalents as documented here:
@@ -591,7 +593,7 @@ typedef enum {
  *
  * @return Length of the video in seconds.
  */
-- (int)duration;
+- (NSTimeInterval)duration;
 
 /**
  * Returns the YouTube.com URL for the video. This method corresponds
@@ -634,5 +636,7 @@ typedef enum {
  * @return The 0-based index of the currently playing item in the playlist.
  */
 - (int)playlistIndex;
+
+- (void)removeWebView;
 
 @end

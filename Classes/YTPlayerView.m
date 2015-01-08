@@ -34,6 +34,7 @@ NSString static *const kYTPlaybackQualityLargeQuality = @"large";
 NSString static *const kYTPlaybackQualityHD720Quality = @"hd720";
 NSString static *const kYTPlaybackQualityHD1080Quality = @"hd1080";
 NSString static *const kYTPlaybackQualityHighResQuality = @"highres";
+NSString static *const kYTPlaybackQualityDefaultQuality = @"default";
 NSString static *const kYTPlaybackQualityUnknownQuality = @"unknown";
 
 // Constants representing YouTube player errors.

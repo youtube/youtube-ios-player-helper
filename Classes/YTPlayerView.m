@@ -34,6 +34,7 @@ NSString static *const kYTPlaybackQualityLargeQuality = @"large";
 NSString static *const kYTPlaybackQualityHD720Quality = @"hd720";
 NSString static *const kYTPlaybackQualityHD1080Quality = @"hd1080";
 NSString static *const kYTPlaybackQualityHighResQuality = @"highres";
+NSString static *const kYTPlaybackQualityAutoQuality = @"auto";
 NSString static *const kYTPlaybackQualityUnknownQuality = @"unknown";
 
 // Constants representing YouTube player errors.
@@ -418,6 +419,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
     quality = kYTPlaybackQualityHD1080;
   } else if ([qualityString isEqualToString:kYTPlaybackQualityHighResQuality]) {
     quality = kYTPlaybackQualityHighRes;
+  } else if ([qualityString isEqualToString:kYTPlaybackQualityAutoQuality]) {
+    quality = kYTPlaybackQualityAuto;
   }
 
   return quality;
@@ -443,6 +446,8 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
       return kYTPlaybackQualityHD1080Quality;
     case kYTPlaybackQualityHighRes:
       return kYTPlaybackQualityHighResQuality;
+    case kYTPlaybackQualityAuto:
+      return kYTPlaybackQualityAutoQuality;
     default:
       return kYTPlaybackQualityUnknownQuality;
   }

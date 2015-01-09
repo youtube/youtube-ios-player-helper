@@ -38,9 +38,10 @@ Pod::Spec.new do |s|
                             LICENSE
                          }
   s.author             = { "Ikai Lan" => "ikai@google.com",
+                           "Ibrahim Ulukaya" => "ulukaya@google.com",
                            "Yoshifumi Yamaguchi" => "yoshifumi@google.com" }
   s.social_media_url   = "https://twitter.com/YouTubeDev"
-  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git" }
+  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "0.1.1" }
 
   s.platform     = :ios, '6.0'
   s.requires_arc = true

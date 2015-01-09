@@ -35,6 +35,7 @@ NSString static *const kYTPlaybackQualityHD720Quality = @"hd720";
 NSString static *const kYTPlaybackQualityHD1080Quality = @"hd1080";
 NSString static *const kYTPlaybackQualityHighResQuality = @"highres";
 NSString static *const kYTPlaybackQualityAutoQuality = @"auto";
+NSString static *const kYTPlaybackQualityDefaultQuality = @"default";
 NSString static *const kYTPlaybackQualityUnknownQuality = @"unknown";
 
 // Constants representing YouTube player errors.
@@ -52,6 +53,7 @@ NSString static *const kYTPlayerCallbackOnError = @"onError";
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIframeAPIReady";
 
 NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtube.com/embed/(.*)$";
+NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.doubleclick.net/pagead/conversion/";
 
 @interface YTPlayerView()
 
@@ -578,15 +580,24 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   // UIWebView is the URL for the embed, which is of the format:
   //     http(s)://www.youtube.com/embed/[VIDEO ID]?[PARAMETERS]
   NSError *error = NULL;
-  NSRegularExpression *regex =
+  NSRegularExpression *ytRegex =
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerEmbedUrlRegexPattern
                                                 options:NSRegularExpressionCaseInsensitive
                                                   error:&error];
-  NSTextCheckingResult *match =
-      [regex firstMatchInString:url.absoluteString
+  NSTextCheckingResult *ytMatch =
+      [ytRegex firstMatchInString:url.absoluteString
                         options:0
                           range:NSMakeRange(0, [url.absoluteString length])];
-  if (match) {
+    
+  NSRegularExpression *adRegex =
+      [NSRegularExpression regularExpressionWithPattern:kYTPlayerAdUrlRegexPattern
+                                                options:NSRegularExpressionCaseInsensitive
+                                                  error:&error];
+  NSTextCheckingResult *adMatch =
+      [adRegex firstMatchInString:url.absoluteString
+                        options:0
+                          range:NSMakeRange(0, [url.absoluteString length])];
+  if (ytMatch || adMatch) {
     return YES;
   } else {
     [[UIApplication sharedApplication] openURL:url];

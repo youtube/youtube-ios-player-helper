@@ -393,7 +393,11 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
   if ([request.URL.scheme isEqual:@"ytplayer"]) {
     [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
     return NO;
-  } else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
+  } 
+  else if ([request.URL.host isEqual: @"pubads.g.doubleclick.net"]) {
+    return NO; 
+  } 
+  else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
     return [self handleHttpNavigationToUrl:request.URL];
   }
   return YES;
@@ -754,3 +758,4 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 }
 
 @end
+

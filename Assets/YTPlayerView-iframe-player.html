@@ -101,6 +101,31 @@
     }
     function onStateChange(event) {
         if (!error) {
+            
+            /**
+             * This code here is temporary and is in place to handle pause initiated by the api player.
+             * if user is has low connectivity a force play will not happen.
+             */
+            player.interrupted = false;
+
+             switch(event.data) {
+                case YT.PlayerState.PAUSED :
+                    player.paused = true;
+                    break;
+
+                case YT.PlayerState.sPLAYING:
+                    player.paused = false;
+
+                default:
+                    break;
+             }
+            
+            window.location.href = 'ytplayer://onStateChange?data=' + event.data;
+
+            /* * 
+             * @samiq: Commenting this part of the code until a better solution comes out to handle
+             * unrequested pause of video.
+             *
             // Send notification for all states but Paused and for Paused if the user did pause.
             if (event.data != YT.PlayerState.PAUSED) {
                 // The player state has changed and obviously it is not interrupted.
@@ -119,6 +144,7 @@
                     player.interrupted = true;
                 }
             }
+            */
         }
         else {
             error = false;

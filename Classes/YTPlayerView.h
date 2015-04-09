@@ -46,7 +46,8 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
     kYTPlayerErrorHTML5Error,
     kYTPlayerErrorVideoNotFound, // Functionally equivalent error codes 100 and
     // 105 have been collapsed into |kYTPlayerErrorVideoNotFound|.
-    kYTPlayerErrorNotEmbeddable,
+    kYTPlayerErrorNotEmbeddable, // Functionally equivalent error codes 101 and
+    // 150 have been collapsed into |kYTPlayerErrorNotEmbeddable|.
     kYTPlayerErrorUnknown
 };
 

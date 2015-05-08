@@ -44,6 +44,7 @@ NSString static *const kYTPlayerErrorHTML5ErrorCode = @"5";
 NSString static *const kYTPlayerErrorVideoNotFoundErrorCode = @"100";
 NSString static *const kYTPlayerErrorNotEmbeddableErrorCode = @"101";
 NSString static *const kYTPlayerErrorCannotFindVideoErrorCode = @"105";
+NSString static *const kYTPlayerErrorSameAsNotEmbeddableErrorCode = @"150";
 
 // Constants representing player callbacks.
 NSString static *const kYTPlayerCallbackOnReady = @"onReady";
@@ -562,10 +563,11 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
         error = kYTPlayerErrorInvalidParam;
       } else if ([data isEqual:kYTPlayerErrorHTML5ErrorCode]) {
         error = kYTPlayerErrorHTML5Error;
-      } else if ([data isEqual:kYTPlayerErrorNotEmbeddableErrorCode]) {
+      } else if ([data isEqual:kYTPlayerErrorNotEmbeddableErrorCode] ||
+                 [data isEqual:kYTPlayerErrorSameAsNotEmbeddableErrorCode]) {
         error = kYTPlayerErrorNotEmbeddable;
       } else if ([data isEqual:kYTPlayerErrorVideoNotFoundErrorCode] ||
-          [data isEqual:kYTPlayerErrorCannotFindVideoErrorCode]) {
+                 [data isEqual:kYTPlayerErrorCannotFindVideoErrorCode]) {
         error = kYTPlayerErrorVideoNotFound;
       }
 

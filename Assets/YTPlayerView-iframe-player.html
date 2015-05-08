@@ -54,71 +54,12 @@
     });
 
     function onReady(event) {
-        player.paused = false;
-        player.interrupted = false;
-
-        player.oldPlayVideo = player.playVideo;
-        player.playVideo = function() {
-           this.paused = false;
-           this.interrupted = false;
-
-           this.oldPlayVideo();
-        }
-        player.oldPauseVideo = player.pauseVideo;
-        player.pauseVideo = function() {
-           this.paused = true;
-           this.interrupted = false;
-
-           this.oldPauseVideo();
-        }
-        player.oldStopVideo = player.stopVideo;
-        player.stopVideo = function() {
-           // This has to be done on some other place, because if replay is on, it won't work
-           this.paused = false;
-           this.interrupted = false;
-
-           this.oldStopVideo();
-        }
-
-        player.oldClearVideo = player.clearVideo;
-        player.clearVideo = function() {
-           this.paused = false;
-           this.interrupted = false;
-
-           this.oldClearVideo();
-        }
-
-        function forcePlay() {
-           if (player.interrupted) {
-               player.oldPlayVideo();
-               window.location.href = 'ytplayer://onStateChange?data=' + YT.PlayerState.PLAYING;
-           }
-        }
-
-        window.setInterval(forcePlay, 5000);
         window.location.href = 'ytplayer://onReady?data=' + event.data;
-
     }
+
     function onStateChange(event) {
-        if (!error) {
-            // Send notification for all states but Paused and for Paused if the user did pause.
-            if (event.data != YT.PlayerState.PAUSED) {
-                // The player state has changed and obviously it is not interrupted.
-                // Notify the delegate that the state changed.
-                player.interrupted = false;
-
-                window.location.href = 'ytplayer://onStateChange?data=' + event.data;
-
-            } else {
-                if (player.paused == true){
-                    // User has paused. Notify the delegate that the state changed.
-                    window.location.href = 'ytplayer://onStateChange?data=' + event.data;
-                }
-                else {
-                    // Youtube player API tried to pause internaly, do not pause.
-                    player.interrupted = true;
-                }
-            }
+        if (!error) {            
+            window.location.href = 'ytplayer://onStateChange?data=' + event.data;
         }
         else {
             error = false;
@@ -128,12 +69,14 @@
     function onPlaybackQualityChange(event) {
         window.location.href = 'ytplayer://onPlaybackQualityChange?data=' + event.data;
     }
+
     function onPlayerError(event) {
         if (event.data == 100) {
             error = true;
         }
         window.location.href = 'ytplayer://onError?data=' + event.data;
     }
+    
     window.onresize = function() {
         player.setSize(window.innerWidth, window.innerHeight);
     }

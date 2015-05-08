@@ -631,16 +631,20 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   if (![playerParams objectForKey:@"width"]) {
     [playerParams setValue:@"100%" forKey:@"width"];
   }
-  if (![playerParams objectForKey:@"origin"]) {
-    self.originURL = [NSURL URLWithString:@"about:blank"];
-  } else {
-    self.originURL = [NSURL URLWithString: [playerParams objectForKey:@"origin"]];
-  }
 
   [playerParams setValue:playerCallbacks forKey:@"events"];
 
-  // This must not be empty so we can render a '{}' in the output JSON
-  if (![playerParams objectForKey:@"playerVars"]) {
+  if ([playerParams objectForKey:@"playerVars"]) {
+    NSMutableDictionary *playerVars = [[NSMutableDictionary alloc] init];
+    [playerVars addEntriesFromDictionary:[playerParams objectForKey:@"playerVars"]];
+      
+    if (![playerVars objectForKey:@"origin"]) {
+        self.originURL = [NSURL URLWithString:@"about:blank"];
+    } else {
+        self.originURL = [NSURL URLWithString: [playerVars objectForKey:@"origin"]];
+    }
+  } else {
+    // This must not be empty so we can render a '{}' in the output JSON
     [playerParams setValue:[[NSDictionary alloc] init] forKey:@"playerVars"];
   }
 

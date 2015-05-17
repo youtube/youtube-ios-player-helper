@@ -21,6 +21,9 @@
     int time_video_pos;
     int time_video_total;
     BOOL isTrackLogged;
+    BOOL isTranslationEnabled;
+    BOOL isKaraokeEnabled;
+    BOOL isSecretEnabled;
     NSString *lang_selected;
     
     NSTimer *timer_video;
@@ -48,11 +51,13 @@
 @property(nonatomic, weak) IBOutlet UITextView *textview_lyric;
 @property(nonatomic, weak) IBOutlet UITextView *textview_translation;
 @property(nonatomic, weak) IBOutlet UITextView *textview_karaoke;
+@property(nonatomic, weak) IBOutlet UITextView *textview_secret;
 
 //@property(nonatomic, strong) IBOutlet UIView *view_lyric_view;
 @property(nonatomic, strong) IBOutlet UIButton *btn_type_original;
 @property(nonatomic, strong) IBOutlet UIButton *btn_type_translation;
 @property(nonatomic, strong) IBOutlet UIButton *btn_type_karaoke;
+@property(nonatomic, strong) IBOutlet UIButton *btn_type_secret;
 @property(nonatomic, strong) IBOutlet UIPickerView *picker_lang;
 @property(nonatomic, strong) IBOutlet UISearchBar *search_lang;
 

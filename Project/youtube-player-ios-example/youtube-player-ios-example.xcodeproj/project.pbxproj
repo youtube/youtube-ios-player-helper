@@ -20,14 +20,18 @@
 		4D69941D18E22EE10073680F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69941718E22EE10073680F /* AppDelegate.m */; };
 		4D69941E18E22EE10073680F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D69941818E22EE10073680F /* Main.storyboard */; };
 		4D69942218E22F000073680F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69942118E22F000073680F /* main.m */; };
+		8423338D1B08549D00A99EBC /* Serendipity.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333871B08549D00A99EBC /* Serendipity.karaoke.en.txt */; };
+		8423338E1B08549D00A99EBC /* Serendipity.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333881B08549D00A99EBC /* Serendipity.lyric.en.txt */; };
+		8423338F1B08549D00A99EBC /* Serendipity.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333891B08549D00A99EBC /* Serendipity.lyric.txt */; };
+		842333901B08549D00A99EBC /* Serendipity.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8423338A1B08549D00A99EBC /* Serendipity.translation.en.txt */; };
+		842333951B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */; };
+		842333961B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */; };
+		842333981B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */; };
 		84B96C761B009B91001ACC2E /* libPods-youtube-ios-player-helper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B96C711B009B77001ACC2E /* libPods-youtube-ios-player-helper.a */; };
 		84D489CD1B033BAD009299A7 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CA1B033BAD009299A7 /* PlaylistViewController.m */; };
 		84D489CE1B033BAD009299A7 /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CC1B033BAD009299A7 /* SingleVideoViewController.m */; };
 		84D489DF1B05E9A2009299A7 /* Lyric.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489DE1B05E9A2009299A7 /* Lyric.m */; };
 		84D489E61B070032009299A7 /* LyricLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489E51B070032009299A7 /* LyricLang.m */; };
-		84FADA571B072D2E00A84B3D /* Serendipity.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84FADA541B072D2E00A84B3D /* Serendipity.karaoke.en.txt */; };
-		84FADA591B072D2E00A84B3D /* Serendipity.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84FADA561B072D2E00A84B3D /* Serendipity.translation.en.txt */; };
-		84FADA641B073DF600A84B3D /* Serendipity.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84FADA631B073DF600A84B3D /* Serendipity.lyric.en.txt */; };
 		A1667DB27CF64FC392012064 /* libPods-youtube-player-ios-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FE8C7A7A914485BBD9A3D4 /* libPods-youtube-player-ios-exampleTests.a */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +94,13 @@
 		4D69942118E22F000073680F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5E02695E3B9C9C321995A8EB /* Pods-youtube-player-ios-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube-player-ios-exampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-youtube-player-ios-exampleTests/Pods-youtube-player-ios-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		614CB957CD094425884C83E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		842333871B08549D00A99EBC /* Serendipity.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.karaoke.en.txt; sourceTree = "<group>"; };
+		842333881B08549D00A99EBC /* Serendipity.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.lyric.en.txt; sourceTree = "<group>"; };
+		842333891B08549D00A99EBC /* Serendipity.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.lyric.txt; sourceTree = "<group>"; };
+		8423338A1B08549D00A99EBC /* Serendipity.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.translation.en.txt; sourceTree = "<group>"; };
+		842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.lyric.en.txt"; sourceTree = "<group>"; };
+		842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.lyric.txt"; sourceTree = "<group>"; };
+		842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.translation.en.txt"; sourceTree = "<group>"; };
 		845F68471AFECFBB007ACB0C /* libPods-youtube-ios-player-helper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-youtube-ios-player-helper.a"; path = "Pods/../build/Debug-iphoneos/libPods-youtube-ios-player-helper.a"; sourceTree = "<group>"; };
 		84B96C671B009B77001ACC2E /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		84D489C81B033A9D009299A7 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -101,9 +112,6 @@
 		84D489DE1B05E9A2009299A7 /* Lyric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lyric.m; sourceTree = "<group>"; };
 		84D489E41B070032009299A7 /* LyricLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyricLang.h; sourceTree = "<group>"; };
 		84D489E51B070032009299A7 /* LyricLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyricLang.m; sourceTree = "<group>"; };
-		84FADA541B072D2E00A84B3D /* Serendipity.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.karaoke.en.txt; sourceTree = "<group>"; };
-		84FADA561B072D2E00A84B3D /* Serendipity.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.translation.en.txt; sourceTree = "<group>"; };
-		84FADA631B073DF600A84B3D /* Serendipity.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.lyric.en.txt; sourceTree = "<group>"; };
 		97FE8C7A7A914485BBD9A3D4 /* libPods-youtube-player-ios-exampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtube-player-ios-exampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A768218C01189927D9428EFE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C779352E5870E0CC33EE7ADD /* Pods-youtube-player-ios-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube-player-ios-exampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-youtube-player-ios-exampleTests/Pods-youtube-player-ios-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -286,9 +294,13 @@
 		84D489D01B05E8D8009299A7 /* lyrics */ = {
 			isa = PBXGroup;
 			children = (
-				84FADA541B072D2E00A84B3D /* Serendipity.karaoke.en.txt */,
-				84FADA631B073DF600A84B3D /* Serendipity.lyric.en.txt */,
-				84FADA561B072D2E00A84B3D /* Serendipity.translation.en.txt */,
+				842333871B08549D00A99EBC /* Serendipity.karaoke.en.txt */,
+				842333881B08549D00A99EBC /* Serendipity.lyric.en.txt */,
+				842333891B08549D00A99EBC /* Serendipity.lyric.txt */,
+				8423338A1B08549D00A99EBC /* Serendipity.translation.en.txt */,
+				842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */,
+				842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */,
+				842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */,
 			);
 			path = lyrics;
 			sourceTree = "<group>";
@@ -410,12 +422,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8423338F1B08549D00A99EBC /* Serendipity.lyric.txt in Resources */,
+				842333901B08549D00A99EBC /* Serendipity.translation.en.txt in Resources */,
 				4D69941E18E22EE10073680F /* Main.storyboard in Resources */,
-				84FADA591B072D2E00A84B3D /* Serendipity.translation.en.txt in Resources */,
-				84FADA571B072D2E00A84B3D /* Serendipity.karaoke.en.txt in Resources */,
+				8423338D1B08549D00A99EBC /* Serendipity.karaoke.en.txt in Resources */,
+				842333981B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt in Resources */,
+				8423338E1B08549D00A99EBC /* Serendipity.lyric.en.txt in Resources */,
 				4D6993FA18E22E0C0073680F /* Images.xcassets in Resources */,
-				84FADA641B073DF600A84B3D /* Serendipity.lyric.en.txt in Resources */,
+				842333951B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt in Resources */,
 				4D6993EC18E22E0C0073680F /* InfoPlist.strings in Resources */,
+				842333961B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

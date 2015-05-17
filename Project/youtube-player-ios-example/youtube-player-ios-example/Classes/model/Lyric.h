@@ -12,6 +12,7 @@ typedef enum:NSInteger {
     LyricOriginal = 0,
     LyricTranslation,
     LyricKarakoke,
+    LyricSecret,
     LyricTypeCount
 }LyricType;
 
@@ -20,12 +21,19 @@ typedef enum:NSInteger {
     NSMutableDictionary *list_lyric;
     NSMutableDictionary *list_karaoke;
     NSMutableDictionary *list_translation;
+    NSMutableDictionary *list_secret;
+    
     NSString* current_lyric_line;
     NSString* current_translation_line;
     NSString* current_karaoke_line;
+    NSString* current_secret_line;
 }
 
 @property(nonatomic, strong) NSMutableDictionary *list_lyric;
+@property(nonatomic, strong) NSString* current_lyric_line;
+@property(nonatomic, strong) NSString* current_translation_line;
+@property(nonatomic, strong) NSString* current_karaoke_line;
+@property(nonatomic, strong) NSString* current_secret_line;
 
 - (void) searchDataWithTitle:(NSString*) title
                    andArtist:(NSString*) artist
@@ -51,5 +59,8 @@ typedef enum:NSInteger {
 - (NSString*) retrieveLyricInfoAtTime:(NSString*) atTime;
 - (NSString*) retrieveTranslationInfoAtTime:(NSString*) atTime;
 - (NSString*) retrieveKaraokeInfoAtTime:(NSString*) atTime;
+- (NSString*) retrieveSecretInfoAtTime:(NSString*) atTime;
+
+- (void) clearCurrentLyric;
 
 @end

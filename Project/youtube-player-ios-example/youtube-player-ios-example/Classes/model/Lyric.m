@@ -11,6 +11,10 @@
 @implementation Lyric
 
 @synthesize list_lyric;
+@synthesize current_lyric_line;
+@synthesize current_translation_line;
+@synthesize current_karaoke_line;
+@synthesize current_secret_line;
 
 - (id) init
 {
@@ -30,9 +34,9 @@
                                       andType:(LyricType) type
                                       andLang:(NSString*) lang
 {
-    [self loadSampleLyricFromFileWithTitle:title];
-    [self loadSampleKaraokeFromFileWithTitle:title];
-    [self loadSampleTranslationFromFileWithTitle:title];
+    [self loadSampleLyricFromFileWithTitle:title withLang:lang];
+    [self loadSampleKaraokeFromFileWithTitle:title withLang:lang];
+    [self loadSampleTranslationFromFileWithTitle:title withLang:lang];
 
 }
 
@@ -100,15 +104,15 @@
     return list_karaoke;
 }
 
-- (void) loadSampleLyricFromFileWithTitle:(NSString*) titleName
+- (void) loadSampleLyricFromFileWithTitle:(NSString*) titleName withLang:(NSString*) lang
 {
     [list_lyric removeAllObjects];
     if(list_lyric==NULL){
         list_lyric = [[NSMutableDictionary alloc] init];
     }
 
-    NSString *filename = [NSString stringWithFormat:@"%@.lyric.en", titleName];
-
+    NSString *filename = [NSString stringWithFormat:@"%@.lyric", titleName];
+    NSLog(@"filename:%@", filename);
     NSString* pathToFile = [[NSBundle mainBundle] pathForResource:filename ofType:@"txt"];
     NSString* contentFile = @"";
     if(pathToFile){
@@ -135,7 +139,7 @@
     //NSLog(@"%@", lines);
 }
 
-- (void) loadSampleKaraokeFromFileWithTitle:(NSString*) titleName
+- (void) loadSampleKaraokeFromFileWithTitle:(NSString*) titleName withLang:(NSString*) lang
 {
     
     [list_karaoke removeAllObjects];
@@ -143,7 +147,7 @@
         list_karaoke = [[NSMutableDictionary alloc] init];
     }
 
-    NSString *filename = [NSString stringWithFormat:@"%@.karaoke.en", titleName];
+    NSString *filename = [NSString stringWithFormat:@"%@.karaoke.%@", titleName, lang];
     
     NSString* pathToFile = [[NSBundle mainBundle] pathForResource:filename
                                                            ofType:@"txt"];
@@ -172,7 +176,7 @@
     //NSLog(@"%@", lines);
 }
 
-- (void) loadSampleTranslationFromFileWithTitle:(NSString*) titleName
+- (void) loadSampleTranslationFromFileWithTitle:(NSString*) titleName withLang:(NSString*) lang
 {
  
     [list_translation removeAllObjects];
@@ -180,9 +184,9 @@
         list_translation = [[NSMutableDictionary alloc] init];
     }
     
-    NSString *filename = [NSString stringWithFormat:@"%@.translation.en", titleName];
+    NSString *filename = [NSString stringWithFormat:@"%@.translation.%@", titleName, lang];
     
-    NSString* pathToFile = [[NSBundle mainBundle] pathForResource:@"Serendipity.translation.en" ofType:@"txt"];
+    NSString* pathToFile = [[NSBundle mainBundle] pathForResource:filename ofType:@"txt"];
     NSString* contentFile = @"";
     if(pathToFile){
         contentFile = [NSString stringWithContentsOfFile:pathToFile
@@ -212,7 +216,7 @@
 - (NSString*) retrieveTranslationInfoAtTime:(NSString*) atTime
 {
     
-    NSString *timeInfo = [NSString stringWithFormat:@"%@",atTime];
+    NSString *timeInfo = [NSString stringWithFormat:@"%@", atTime];
     if([list_translation count] > 0){
         //NSLog(@"Start search time at:%@", timeInfo);
         NSString *searchResult =  (NSString*)[list_translation objectForKey:timeInfo];
@@ -230,7 +234,7 @@
 - (NSString*) retrieveKaraokeInfoAtTime:(NSString*) atTime
 {
     
-    NSString *timeInfo = [NSString stringWithFormat:@"%@",atTime];
+    NSString *timeInfo = [NSString stringWithFormat:@"%@", atTime];
     //NSLog(@"Start search time at:%@", timeInfo);
     if([list_karaoke count] > 0){
         NSString *searchResult =  (NSString*)[list_karaoke objectForKey:timeInfo];
@@ -248,7 +252,7 @@
 - (NSString*) retrieveLyricInfoAtTime:(NSString*) atTime
 {
     
-    NSString *timeInfo = [NSString stringWithFormat:@"%@",atTime];
+    NSString *timeInfo = [NSString stringWithFormat:@"%@", atTime];
     //NSLog(@"Start search time at:%@", timeInfo);
     if([list_lyric count] > 0){
         NSString *searchResult =  (NSString*)[list_lyric objectForKey:timeInfo];
@@ -261,6 +265,37 @@
     }
     
     return current_lyric_line;
+}
+
+- (NSString*) retrieveSecretInfoAtTime:(NSString*) atTime
+{
+    
+    NSString *timeInfo = [NSString stringWithFormat:@"%@", atTime];
+    if([list_secret count] > 0){
+        NSString *searchResult =  (NSString*)[list_secret objectForKey:timeInfo];
+        NSLog(@"Search results:%@", searchResult);
+        
+        if(searchResult!=NULL){
+            current_translation_line = searchResult;
+        }
+        NSLog(@"Current results:%@", current_secret_line);
+    }
+    
+    return current_secret_line;
+}
+
+- (void) clearCurrentLyric
+{
+    [list_lyric removeAllObjects];
+    [list_secret removeAllObjects];
+    [list_karaoke removeAllObjects];
+    [list_translation removeAllObjects];
+    
+    self.current_karaoke_line = @"";
+    self.current_lyric_line = @"";
+    self.current_secret_line = @"";
+    self.current_translation_line = @"";
+    
 }
 
 @end

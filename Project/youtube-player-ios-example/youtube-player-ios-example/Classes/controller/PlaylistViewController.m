@@ -48,7 +48,14 @@
     lyric_type_selected = LyricOriginal;
     list_langs = [self loadAvailableLanguages];
     
+    isKaraokeEnabled = TRUE;
+    isTranslationEnabled =  TRUE;
+    isSecretEnabled = TRUE;
+    
     [self.btn_type_original setSelected:TRUE];
+    [self.btn_type_translation setSelected:TRUE];
+    [self.btn_type_karaoke setSelected:TRUE];
+    [self.btn_type_secret setSelected:TRUE];
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -59,9 +66,12 @@
 
 - (IBAction)buttonPressed:(id)sender {
     if (sender == self.playButton) {
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"Playback started" object:self];
-      [self.playerView playVideo];
-      [self startUpdateTimer];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Playback started"
+                                                          object:self];
+        [self.playerView playVideo];
+//        [self loadingVideoLyric];
+        [self startUpdateTimer];
+        
       
     } else if (sender == self.pauseButton) {
         [self.playerView pauseVideo];
@@ -76,7 +86,8 @@
         [self startUpdateTimer];
         [self appendStatusText:@"Loading next video in playlist\n"];
         [self.playerView nextVideo];
-        [self loadingVideoLyric];
+//        [self loadingVideoLyric];
+        
         
       
     } else if (sender == self.previousVideoButton) {
@@ -84,32 +95,75 @@
         [self startUpdateTimer];
         [self appendStatusText:@"Loading previous video in playlist\n"];
         [self.playerView previousVideo];
-        [self loadingVideoLyric];
+//        [self loadingVideoLyric];
+        
         
     } else if (sender == self.btn_type_karaoke) {
-//        self.btn_type_karaoke.selected = true;
-//        self.btn_type_translation.selected = false;
-//        self.btn_type_original.selected = false;
-        [self.btn_type_karaoke setSelected: !self.btn_type_karaoke];
+        [self.btn_type_karaoke setSelected: !self.btn_type_karaoke.isSelected];
         self.lyric_type_selected = LyricKarakoke;
+        if(self.btn_type_karaoke.isSelected){
+            isKaraokeEnabled = TRUE;
+        }
         
     } else if (sender == self.btn_type_translation) {
-        
-//        self.btn_type_karaoke.selected = false;
-//        self.btn_type_translation.selected = true;
-//        self.btn_type_original.selected = false;
-        [self.btn_type_translation setSelected: !self.btn_type_translation];
+        [self.btn_type_translation setSelected: !self.btn_type_translation.isSelected];
         self.lyric_type_selected = LyricTranslation;
+        if(self.btn_type_translation.isSelected){
+            isTranslationEnabled = TRUE;
+        }
+        
         
     } else if (sender == self.btn_type_original) {
-        
-//        self.btn_type_karaoke.selected = false;
-//        self.btn_type_translation.selected = false;
-//        self.btn_type_original.selected = true;
-        [self.btn_type_original setSelected: !self.btn_type_original];
+        [self.btn_type_original setSelected: !self.btn_type_original.isSelected];
         self.lyric_type_selected = LyricOriginal;
+   
+    }else if (sender == self.btn_type_secret) {
+        [self.btn_type_secret setSelected: !self.btn_type_secret.isSelected];
+        self.lyric_type_selected = LyricSecret;
+        if(self.btn_type_secret.isSelected){
+            isSecretEnabled = TRUE;
+        }
         
     }
+    
+    [self refreshData];
+}
+
+#pragma mark - PlayerView Delegate
+- (void)playerViewDidBecomeReady:(YTPlayerView *)playerView
+{
+    NSLog(@"Video come ready--");
+    [self clearAllData];
+    [self loadingVideoLyric];
+}
+
+-(void)playerView:(YTPlayerView *)playerView didChangeToState:(YTPlayerState)state
+{
+    if(state == kYTPlayerStateEnded)
+    {
+        NSLog(@"Play at : %d", [self.playerView playlistIndex] );
+        [self clearAllData];
+        
+    }
+    
+    else if(state == kYTPlayerStateBuffering)
+    {
+        NSLog(@"Play at : %d", [self.playerView playlistIndex] );
+        [self clearAllData];
+        [self loadingVideoLyric];
+        [self startUpdateTimer];
+    }
+    
+    else if(state == kYTPlayerStatePaused)
+    {
+        [self pauseTimer];
+    }
+    
+    else if(state == kYTPlayerStateEnded)
+    {
+        [self stopUpdateTimer];
+    }
+
 }
 
 #pragma mark - SearchBar Delegate
@@ -246,7 +300,7 @@
         NSString *timeTotalString = [NSString stringWithFormat:@"%d:%02d", totalM, totalS];
         
         NSLog(@"TimePlay(%@/%@)", timePlayString, timeTotalString);
-        [self showDataAtTime:timePlayString];
+        [self loadDataAtTime:timePlayString];
         
         self.lbl_time_now.text = timePlayString;
         self.lbl_time_total.text = timeTotalString;
@@ -287,22 +341,63 @@
 
 - (void) loadingVideoLyric
 {
-    [lyric searchDataWithTitle:@"Serendipity"
-                           andArtist:@"-"
-                      andDescription:@""
-                             andType:LyricTranslation
-                             andLang:@"en"];
+    NSLog(@"Current playlist index: %d", [self.playerView playlistIndex] );
+    if( [self.playerView playlistIndex] == 0 ){
+        [lyric searchDataWithTitle:@"Serendipity"
+                               andArtist:@"-"
+                          andDescription:@""
+                                 andType:LyricTranslation
+                                 andLang:@"en"];
+    }else if( [self.playerView playlistIndex] == 1 ){
+        [lyric searchDataWithTitle:@"ไกลแค่ไหนคือใกล้"
+                         andArtist:@"-"
+                    andDescription:@""
+                           andType:LyricTranslation
+                           andLang:@"en"];
+    }
 
 }
 
-- (void) showDataAtTime:(NSString*) atTime
+- (void) loadDataAtTime:(NSString*) atTime
 {
     NSLog(@"Search Time:%@", atTime);
     //self.lyricView.text = [lyric retrieveLyricInfoAtTime:atTime];
     NSString *search = [NSString stringWithFormat:@"%@", atTime];
+    
     self.textview_lyric.text = [lyric retrieveLyricInfoAtTime:search];
-    self.textview_karaoke.text = [lyric retrieveKaraokeInfoAtTime:search];
-    self.textview_translation.text = [lyric retrieveTranslationInfoAtTime:search];
+    
+    if(isKaraokeEnabled){
+        self.textview_karaoke.text = [lyric retrieveKaraokeInfoAtTime:search];
+    }
+    
+    if(isTranslationEnabled){
+        self.textview_translation.text = [lyric retrieveTranslationInfoAtTime:search];
+    }
+    
+    if(isSecretEnabled){
+        self.textview_secret.text = [lyric retrieveSecretInfoAtTime:search];
+    }
+}
+
+
+- (void) refreshData
+{
+    self.textview_lyric.text = [lyric current_lyric_line];
+    self.textview_karaoke.text = [lyric current_karaoke_line];
+    self.textview_translation.text = [lyric current_translation_line];
+    self.textview_secret.text = [lyric current_secret_line];
+    
+}
+
+- (void) clearAllData
+{
+    [lyric clearCurrentLyric];
+    
+    self.textview_lyric.text = @"";
+    self.textview_karaoke.text = @"";
+    self.textview_translation.text = @"";
+    self.textview_secret.text = @"";
+
 }
 
 - (NSMutableArray*) loadAvailableLanguages

@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		107E538F00C04BB3BB937C5F /* Pods-youtube-player-ios-exampleTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube-player-ios-exampleTests.xcconfig"; path = "Pods/Pods-youtube-player-ios-exampleTests.xcconfig"; sourceTree = "<group>"; };
+		41DE6A7D49F386BF08C18468 /* Pods-youtube-player-ios-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube-player-ios-exampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-youtube-player-ios-exampleTests/Pods-youtube-player-ios-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D6993DE18E22E0C0073680F /* youtube-player-ios-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "youtube-player-ios-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6993E118E22E0C0073680F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4D6993E318E22E0C0073680F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,7 +61,9 @@
 		4D69942118E22F000073680F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		614CB957CD094425884C83E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		97FE8C7A7A914485BBD9A3D4 /* libPods-youtube-player-ios-exampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtube-player-ios-exampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6670756F2BD48C08B22B301 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9F1A73947F21B4AC48269A4E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A33CC11F5E5B159D09ADCB5D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C9EAC06935E4E004160720A4 /* Pods-youtube-player-ios-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube-player-ios-exampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-youtube-player-ios-exampleTests/Pods-youtube-player-ios-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,7 @@
 				4D69940618E22E0C0073680F /* youtube-player-ios-exampleTests */,
 				4D6993E018E22E0C0073680F /* Frameworks */,
 				4D6993DF18E22E0C0073680F /* Products */,
-				A6670756F2BD48C08B22B301 /* Pods.xcconfig */,
-				107E538F00C04BB3BB937C5F /* Pods-youtube-player-ios-exampleTests.xcconfig */,
+				686E9A838DE037A32431FD61 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +168,17 @@
 				4D69940918E22E0C0073680F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		686E9A838DE037A32431FD61 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9F1A73947F21B4AC48269A4E /* Pods.debug.xcconfig */,
+				A33CC11F5E5B159D09ADCB5D /* Pods.release.xcconfig */,
+				C9EAC06935E4E004160720A4 /* Pods-youtube-player-ios-exampleTests.debug.xcconfig */,
+				41DE6A7D49F386BF08C18468 /* Pods-youtube-player-ios-exampleTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B16AF54440614B7BBEA8906E /* Copy Pods Resources */ = {
@@ -308,7 +320,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-youtube-player-ios-exampleTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-youtube-player-ios-exampleTests/Pods-youtube-player-ios-exampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE80856E09B8459AAE18655D /* Check Pods Manifest.lock */ = {
@@ -450,7 +462,7 @@
 		};
 		4D69941118E22E0C0073680F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6670756F2BD48C08B22B301 /* Pods.xcconfig */;
+			baseConfigurationReference = 9F1A73947F21B4AC48269A4E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -464,7 +476,7 @@
 		};
 		4D69941218E22E0C0073680F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6670756F2BD48C08B22B301 /* Pods.xcconfig */;
+			baseConfigurationReference = A33CC11F5E5B159D09ADCB5D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -478,7 +490,7 @@
 		};
 		4D69941418E22E0C0073680F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 107E538F00C04BB3BB937C5F /* Pods-youtube-player-ios-exampleTests.xcconfig */;
+			baseConfigurationReference = C9EAC06935E4E004160720A4 /* Pods-youtube-player-ios-exampleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/youtube-player-ios-example.app/youtube-player-ios-example";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -501,7 +513,7 @@
 		};
 		4D69941518E22E0C0073680F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 107E538F00C04BB3BB937C5F /* Pods-youtube-player-ios-exampleTests.xcconfig */;
+			baseConfigurationReference = 41DE6A7D49F386BF08C18468 /* Pods-youtube-player-ios-exampleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/youtube-player-ios-example.app/youtube-player-ios-example";
 				FRAMEWORK_SEARCH_PATHS = (

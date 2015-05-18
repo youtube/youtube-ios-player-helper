@@ -54,9 +54,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 /**
  * A delegate for ViewControllers to respond to YouTube player events outside
  * of the view, such as changes to video playback state or playback errors.
- * The callback functions correlate to the events fired by the JavaScript
- * API. For the full documentation, see the JavaScript documentation here:
- *     https://developers.google.com/youtube/js_api_reference#Events
+ * The callback functions correlate to the events fired by the IFrame API.
+ * For the full documentation, see the IFrame documentation here:
+ *     https://developers.google.com/youtube/iframe_api_reference#Events
  */
 @protocol YTPlayerViewDelegate<NSObject>
 
@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 #pragma mark - Player controls
 
 // These methods correspond to their JavaScript equivalents as documented here:
-//   https://developers.google.com/youtube/js_api_reference#Playback_controls
+//   https://developers.google.com/youtube/iframe_api_reference#Playback_controls
 
 /**
  * Starts or resumes playback on the loaded video. Corresponds to this method from
@@ -233,7 +233,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 
 // Queueing functions for videos. These methods correspond to their JavaScript
 // equivalents as documented here:
-//   https://developers.google.com/youtube/js_api_reference#Queueing_Functions
+//   https://developers.google.com/youtube/iframe_api_reference#Queueing_Functions
 
 /**
  * Cues a given video by its video ID for playback starting at the given time and with the
@@ -433,7 +433,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 
 // These methods correspond to the JavaScript API as defined under the
 // "Playing a video in a playlist" section here:
-//    https://developers.google.com/youtube/js_api_reference#Playback_status
+//    https://developers.google.com/youtube/iframe_api_reference#Playback_status
 
 /**
  * Loads and plays the next video in the playlist. Corresponds to this method from

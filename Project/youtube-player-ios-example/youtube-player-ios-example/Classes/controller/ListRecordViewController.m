@@ -1,18 +1,18 @@
 //
-//  RecordViewController.m
+//  ListRecordViewController.m
 //  youtube-player-ios-example
 //
-//  Created by BooBoo on 5/18/2558 BE.
+//  Created by BooBoo on 5/19/2558 BE.
 //  Copyright (c) 2558 YouTube Developer Relations. All rights reserved.
 //
 
-#import "RecordViewController.h"
+#import "ListRecordViewController.h"
 
-@interface RecordViewController ()
+@interface ListRecordViewController ()
 
 @end
 
-@implementation RecordViewController
+@implementation ListRecordViewController
 
 @synthesize tableview_record;
 
@@ -36,11 +36,10 @@
 }
 */
 
-
 #pragma mark - UITableView Datasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *tableview_cell = [self.tableview_record dequeueReusableCellWithIdentifier:CELL_USER_RECORD_ID];
+    UITableViewCell *tableview_cell = [self.tableview_record dequeueReusableCellWithIdentifier:CELL_LIST_RECORD_ID];
     return tableview_cell;
 }
 
@@ -53,6 +52,5 @@
 {
     return 3;
 }
-
 
 @end

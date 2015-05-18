@@ -27,6 +27,11 @@
 		842333951B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */; };
 		842333961B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */; };
 		842333981B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */; };
+		8423339C1B09B4FA00A99EBC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8423339B1B09B4FA00A99EBC /* SettingViewController.m */; };
+		842333A31B09B51C00A99EBC /* LyricAddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A21B09B51C00A99EBC /* LyricAddingViewController.m */; };
+		842333A61B0A22A600A99EBC /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A51B0A22A600A99EBC /* RecordViewController.m */; };
+		842333A91B0A23A200A99EBC /* UserLyricsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A81B0A23A200A99EBC /* UserLyricsViewController.m */; };
+		842333AD1B0A9DB700A99EBC /* ListRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */; };
 		84B96C761B009B91001ACC2E /* libPods-youtube-ios-player-helper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B96C711B009B77001ACC2E /* libPods-youtube-ios-player-helper.a */; };
 		84D489CD1B033BAD009299A7 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CA1B033BAD009299A7 /* PlaylistViewController.m */; };
 		84D489CE1B033BAD009299A7 /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CC1B033BAD009299A7 /* SingleVideoViewController.m */; };
@@ -101,6 +106,16 @@
 		842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.lyric.en.txt"; sourceTree = "<group>"; };
 		842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.lyric.txt"; sourceTree = "<group>"; };
 		842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.translation.en.txt"; sourceTree = "<group>"; };
+		8423339A1B09B4FA00A99EBC /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		8423339B1B09B4FA00A99EBC /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		842333A11B09B51C00A99EBC /* LyricAddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyricAddingViewController.h; sourceTree = "<group>"; };
+		842333A21B09B51C00A99EBC /* LyricAddingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyricAddingViewController.m; sourceTree = "<group>"; };
+		842333A41B0A22A600A99EBC /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		842333A51B0A22A600A99EBC /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		842333A71B0A23A200A99EBC /* UserLyricsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLyricsViewController.h; sourceTree = "<group>"; };
+		842333A81B0A23A200A99EBC /* UserLyricsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLyricsViewController.m; sourceTree = "<group>"; };
+		842333AB1B0A9DB700A99EBC /* ListRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRecordViewController.h; sourceTree = "<group>"; };
+		842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListRecordViewController.m; sourceTree = "<group>"; };
 		845F68471AFECFBB007ACB0C /* libPods-youtube-ios-player-helper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-youtube-ios-player-helper.a"; path = "Pods/../build/Debug-iphoneos/libPods-youtube-ios-player-helper.a"; sourceTree = "<group>"; };
 		84B96C671B009B77001ACC2E /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		84D489C81B033A9D009299A7 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -261,6 +276,16 @@
 				84D489CA1B033BAD009299A7 /* PlaylistViewController.m */,
 				84D489CB1B033BAD009299A7 /* SingleVideoViewController.h */,
 				84D489CC1B033BAD009299A7 /* SingleVideoViewController.m */,
+				842333A11B09B51C00A99EBC /* LyricAddingViewController.h */,
+				842333A21B09B51C00A99EBC /* LyricAddingViewController.m */,
+				8423339A1B09B4FA00A99EBC /* SettingViewController.h */,
+				8423339B1B09B4FA00A99EBC /* SettingViewController.m */,
+				842333A41B0A22A600A99EBC /* RecordViewController.h */,
+				842333A51B0A22A600A99EBC /* RecordViewController.m */,
+				842333A71B0A23A200A99EBC /* UserLyricsViewController.h */,
+				842333A81B0A23A200A99EBC /* UserLyricsViewController.m */,
+				842333AB1B0A9DB700A99EBC /* ListRecordViewController.h */,
+				842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -514,11 +539,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D69942218E22F000073680F /* main.m in Sources */,
+				842333AD1B0A9DB700A99EBC /* ListRecordViewController.m in Sources */,
+				842333A91B0A23A200A99EBC /* UserLyricsViewController.m in Sources */,
 				4D69941D18E22EE10073680F /* AppDelegate.m in Sources */,
 				84D489CE1B033BAD009299A7 /* SingleVideoViewController.m in Sources */,
+				8423339C1B09B4FA00A99EBC /* SettingViewController.m in Sources */,
 				84D489DF1B05E9A2009299A7 /* Lyric.m in Sources */,
 				84D489CD1B033BAD009299A7 /* PlaylistViewController.m in Sources */,
+				842333A61B0A22A600A99EBC /* RecordViewController.m in Sources */,
 				84D489E61B070032009299A7 /* LyricLang.m in Sources */,
+				842333A31B09B51C00A99EBC /* LyricAddingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

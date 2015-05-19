@@ -343,12 +343,18 @@
 {
     NSLog(@"Current playlist index: %d", [self.playerView playlistIndex] );
     if( [self.playerView playlistIndex] == 0 ){
+        [lyric searchDataWithTitle:@"ในหลวงของแผ่นดิน"
+                         andArtist:@"-"
+                    andDescription:@""
+                           andType:LyricTranslation
+                           andLang:@"en"];
+    }else if( [self.playerView playlistIndex] == 1 ){
         [lyric searchDataWithTitle:@"Serendipity"
                                andArtist:@"-"
                           andDescription:@""
                                  andType:LyricTranslation
                                  andLang:@"en"];
-    }else if( [self.playerView playlistIndex] == 1 ){
+    }else if( [self.playerView playlistIndex] == 2 ){
         [lyric searchDataWithTitle:@"ไกลแค่ไหนคือใกล้"
                          andArtist:@"-"
                     andDescription:@""

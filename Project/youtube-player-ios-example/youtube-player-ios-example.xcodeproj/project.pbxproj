@@ -32,6 +32,9 @@
 		842333A61B0A22A600A99EBC /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A51B0A22A600A99EBC /* RecordViewController.m */; };
 		842333A91B0A23A200A99EBC /* UserLyricsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A81B0A23A200A99EBC /* UserLyricsViewController.m */; };
 		842333AD1B0A9DB700A99EBC /* ListRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */; };
+		842333B51B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333B31B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt */; };
+		842333B61B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333B41B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt */; };
+		842333BC1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333BB1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt */; };
 		84B96C761B009B91001ACC2E /* libPods-youtube-ios-player-helper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B96C711B009B77001ACC2E /* libPods-youtube-ios-player-helper.a */; };
 		84D489CD1B033BAD009299A7 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CA1B033BAD009299A7 /* PlaylistViewController.m */; };
 		84D489CE1B033BAD009299A7 /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CC1B033BAD009299A7 /* SingleVideoViewController.m */; };
@@ -116,6 +119,9 @@
 		842333A81B0A23A200A99EBC /* UserLyricsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLyricsViewController.m; sourceTree = "<group>"; };
 		842333AB1B0A9DB700A99EBC /* ListRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRecordViewController.h; sourceTree = "<group>"; };
 		842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListRecordViewController.m; sourceTree = "<group>"; };
+		842333B31B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ในหลวงของแผ่นดิน.lyric.en.txt"; sourceTree = "<group>"; };
+		842333B41B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ในหลวงของแผ่นดิน.lyric.txt"; sourceTree = "<group>"; };
+		842333BB1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ในหลวงของแผ่นดิน.translation.en.txt"; sourceTree = "<group>"; };
 		845F68471AFECFBB007ACB0C /* libPods-youtube-ios-player-helper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-youtube-ios-player-helper.a"; path = "Pods/../build/Debug-iphoneos/libPods-youtube-ios-player-helper.a"; sourceTree = "<group>"; };
 		84B96C671B009B77001ACC2E /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		84D489C81B033A9D009299A7 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -326,6 +332,9 @@
 				842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */,
 				842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */,
 				842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */,
+				842333B31B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt */,
+				842333B41B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt */,
+				842333BB1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt */,
 			);
 			path = lyrics;
 			sourceTree = "<group>";
@@ -447,12 +456,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842333B61B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt in Resources */,
+				842333B51B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt in Resources */,
 				8423338F1B08549D00A99EBC /* Serendipity.lyric.txt in Resources */,
 				842333901B08549D00A99EBC /* Serendipity.translation.en.txt in Resources */,
 				4D69941E18E22EE10073680F /* Main.storyboard in Resources */,
 				8423338D1B08549D00A99EBC /* Serendipity.karaoke.en.txt in Resources */,
 				842333981B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt in Resources */,
 				8423338E1B08549D00A99EBC /* Serendipity.lyric.en.txt in Resources */,
+				842333BC1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt in Resources */,
 				4D6993FA18E22E0C0073680F /* Images.xcassets in Resources */,
 				842333951B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt in Resources */,
 				4D6993EC18E22E0C0073680F /* InfoPlist.strings in Resources */,

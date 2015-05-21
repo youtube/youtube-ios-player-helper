@@ -51,6 +51,8 @@ NSString static *const kYTPlayerCallbackOnReady = @"onReady";
 NSString static *const kYTPlayerCallbackOnStateChange = @"onStateChange";
 NSString static *const kYTPlayerCallbackOnPlaybackQualityChange = @"onPlaybackQualityChange";
 NSString static *const kYTPlayerCallbackOnError = @"onError";
+NSString static *const kYTPlayerCallbackOnPlayTime = @"onPlayTime";
+
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIframeAPIReady";
 
 NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtube.com/embed/(.*)$";
@@ -573,6 +575,12 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 
       [self.delegate playerView:self receivedError:error];
     }
+  } else if ([action isEqualToString:kYTPlayerCallbackOnPlayTime]) {
+      if ([self.delegate respondsToSelector:@selector(playerView:didPlayTime:)]) {
+          float time = [data floatValue];
+          [self.delegate playerView:self didPlayTime:time];
+      }
+      
   }
 }
 

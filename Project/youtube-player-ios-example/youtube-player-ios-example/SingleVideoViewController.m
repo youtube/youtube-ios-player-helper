@@ -32,6 +32,8 @@
   self.playerView.delegate = self;
   [self.playerView loadWithVideoId:videoId playerVars:playerVars];
 
+    
+    
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(receivedPlaybackStartedNotification:)
                                                name:@"Playback started"
@@ -41,6 +43,17 @@
 - (void)playerView:(YTPlayerView *)ytPlayerView didChangeToState:(YTPlayerState)state {
   NSString *message = [NSString stringWithFormat:@"Player state changed: %ld\n", (long)state];
   [self appendStatusText:message];
+}
+
+- (void)playerView:(YTPlayerView *)playerView didPlayTime:(float)playTime {
+    float progress = playTime/self.playerView.duration;
+    [self.slider setValue:progress];
+}
+
+- (IBAction)onSliderChange:(id)sender {
+    float seekToTime = self.playerView.duration * self.slider.value;
+    [self.playerView seekToSeconds:seekToTime allowSeekAhead:YES];
+    [self appendStatusText:[NSString stringWithFormat:@"Seeking to time: %.0f seconds\n", seekToTime]];
 }
 
 - (IBAction)buttonPressed:(id)sender {

@@ -27,6 +27,10 @@
 @property(nonatomic, weak) IBOutlet UIButton *forwardButton;
 @property(nonatomic, weak) IBOutlet UITextView *statusTextView;
 
+@property(nonatomic, weak) IBOutlet UISlider *slider;
+
+- (IBAction)onSliderChange:(id)sender;
+
 - (IBAction)buttonPressed:(id)sender;
 
 @end

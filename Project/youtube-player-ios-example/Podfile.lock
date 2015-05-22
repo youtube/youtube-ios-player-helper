@@ -8,10 +8,10 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   youtube-ios-player-helper:
-    :path: "../../youtube-ios-player-helper.podspec"
+    :path: ../../youtube-ios-player-helper.podspec
 
 SPEC CHECKSUMS:
   OCMock: d2a4f33dcdd80da8af651eda9a598646c9bcc0b5
-  youtube-ios-player-helper: cadabb4ad9edb62b32e00770f40f982bd39f99ae
+  youtube-ios-player-helper: 9b1ff47d73626e83038be3a019ac714472e6e22c
 
 COCOAPODS: 0.36.3

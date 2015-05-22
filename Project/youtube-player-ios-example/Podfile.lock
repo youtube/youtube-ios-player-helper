@@ -1,6 +1,6 @@
 PODS:
   - OCMock (2.2.3)
-  - youtube-ios-player-helper (0.1.1)
+  - youtube-ios-player-helper (0.1.2)
 
 DEPENDENCIES:
   - OCMock (= 2.2.3)
@@ -8,7 +8,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   youtube-ios-player-helper:
-    :path: ../../youtube-ios-player-helper.podspec
+    :path: "../../youtube-ios-player-helper.podspec"
 
 SPEC CHECKSUMS:
   OCMock: d2a4f33dcdd80da8af651eda9a598646c9bcc0b5

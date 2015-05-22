@@ -91,6 +91,16 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param error YTPlayerError containing the error state.
  */
 - (void)playerView:(YTPlayerView *)playerView receivedError:(YTPlayerError)error;
+
+
+/**
+ * Callback invoked frequently when playBack is plaing.
+ *
+ * @param playerView The YTPlayerView instance where the error has occurred.
+ * @param playTime float containing curretn playback time.
+ */
+- (void)playerView:(YTPlayerView *)playerView didPlayTime:(float)playTime;
+
 @end
 
 /**

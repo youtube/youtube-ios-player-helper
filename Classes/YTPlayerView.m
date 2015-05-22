@@ -598,7 +598,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
       [ytRegex firstMatchInString:url.absoluteString
                         options:0
                           range:NSMakeRange(0, [url.absoluteString length])];
-    
+
   NSRegularExpression *adRegex =
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerAdUrlRegexPattern
                                                 options:NSRegularExpressionCaseInsensitive
@@ -645,7 +645,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   if ([playerParams objectForKey:@"playerVars"]) {
     NSMutableDictionary *playerVars = [[NSMutableDictionary alloc] init];
     [playerVars addEntriesFromDictionary:[playerParams objectForKey:@"playerVars"]];
-      
+
     if (![playerVars objectForKey:@"origin"]) {
         self.originURL = [NSURL URLWithString:@"about:blank"];
     } else {
@@ -788,6 +788,8 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
   webView.scrollView.scrollEnabled = NO;
   webView.scrollView.bounces = NO;
+  webView.opaque = false;
+  webView.backgroundColor = self.backgroundColor;
   return webView;
 }
 

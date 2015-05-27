@@ -662,9 +662,19 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   [self addSubview:self.webView];
 
   NSError *error = nil;
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"YTPlayerView-iframe-player"
-                                                   ofType:@"html"
-                                              inDirectory:@"Assets"];
+  NSMutableSet *allBundles = [NSMutableSet setWithArray:@[ [NSBundle mainBundle] ] ];
+  [allBundles addObjectsFromArray:[NSBundle allBundles]];
+  [allBundles addObjectsFromArray:[NSBundle allFrameworks]];
+  
+  NSString __block *path;
+  [allBundles enumerateObjectsUsingBlock:^(NSBundle *bundle, BOOL *stop) {
+      NSString *candidate = [bundle pathForResource:@"YTPlayerView-iframe-player" ofType:@"html" inDirectory:@"Assets"];
+      if (candidate != nil) {
+          path = candidate;
+          *stop = YES;
+      }
+  }];
+  
   NSString *embedHTMLTemplate =
       [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
 

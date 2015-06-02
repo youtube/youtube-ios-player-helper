@@ -57,6 +57,8 @@ NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIfr
 
 NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtube.com/embed/(.*)$";
 NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.doubleclick.net/pagead/conversion/";
+NSString static *const kYTPlayerOAuthRegexPattern = @"^http(s)://accounts.google.com/o/oauth2/(.*)$";
+NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.googleapis.com/static/proxy.html(.*)$";
 
 @interface YTPlayerView()
 
@@ -607,7 +609,26 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
       [adRegex firstMatchInString:url.absoluteString
                         options:0
                           range:NSMakeRange(0, [url.absoluteString length])];
-  if (ytMatch || adMatch) {
+
+  NSRegularExpression *oauthRegex =
+      [NSRegularExpression regularExpressionWithPattern:kYTPlayerOAuthRegexPattern
+                                              options:NSRegularExpressionCaseInsensitive
+                                                error:&error];
+  NSTextCheckingResult *oauthMatch =
+    [oauthRegex firstMatchInString:url.absoluteString
+                           options:0
+                             range:NSMakeRange(0, [url.absoluteString length])];
+    
+  NSRegularExpression *staticProxyRegex =
+    [NSRegularExpression regularExpressionWithPattern:kYTPlayerStaticProxyRegexPattern
+                                              options:NSRegularExpressionCaseInsensitive
+                                                error:&error];
+  NSTextCheckingResult *staticProxyMatch =
+    [[staticProxyRegex firstMatchInString:url.absoluteString
+                                  options:0
+                                    range:NSMakeRange(0, [url.absoluteString length])];
+
+  if (ytMatch || adMatch || oauthMatch || staticProxyMatch) {
     return YES;
   } else {
     [[UIApplication sharedApplication] openURL:url];

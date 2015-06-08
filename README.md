@@ -1,7 +1,7 @@
 # YouTube-Player-iOS-Helper
 
-[![Version](http://cocoapod-badges.herokuapp.com/v/YouTube-Player-iOS-Helper/badge.png)](http://cocoadocs.org/docsets/YouTube-Player-iOS-Helper)
-[![Platform](http://cocoapod-badges.herokuapp.com/p/YouTube-Player-iOS-Helper/badge.png)](http://cocoadocs.org/docsets/YouTube-Player-iOS-Helper)
+[![Version](https://cocoapod-badges.herokuapp.com/v/youtube-ios-player-helper/badge.png)](https://cocoapods.org/pods/youtube-ios-player-helper)
+[![Platform](https://cocoapod-badges.herokuapp.com/p/youtube-ios-player-helper/badge.png)](https://cocoapods.org/pods/youtube-ios-player-helper)
 
 ## Usage
 

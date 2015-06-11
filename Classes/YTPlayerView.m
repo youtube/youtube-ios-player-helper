@@ -624,7 +624,7 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
                                               options:NSRegularExpressionCaseInsensitive
                                                 error:&error];
   NSTextCheckingResult *staticProxyMatch =
-    [[staticProxyRegex firstMatchInString:url.absoluteString
+    [staticProxyRegex firstMatchInString:url.absoluteString
                                   options:0
                                     range:NSMakeRange(0, [url.absoluteString length])];
 

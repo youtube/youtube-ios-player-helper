@@ -686,6 +686,15 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   NSString *path = [[NSBundle mainBundle] pathForResource:@"YTPlayerView-iframe-player"
                                                    ofType:@"html"
                                               inDirectory:@"Assets"];
+    
+  // in case of using Swift and embedded frameworks, resources included not in main bundle,
+  // but in framework bundle
+  if (!path) {
+      path = [[[self class] frameworkBundle] pathForResource:@"YTPlayerView-iframe-player"
+                                                     ofType:@"html"
+                                                inDirectory:@"Assets"];
+  }
+    
   NSString *embedHTMLTemplate =
       [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
 
@@ -815,6 +824,17 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
 - (void)removeWebView {
   [self.webView removeFromSuperview];
   self.webView = nil;
+}
+
++ (NSBundle *)frameworkBundle {
+    static NSBundle* frameworkBundle = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        NSString* mainBundlePath = [[NSBundle bundleForClass:[self class]] resourcePath];
+        NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"Assets.bundle"];
+        frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
+    });
+    return frameworkBundle;
 }
 
 @end

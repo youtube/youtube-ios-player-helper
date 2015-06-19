@@ -582,7 +582,10 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
           float time = [data floatValue];
           [self.delegate playerView:self didPlayTime:time];
       }
-      
+  } else if ([action isEqualToString:kYTPlayerCallbackOnYouTubeIframeAPIReady]) {
+      if ([self.delegate respondsToSelector:@selector(playerView:receivedError:)]) {
+          [self.delegate playerView:self receivedError:kYTPlayerErrorNotEmbeddable];
+      }
   }
 }
 

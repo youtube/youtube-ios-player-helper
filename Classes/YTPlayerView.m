@@ -83,13 +83,13 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 }
 
 - (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars {
-
+  
   // Mutable copy because we may have been passed an immutable config dictionary.
   NSMutableDictionary *tempPlayerVars = [[NSMutableDictionary alloc] init];
   [tempPlayerVars setValue:@"playlist" forKey:@"listType"];
   [tempPlayerVars setValue:playlistId forKey:@"list"];
   [tempPlayerVars addEntriesFromDictionary:playerVars];  // No-op if playerVars is null
-
+  
   NSDictionary *playerParams = @{ @"playerVars" : tempPlayerVars };
   return [self loadWithPlayerParams:playerParams];
 }
@@ -128,7 +128,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoById('%@', %@, '%@');",
-      videoId, startSecondsValue, qualityValue];
+                       videoId, startSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -149,7 +149,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoById('%@', %@, '%@');",
-      videoId, startSecondsValue, qualityValue];
+                       videoId, startSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -170,7 +170,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, '%@');",
-      videoURL, startSecondsValue, qualityValue];
+                       videoURL, startSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -182,7 +182,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, %@, '%@');",
-      videoURL, startSecondsValue, endSecondsValue, qualityValue];
+                       videoURL, startSecondsValue, endSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -192,7 +192,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, '%@');",
-      videoURL, startSecondsValue, qualityValue];
+                       videoURL, startSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -204,7 +204,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, %@, '%@');",
-      videoURL, startSecondsValue, endSecondsValue, qualityValue];
+                       videoURL, startSecondsValue, endSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -216,9 +216,9 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
                suggestedQuality:(YTPlaybackQuality)suggestedQuality {
   NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
   [self cuePlaylist:playlistIdString
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+              index:index
+       startSeconds:startSeconds
+   suggestedQuality:suggestedQuality];
 }
 
 - (void)cuePlaylistByVideos:(NSArray *)videoIds
@@ -226,9 +226,9 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
                startSeconds:(float)startSeconds
            suggestedQuality:(YTPlaybackQuality)suggestedQuality {
   [self cuePlaylist:[self stringFromVideoIdArray:videoIds]
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+              index:index
+       startSeconds:startSeconds
+   suggestedQuality:suggestedQuality];
 }
 
 - (void)loadPlaylistByPlaylistId:(NSString *)playlistId
@@ -237,9 +237,9 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
                 suggestedQuality:(YTPlaybackQuality)suggestedQuality {
   NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
   [self loadPlaylist:playlistIdString
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+               index:index
+        startSeconds:startSeconds
+    suggestedQuality:suggestedQuality];
 }
 
 - (void)loadPlaylistByVideos:(NSArray *)videoIds
@@ -247,9 +247,9 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
                 startSeconds:(float)startSeconds
             suggestedQuality:(YTPlaybackQuality)suggestedQuality {
   [self loadPlaylist:[self stringFromVideoIdArray:videoIds]
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+               index:index
+        startSeconds:startSeconds
+    suggestedQuality:suggestedQuality];
 }
 
 #pragma mark - Setting the playback rate
@@ -266,8 +266,8 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 
 - (NSArray *)availablePlaybackRates {
   NSString *returnValue =
-      [self stringFromEvaluatingJavaScript:@"player.getAvailablePlaybackRates();"];
-
+  [self stringFromEvaluatingJavaScript:@"player.getAvailablePlaybackRates();"];
+  
   NSData *playbackRateData = [returnValue dataUsingEncoding:NSUTF8StringEncoding];
   NSError *jsonDeserializationError;
   NSArray *playbackRates = [NSJSONSerialization JSONObjectWithData:playbackRateData
@@ -276,7 +276,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   if (jsonDeserializationError) {
     return nil;
   }
-
+  
   return playbackRates;
 }
 
@@ -339,7 +339,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 
 - (NSArray *)playlist {
   NSString *returnValue = [self stringFromEvaluatingJavaScript:@"player.getPlaylist();"];
-
+  
   NSData *playlistData = [returnValue dataUsingEncoding:NSUTF8StringEncoding];
   NSError *jsonDeserializationError;
   NSArray *videoIds = [NSJSONSerialization JSONObjectWithData:playlistData
@@ -348,7 +348,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   if (jsonDeserializationError) {
     return nil;
   }
-
+  
   return videoIds;
 }
 
@@ -369,7 +369,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 
 - (void)playVideoAt:(int)index {
   NSString *command =
-      [NSString stringWithFormat:@"player.playVideoAt(%@);", [NSNumber numberWithInt:index]];
+  [NSString stringWithFormat:@"player.playVideoAt(%@);", [NSNumber numberWithInt:index]];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -377,9 +377,9 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 
 - (NSArray *)availableQualityLevels {
   NSString *returnValue =
-      [self stringFromEvaluatingJavaScript:@"player.getAvailableQualityLevels().toString();"];
+  [self stringFromEvaluatingJavaScript:@"player.getAvailableQualityLevels().toString();"];
   if(!returnValue) return nil;
-
+  
   NSArray *rawQualityValues = [returnValue componentsSeparatedByString:@","];
   NSMutableArray *levels = [[NSMutableArray alloc] init];
   for (NSString *rawQualityValue in rawQualityValues) {
@@ -390,8 +390,8 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
 }
 
 - (BOOL)webView:(UIWebView *)webView
-    shouldStartLoadWithRequest:(NSURLRequest *)request
-                navigationType:(UIWebViewNavigationType)navigationType {
+shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType {
   if ([request.URL.host isEqual: self.originURL.host]) {
     return YES;
   } else if ([request.URL.scheme isEqual:@"ytplayer"]) {
@@ -411,7 +411,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
  */
 + (YTPlaybackQuality)playbackQualityForString:(NSString *)qualityString {
   YTPlaybackQuality quality = kYTPlaybackQualityUnknown;
-
+  
   if ([qualityString isEqualToString:kYTPlaybackQualitySmallQuality]) {
     quality = kYTPlaybackQualitySmall;
   } else if ([qualityString isEqualToString:kYTPlaybackQualityMediumQuality]) {
@@ -427,7 +427,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   } else if ([qualityString isEqualToString:kYTPlaybackQualityAutoQuality]) {
     quality = kYTPlaybackQualityAuto;
   }
-
+  
   return quality;
 }
 
@@ -519,7 +519,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
  */
 - (void)notifyDelegateOfYouTubeCallbackUrl: (NSURL *) url {
   NSString *action = url.host;
-
+  
   // We know the query can only be of the format ytplayer://action?data=SOMEVALUE,
   // so we parse out the value.
   NSString *query = url.query;
@@ -527,7 +527,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   if (query) {
     data = [query componentsSeparatedByString:@"="][1];
   }
-
+  
   if ([action isEqual:kYTPlayerCallbackOnReady]) {
     if ([self.delegate respondsToSelector:@selector(playerViewDidBecomeReady:)]) {
       [self.delegate playerViewDidBecomeReady:self];
@@ -535,7 +535,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   } else if ([action isEqual:kYTPlayerCallbackOnStateChange]) {
     if ([self.delegate respondsToSelector:@selector(playerView:didChangeToState:)]) {
       YTPlayerState state = kYTPlayerStateUnknown;
-
+      
       if ([data isEqual:kYTPlayerStateEndedCode]) {
         state = kYTPlayerStateEnded;
       } else if ([data isEqual:kYTPlayerStatePlayingCode]) {
@@ -549,7 +549,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
       } else if ([data isEqual:kYTPlayerStateUnstartedCode]) {
         state = kYTPlayerStateUnstarted;
       }
-
+      
       [self.delegate playerView:self didChangeToState:state];
     }
   } else if ([action isEqual:kYTPlayerCallbackOnPlaybackQualityChange]) {
@@ -560,7 +560,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   } else if ([action isEqual:kYTPlayerCallbackOnError]) {
     if ([self.delegate respondsToSelector:@selector(playerView:receivedError:)]) {
       YTPlayerError error = kYTPlayerErrorUnknown;
-
+      
       if ([data isEqual:kYTPlayerErrorInvalidParamErrorCode]) {
         error = kYTPlayerErrorInvalidParam;
       } else if ([data isEqual:kYTPlayerErrorHTML5ErrorCode]) {
@@ -572,15 +572,15 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
                  [data isEqual:kYTPlayerErrorCannotFindVideoErrorCode]) {
         error = kYTPlayerErrorVideoNotFound;
       }
-
+      
       [self.delegate playerView:self receivedError:error];
     }
   } else if ([action isEqualToString:kYTPlayerCallbackOnPlayTime]) {
-      if ([self.delegate respondsToSelector:@selector(playerView:didPlayTime:)]) {
-          float time = [data floatValue];
-          [self.delegate playerView:self didPlayTime:time];
-      }
-      
+    if ([self.delegate respondsToSelector:@selector(playerView:didPlayTime:)]) {
+      float time = [data floatValue];
+      [self.delegate playerView:self didPlayTime:time];
+    }
+    
   }
 }
 
@@ -591,22 +591,22 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   //     http(s)://www.youtube.com/embed/[VIDEO ID]?[PARAMETERS]
   NSError *error = NULL;
   NSRegularExpression *ytRegex =
-      [NSRegularExpression regularExpressionWithPattern:kYTPlayerEmbedUrlRegexPattern
-                                                options:NSRegularExpressionCaseInsensitive
-                                                  error:&error];
+  [NSRegularExpression regularExpressionWithPattern:kYTPlayerEmbedUrlRegexPattern
+                                            options:NSRegularExpressionCaseInsensitive
+                                              error:&error];
   NSTextCheckingResult *ytMatch =
-      [ytRegex firstMatchInString:url.absoluteString
-                        options:0
-                          range:NSMakeRange(0, [url.absoluteString length])];
-    
+  [ytRegex firstMatchInString:url.absoluteString
+                      options:0
+                        range:NSMakeRange(0, [url.absoluteString length])];
+  
   NSRegularExpression *adRegex =
-      [NSRegularExpression regularExpressionWithPattern:kYTPlayerAdUrlRegexPattern
-                                                options:NSRegularExpressionCaseInsensitive
-                                                  error:&error];
+  [NSRegularExpression regularExpressionWithPattern:kYTPlayerAdUrlRegexPattern
+                                            options:NSRegularExpressionCaseInsensitive
+                                              error:&error];
   NSTextCheckingResult *adMatch =
-      [adRegex firstMatchInString:url.absoluteString
-                        options:0
-                          range:NSMakeRange(0, [url.absoluteString length])];
+  [adRegex firstMatchInString:url.absoluteString
+                      options:0
+                        range:NSMakeRange(0, [url.absoluteString length])];
   if (ytMatch || adMatch) {
     return YES;
   } else {
@@ -626,11 +626,11 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
  */
 - (BOOL)loadWithPlayerParams:(NSDictionary *)additionalPlayerParams {
   NSDictionary *playerCallbacks = @{
-        @"onReady" : @"onReady",
-        @"onStateChange" : @"onStateChange",
-        @"onPlaybackQualityChange" : @"onPlaybackQualityChange",
-        @"onError" : @"onPlayerError"
-  };
+                                    @"onReady" : @"onReady",
+                                    @"onStateChange" : @"onStateChange",
+                                    @"onPlaybackQualityChange" : @"onPlaybackQualityChange",
+                                    @"onError" : @"onPlayerError"
+                                    };
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
   [playerParams addEntriesFromDictionary:additionalPlayerParams];
   if (![playerParams objectForKey:@"height"]) {
@@ -639,50 +639,30 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   if (![playerParams objectForKey:@"width"]) {
     [playerParams setValue:@"100%" forKey:@"width"];
   }
-
+  
   [playerParams setValue:playerCallbacks forKey:@"events"];
-
+  
   if ([playerParams objectForKey:@"playerVars"]) {
     NSMutableDictionary *playerVars = [[NSMutableDictionary alloc] init];
     [playerVars addEntriesFromDictionary:[playerParams objectForKey:@"playerVars"]];
-      
+    
     if (![playerVars objectForKey:@"origin"]) {
-        self.originURL = [NSURL URLWithString:@"about:blank"];
+      self.originURL = [NSURL URLWithString:@"about:blank"];
     } else {
-        self.originURL = [NSURL URLWithString: [playerVars objectForKey:@"origin"]];
+      self.originURL = [NSURL URLWithString: [playerVars objectForKey:@"origin"]];
     }
   } else {
     // This must not be empty so we can render a '{}' in the output JSON
     [playerParams setValue:[[NSDictionary alloc] init] forKey:@"playerVars"];
   }
-
+  
   // Remove the existing webView to reset any state
   [self.webView removeFromSuperview];
   _webView = [self createNewWebView];
   [self addSubview:self.webView];
-
-  NSError *error = nil;
-  NSMutableSet *allBundles = [NSMutableSet setWithArray:@[ [NSBundle mainBundle] ] ];
-  [allBundles addObjectsFromArray:[NSBundle allBundles]];
-  [allBundles addObjectsFromArray:[NSBundle allFrameworks]];
   
-  NSString __block *path;
-  [allBundles enumerateObjectsUsingBlock:^(NSBundle *bundle, BOOL *stop) {
-      NSString *candidate = [bundle pathForResource:@"YTPlayerView-iframe-player" ofType:@"html" inDirectory:@"Assets"];
-      if (candidate != nil) {
-          path = candidate;
-          *stop = YES;
-      }
-  }];
+  NSString *embedHTMLTemplate = [self embedHTMLTemplate];
   
-  NSString *embedHTMLTemplate =
-      [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-
-  if (error) {
-    NSLog(@"Received error rendering template: %@", error);
-    return NO;
-  }
-
   // Render the playerVars as a JSON dictionary.
   NSError *jsonRenderingError = nil;
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:playerParams
@@ -694,16 +674,45 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
           jsonRenderingError);
     return NO;
   }
-
+  
   NSString *playerVarsJsonString =
-      [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
+  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
   [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
   [self.webView setDelegate:self];
   self.webView.allowsInlineMediaPlayback = YES;
   self.webView.mediaPlaybackRequiresUserAction = NO;
   return YES;
+}
+
+/**
+ * Private helper method that loads template string from file just once
+ * @returns loaded player html template
+ */
+- (NSString *)embedHTMLTemplate {
+  static NSString *embedHTMLTemplate = @"";
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    
+    NSMutableSet *bundles = [NSMutableSet setWithArray:@[ [NSBundle mainBundle] ] ];
+    NSBundle *classBundle = [NSBundle bundleForClass:self.class];
+    [bundles addObject:classBundle];
+    
+    NSString __block *path;
+    [bundles enumerateObjectsUsingBlock:^(NSBundle *bundle, BOOL *stop) {
+      NSString *candidate = [bundle pathForResource:@"YTPlayerView-iframe-player" ofType:@"html" inDirectory:@"Assets"];
+      if (candidate != nil) {
+        path = candidate;
+        *stop = YES;
+      }
+    }];
+    
+    NSError *error = nil;
+    embedHTMLTemplate =
+    [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+  });
+  return embedHTMLTemplate;
 }
 
 /**
@@ -718,14 +727,14 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
  * @return The result of cueing the playlist.
  */
 - (void)cuePlaylist:(NSString *)cueingString
-               index:(int)index
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+              index:(int)index
+       startSeconds:(float)startSeconds
+   suggestedQuality:(YTPlaybackQuality)suggestedQuality {
   NSNumber *indexValue = [NSNumber numberWithInt:index];
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cuePlaylist(%@, %@, %@, '%@');",
-      cueingString, indexValue, startSecondsValue, qualityValue];
+                       cueingString, indexValue, startSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -748,7 +757,7 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadPlaylist(%@, %@, %@, '%@');",
-      cueingString, indexValue, startSecondsValue, qualityValue];
+                       cueingString, indexValue, startSecondsValue, qualityValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -760,11 +769,11 @@ NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.double
  */
 - (NSString *)stringFromVideoIdArray:(NSArray *)videoIds {
   NSMutableArray *formattedVideoIds = [[NSMutableArray alloc] init];
-
+  
   for (id unformattedId in videoIds) {
     [formattedVideoIds addObject:[NSString stringWithFormat:@"'%@'", unformattedId]];
   }
-
+  
   return [NSString stringWithFormat:@"[%@]", [formattedVideoIds componentsJoinedByString:@", "]];
 }
 

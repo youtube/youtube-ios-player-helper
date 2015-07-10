@@ -137,6 +137,7 @@
 }
 
 - (void)testPauseVideo {
+  [[mockDelegate expect] playerView:playerView didChangeToState:kYTPlayerStatePaused];
   [[mockWebView expect] stringByEvaluatingJavaScriptFromString:@"player.pauseVideo();"];
   [playerView pauseVideo];
   [mockWebView verify];
@@ -171,7 +172,7 @@
 
 - (void)testCueVideoByIdstartSecondsendSecondsWithQuality {
   [[mockWebView expect]
-   stringByEvaluatingJavaScriptFromString:@"player.cueVideoById('abc', 5.5, 10.5, 'hd1080');"];
+   stringByEvaluatingJavaScriptFromString:@"player.cueVideoById({'videoId': 'abc', 'startSeconds': 5.5, 'endSeconds': 10.5, 'suggestedQuality': 'hd1080'});"];
   [playerView cueVideoById:@"abc"
               startSeconds:5.5
                 endSeconds:10.5
@@ -188,7 +189,7 @@
 
 - (void)testLoadVideoByIdstartSecondsendSecondsWithQuality {
   [[mockWebView expect]
-   stringByEvaluatingJavaScriptFromString:@"player.cueVideoById('abc', 5.5, 10.5, 'highres');"];
+   stringByEvaluatingJavaScriptFromString:@"player.cueVideoById({'videoId': 'abc', 'startSeconds': 5.5, 'endSeconds': 10.5, 'suggestedQuality': 'highres'});"];
   [playerView cueVideoById:@"abc"
               startSeconds:5.5
                 endSeconds:10.5
@@ -336,8 +337,8 @@
 }
 
 - (void)testGetAvailableQualityLevels {
-  [[[mockWebView stub] andReturn:@"[\"highres\", \"hd1080\"]"]
-   stringByEvaluatingJavaScriptFromString:@"player.getAvailableQualityLevels();"];
+  [[[mockWebView stub] andReturn:@"highres,hd1080"]
+   stringByEvaluatingJavaScriptFromString:@"player.getAvailableQualityLevels().toString();"];
 
   NSArray *expectedArray =
   [NSArray arrayWithObjects:[NSNumber numberWithInt:kYTPlaybackQualityHighRes],

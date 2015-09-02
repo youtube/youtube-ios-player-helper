@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		B3C76A271B975ADB00F375B4 /* YTPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C76A251B975ADB00F375B4 /* YTPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3C76A281B975ADB00F375B4 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C76A261B975ADB00F375B4 /* YTPlayerView.m */; };
-		B3C76A2B1B975AE500F375B4 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = B3C76A2A1B975AE500F375B4 /* YTPlayerView-iframe-player.html */; };
 		B3C76A2F1B975C0100F375B4 /* YouTubeiOSPlayerHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C76A2D1B975BD500F375B4 /* YouTubeiOSPlayerHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B3C76A331B9765D700F375B4 /* Assets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3C76A321B9765D700F375B4 /* Assets.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,8 +18,8 @@
 		B3C76A1F1B975AA700F375B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3C76A251B975ADB00F375B4 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTPlayerView.h; path = Classes/YTPlayerView.h; sourceTree = SOURCE_ROOT; };
 		B3C76A261B975ADB00F375B4 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTPlayerView.m; path = Classes/YTPlayerView.m; sourceTree = SOURCE_ROOT; };
-		B3C76A2A1B975AE500F375B4 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
 		B3C76A2D1B975BD500F375B4 /* YouTubeiOSPlayerHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YouTubeiOSPlayerHelper.h; sourceTree = "<group>"; };
+		B3C76A321B9765D700F375B4 /* Assets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Assets.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,7 @@
 		B3C76A1C1B975AA700F375B4 /* youtube-ios-player-helper */ = {
 			isa = PBXGroup;
 			children = (
-				B3C76A291B975AE500F375B4 /* Assets */,
+				B3C76A321B9765D700F375B4 /* Assets.bundle */,
 				B3C76A251B975ADB00F375B4 /* YTPlayerView.h */,
 				B3C76A261B975ADB00F375B4 /* YTPlayerView.m */,
 				B3C76A1F1B975AA700F375B4 /* Info.plist */,
@@ -60,14 +60,6 @@
 			);
 			path = "youtube-ios-player-helper";
 			sourceTree = "<group>";
-		};
-		B3C76A291B975AE500F375B4 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				B3C76A2A1B975AE500F375B4 /* YTPlayerView-iframe-player.html */,
-			);
-			path = Assets;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -138,7 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3C76A2B1B975AE500F375B4 /* YTPlayerView-iframe-player.html in Resources */,
+				B3C76A331B9765D700F375B4 /* Assets.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -820,9 +820,9 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
     webView.scrollView.bounces = NO;
     
     if ([self.delegate respondsToSelector:@selector(playerViewPreferredWebViewBackgroundColor:)]) {
-        webView.backgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor];
+        webView.backgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor:self];
         if (webView.backgroundColor == [UIColor clearColor]) {
-            webView.opaque = NO
+            webView.opaque = NO;
         }
     }
     

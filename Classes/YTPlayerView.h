@@ -92,7 +92,6 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (void)playerView:(YTPlayerView *)playerView receivedError:(YTPlayerError)error;
 
-
 /**
  * Callback invoked frequently when playBack is plaing.
  *
@@ -100,6 +99,13 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playTime float containing curretn playback time.
  */
 - (void)playerView:(YTPlayerView *)playerView didPlayTime:(float)playTime;
+
+/**
+ * Callback invoked when setting up the webview to allow custom colours so it fits in
+ * with app color schemes. If a transparent view is required specify clearColor and
+ * the code will handle the opacity etc.
+ */
+- (UIColor *)playerViewPreferredWebViewBackgroundColor:(YTPlayerView *)playerView;
 
 @end
 

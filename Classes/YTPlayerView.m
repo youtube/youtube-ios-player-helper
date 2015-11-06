@@ -814,11 +814,19 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
 }
 
 - (UIWebView *)createNewWebView {
-  UIWebView *webView = [[UIWebView alloc] initWithFrame:self.bounds];
-  webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-  webView.scrollView.scrollEnabled = NO;
-  webView.scrollView.bounces = NO;
-  return webView;
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.bounds];
+    webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    webView.scrollView.scrollEnabled = NO;
+    webView.scrollView.bounces = NO;
+    
+    if ([self.delegate respondsToSelector:@selector(playerViewPreferredWebViewBackgroundColor:)]) {
+        webView.backgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor:self];
+        if (webView.backgroundColor == [UIColor clearColor]) {
+            webView.opaque = NO;
+        }
+    }
+    
+    return webView;
 }
 
 - (void)removeWebView {

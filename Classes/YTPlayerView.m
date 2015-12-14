@@ -408,6 +408,12 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   return YES;
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+  if (self.initialLoadingView) {
+    [self.initialLoadingView removeFromSuperview];
+  }
+}
+
 /**
  * Convert a quality value from NSString to the typed enum value.
  *

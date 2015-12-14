@@ -35,7 +35,7 @@
     <div class="embed-container">
         <div id="player"></div>
     </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.youtube.com/iframe_api" onerror="window.location.href='ytplayer://onYouTubeIframeAPIFailedToLoad'"></script>
     <script>
     var player;
     var error = false;

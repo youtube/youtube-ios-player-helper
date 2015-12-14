@@ -54,6 +54,7 @@ NSString static *const kYTPlayerCallbackOnError = @"onError";
 NSString static *const kYTPlayerCallbackOnPlayTime = @"onPlayTime";
 
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIframeAPIReady";
+NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIFailedToLoad = @"onYouTubeIframeAPIFailedToLoad";
 
 NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtube.com/embed/(.*)$";
 NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.doubleclick.net/pagead/conversion/";
@@ -590,11 +591,14 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
       [self.delegate playerView:self receivedError:error];
     }
   } else if ([action isEqualToString:kYTPlayerCallbackOnPlayTime]) {
-      if ([self.delegate respondsToSelector:@selector(playerView:didPlayTime:)]) {
-          float time = [data floatValue];
-          [self.delegate playerView:self didPlayTime:time];
-      }
-      
+    if ([self.delegate respondsToSelector:@selector(playerView:didPlayTime:)]) {
+      float time = [data floatValue];
+      [self.delegate playerView:self didPlayTime:time];
+    }
+  } else if ([action isEqualToString:kYTPlayerCallbackOnYouTubeIframeAPIFailedToLoad]) {
+    if (self.initialLoadingView) {
+      [self.initialLoadingView removeFromSuperview];
+    }
   }
 }
 

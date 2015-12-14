@@ -110,6 +110,25 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (nonnull UIColor *)playerViewPreferredWebViewBackgroundColor:(nonnull YTPlayerView *)playerView;
 
+/**
+ * Callback invoked when initially loading the YouTube iframe to the webview to display a custom
+ * loading view while the player view is not ready. This loading view will be dismissed just before
+ * -playerViewDidBecomeReady: callback is invoked. The loading view will be automatically resized
+ * to cover the entire player view.
+ *
+ * The default implementation does not display any custom loading views so the player will display
+ * a blank view with a background color of (-playerViewPreferredWebViewBackgroundColor:).
+ * 
+ * Note that the custom loading view WILL NOT be displayed after iframe is loaded. It will be 
+ * handled by YouTube iframe API. This callback is just intended to tell users the view is actually
+ * doing something while iframe is being loaded, which will take some time if users are in poor networks.
+ *
+ * @param playerView The YTPlayerView instance where the error has occurred.
+ * @return A view object that will be displayed while YouTube iframe API is being loaded. 
+ *         Pass nil to display no custom loading view. Default implementation returns nil.
+ */
+- (nullable UIView *)playerViewPreferredInitialLoadingView:(nonnull YTPlayerView *)playerView;
+
 @end
 
 /**

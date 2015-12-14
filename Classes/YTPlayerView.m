@@ -62,7 +62,8 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
 
 @interface YTPlayerView()
 
-@property(nonatomic, strong) NSURL *originURL;
+@property (nonatomic, strong) NSURL *originURL;
+@property (nonatomic, weak) UIView *initialLoadingView;
 
 @end
 
@@ -533,6 +534,9 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   }
 
   if ([action isEqual:kYTPlayerCallbackOnReady]) {
+    if (self.initialLoadingView) {
+      [self.initialLoadingView removeFromSuperview];
+    }
     if ([self.delegate respondsToSelector:@selector(playerViewDidBecomeReady:)]) {
       [self.delegate playerViewDidBecomeReady:self];
     }
@@ -727,6 +731,17 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   [self.webView setDelegate:self];
   self.webView.allowsInlineMediaPlayback = YES;
   self.webView.mediaPlaybackRequiresUserAction = NO;
+  
+  if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
+    UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
+    if (initialLoadingView) {
+      initialLoadingView.frame = self.bounds;
+      initialLoadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+      [self addSubview:initialLoadingView];
+      self.initialLoadingView = initialLoadingView;
+    }
+  }
+  
   return YES;
 }
 

@@ -808,7 +808,8 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   return boolValue ? @"true" : @"false";
 }
 
-#pragma mark Exposed for Testing
+#pragma mark - Exposed for Testing
+
 - (void)setWebView:(UIWebView *)webView {
   _webView = webView;
 }

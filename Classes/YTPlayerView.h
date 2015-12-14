@@ -656,6 +656,12 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (int)playlistIndex;
 
+#pragma mark - Exposed for Testing
+
+/**
+ * Removes the internal web view from this player view.
+ * Intended to use for testing, should not be used in production code.
+ */
 - (void)removeWebView;
 
 @end

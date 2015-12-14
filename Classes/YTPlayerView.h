@@ -104,6 +104,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * Callback invoked when setting up the webview to allow custom colours so it fits in
  * with app color schemes. If a transparent view is required specify clearColor and
  * the code will handle the opacity etc.
+ * 
+ * @param playerView The YTPlayerView instance where the error has occurred.
+ * @return A color object that represents the background color of the webview.
  */
 - (nonnull UIColor *)playerViewPreferredWebViewBackgroundColor:(nonnull YTPlayerView *)playerView;
 

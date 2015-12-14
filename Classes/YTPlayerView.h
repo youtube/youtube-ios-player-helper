@@ -199,6 +199,17 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars;
 
+/**
+ * This method loads an iframe player with the given player parameters. Usually you may want to use
+ * -loadWithVideoId:playerVars: or -loadWithPlaylistId:playerVars: instead of this method does not handle
+ * video_id or playlist_id at all. The full list of parameters is defined at:
+ *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
+ *
+ * @param additionalPlayerParams An NSDictionary of parameters in addition to required parameters
+ *                               to instantiate the HTML5 player with. This differs depending on
+ *                               whether a single video or playlist is being loaded.
+ * @return YES if successful, NO if not.
+ */
 - (BOOL)loadWithPlayerParams:(NSDictionary *)additionalPlayerParams;
 
 #pragma mark - Player controls

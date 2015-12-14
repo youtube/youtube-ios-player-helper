@@ -90,7 +90,9 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   NSMutableDictionary *tempPlayerVars = [[NSMutableDictionary alloc] init];
   [tempPlayerVars setValue:@"playlist" forKey:@"listType"];
   [tempPlayerVars setValue:playlistId forKey:@"list"];
-  [tempPlayerVars addEntriesFromDictionary:playerVars];  // No-op if playerVars is null
+  if (playerVars) {
+    [tempPlayerVars addEntriesFromDictionary:playerVars];
+  }
 
   NSDictionary *playerParams = @{ @"playerVars" : tempPlayerVars };
   return [self loadWithPlayerParams:playerParams];
@@ -653,7 +655,9 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
         @"onError" : @"onPlayerError"
   };
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
-  [playerParams addEntriesFromDictionary:additionalPlayerParams];
+  if (additionalPlayerParams) {
+    [playerParams addEntriesFromDictionary:additionalPlayerParams];
+  }
   if (![playerParams objectForKey:@"height"]) {
     [playerParams setValue:@"100%" forKey:@"height"];
   }

@@ -30,9 +30,6 @@
 		84AF9E541C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E511C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt */; };
 		84AF9E551C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E521C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt */; };
 		84AF9E561C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E531C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt */; };
-		84AF9E5E1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E571C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt */; };
-		84AF9E5F1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E581C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt */; };
-		84AF9E601C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E591C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt */; };
 		84AF9E611C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5A1C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt */; };
 		84AF9E621C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5B1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt */; };
 		84AF9E631C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5C1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt */; };
@@ -131,9 +128,6 @@
 		84AF9E511C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.lyric.en.txt; sourceTree = "<group>"; };
 		84AF9E521C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.lyric.txt; sourceTree = "<group>"; };
 		84AF9E531C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.translation.en.txt; sourceTree = "<group>"; };
-		84AF9E571C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5fa_vF4mnGA.lyric.en.txt; sourceTree = "<group>"; };
-		84AF9E581C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5fa_vF4mnGA.lyric.txt; sourceTree = "<group>"; };
-		84AF9E591C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5fa_vF4mnGA.translation.en.txt; sourceTree = "<group>"; };
 		84AF9E5A1C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.karaoke.en.txt; sourceTree = "<group>"; };
 		84AF9E5B1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.lyric.en.txt; sourceTree = "<group>"; };
 		84AF9E5C1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.lyric.txt; sourceTree = "<group>"; };
@@ -353,9 +347,6 @@
 		84D489D01B05E8D8009299A7 /* lyrics */ = {
 			isa = PBXGroup;
 			children = (
-				84AF9E571C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt */,
-				84AF9E581C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt */,
-				84AF9E591C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt */,
 				84AF9E5A1C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt */,
 				84AF9E5B1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt */,
 				84AF9E5C1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt */,
@@ -498,7 +489,6 @@
 				84AF9E6B1C4B981E001A48D8 /* 4OrCA1OInoo.karaoke.en.txt in Resources */,
 				84AF9E611C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt in Resources */,
 				4D69941E18E22EE10073680F /* Main.storyboard in Resources */,
-				84AF9E5F1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt in Resources */,
 				84AF9E7C1C4CD452001A48D8 /* mTI_ngJEJuo.karaoke.en.txt in Resources */,
 				84AF9E641C4B87EA001A48D8 /* wjzQdQGtnF0.translation.en.txt in Resources */,
 				84AF9E6E1C4B9E45001A48D8 /* 4OrCA1OInoo.lyric.en.txt in Resources */,
@@ -512,8 +502,6 @@
 				84AF9E631C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt in Resources */,
 				84AF9E541C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt in Resources */,
 				84AF9E761C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.en.txt in Resources */,
-				84AF9E5E1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt in Resources */,
-				84AF9E601C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt in Resources */,
 				84AF9E6C1C4B981E001A48D8 /* 4OrCA1OInoo.translation.en.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

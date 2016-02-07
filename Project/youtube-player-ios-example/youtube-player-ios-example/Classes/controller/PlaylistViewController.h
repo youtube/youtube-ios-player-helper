@@ -61,6 +61,10 @@
 @property(nonatomic, strong) IBOutlet UIPickerView *picker_lang;
 @property(nonatomic, strong) IBOutlet UISearchBar *search_lang;
 
+@property(nonatomic, strong) IBOutlet NSLayoutConstraint *constraint_textview_translation_height;
+@property(nonatomic, strong) IBOutlet NSLayoutConstraint *constraint_textview_original_height;
+@property(nonatomic, strong) IBOutlet NSLayoutConstraint *constraint_textview_secret_height;
+@property(nonatomic, strong) IBOutlet NSLayoutConstraint *constraint_textview_karaoke_height;
 
 - (IBAction)buttonPressed:(id)sender;
 

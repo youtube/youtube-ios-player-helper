@@ -7,6 +7,8 @@
 //
 
 #import "ListRecordViewController.h"
+#import "ListRecordCell.h"
+#import "RecordViewController.h"
 
 @interface ListRecordViewController ()
 
@@ -39,18 +41,27 @@
 #pragma mark - UITableView Datasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *tableview_cell = [self.tableview_record dequeueReusableCellWithIdentifier:CELL_LIST_RECORD_ID];
+    ListRecordCell *tableview_cell = [self.tableview_record dequeueReusableCellWithIdentifier:CELL_LIST_RECORD_ID];
+    [tableview_cell.btn_detail addTarget:self action:@selector(clickBtnDetail) forControlEvents:UIControlEventTouchUpInside];
     return tableview_cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50.0;
+    return 100.0;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 3;
+}
+
+#pragma mark - Private method
+- (void) clickBtnDetail
+{
+    UIStoryboard *storyBoard = [self storyboard];
+    RecordViewController *recordView = [storyBoard instantiateViewControllerWithIdentifier:@"RecordViewControllerID"];
+    [self.navigationController pushViewController:recordView animated:YES];
 }
 
 @end

@@ -20,21 +20,32 @@
 		4D69941D18E22EE10073680F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69941718E22EE10073680F /* AppDelegate.m */; };
 		4D69941E18E22EE10073680F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D69941818E22EE10073680F /* Main.storyboard */; };
 		4D69942218E22F000073680F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69942118E22F000073680F /* main.m */; };
-		8423338D1B08549D00A99EBC /* Serendipity.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333871B08549D00A99EBC /* Serendipity.karaoke.en.txt */; };
-		8423338E1B08549D00A99EBC /* Serendipity.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333881B08549D00A99EBC /* Serendipity.lyric.en.txt */; };
-		8423338F1B08549D00A99EBC /* Serendipity.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333891B08549D00A99EBC /* Serendipity.lyric.txt */; };
-		842333901B08549D00A99EBC /* Serendipity.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8423338A1B08549D00A99EBC /* Serendipity.translation.en.txt */; };
-		842333951B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */; };
-		842333961B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */; };
-		842333981B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */; };
+		84178B361B0F626300C42CF9 /* ListRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84178B351B0F626300C42CF9 /* ListRecordCell.m */; };
+		84178B401B123C6300C42CF9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84178B3F1B123C6300C42CF9 /* RootViewController.m */; };
 		8423339C1B09B4FA00A99EBC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8423339B1B09B4FA00A99EBC /* SettingViewController.m */; };
 		842333A31B09B51C00A99EBC /* LyricAddingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A21B09B51C00A99EBC /* LyricAddingViewController.m */; };
 		842333A61B0A22A600A99EBC /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A51B0A22A600A99EBC /* RecordViewController.m */; };
 		842333A91B0A23A200A99EBC /* UserLyricsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333A81B0A23A200A99EBC /* UserLyricsViewController.m */; };
 		842333AD1B0A9DB700A99EBC /* ListRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */; };
-		842333B51B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333B31B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt */; };
-		842333B61B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333B41B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt */; };
-		842333BC1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 842333BB1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt */; };
+		84AF9E541C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E511C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt */; };
+		84AF9E551C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E521C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt */; };
+		84AF9E561C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E531C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt */; };
+		84AF9E5E1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E571C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt */; };
+		84AF9E5F1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E581C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt */; };
+		84AF9E601C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E591C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt */; };
+		84AF9E611C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5A1C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt */; };
+		84AF9E621C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5B1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt */; };
+		84AF9E631C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5C1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt */; };
+		84AF9E641C4B87EA001A48D8 /* wjzQdQGtnF0.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E5D1C4B87EA001A48D8 /* wjzQdQGtnF0.translation.en.txt */; };
+		84AF9E6B1C4B981E001A48D8 /* 4OrCA1OInoo.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E691C4B981E001A48D8 /* 4OrCA1OInoo.karaoke.en.txt */; };
+		84AF9E6C1C4B981E001A48D8 /* 4OrCA1OInoo.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E6A1C4B981E001A48D8 /* 4OrCA1OInoo.translation.en.txt */; };
+		84AF9E6E1C4B9E45001A48D8 /* 4OrCA1OInoo.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E6D1C4B9E45001A48D8 /* 4OrCA1OInoo.lyric.en.txt */; };
+		84AF9E701C4CA72E001A48D8 /* 4OrCA1OInoo.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E6F1C4CA72E001A48D8 /* 4OrCA1OInoo.lyric.txt */; };
+		84AF9E761C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E721C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.en.txt */; };
+		84AF9E771C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E731C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.txt */; };
+		84AF9E781C4CBD9B001A48D8 /* LIPyB7SgzKc.translation.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E741C4CBD9B001A48D8 /* LIPyB7SgzKc.translation.en.txt */; };
+		84AF9E7A1C4CCFCC001A48D8 /* LIPyB7SgzKc.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E791C4CCFCC001A48D8 /* LIPyB7SgzKc.karaoke.en.txt */; };
+		84AF9E7C1C4CD452001A48D8 /* mTI_ngJEJuo.karaoke.en.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84AF9E7B1C4CD452001A48D8 /* mTI_ngJEJuo.karaoke.en.txt */; };
 		84B96C761B009B91001ACC2E /* libPods-youtube-ios-player-helper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B96C711B009B77001ACC2E /* libPods-youtube-ios-player-helper.a */; };
 		84D489CD1B033BAD009299A7 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CA1B033BAD009299A7 /* PlaylistViewController.m */; };
 		84D489CE1B033BAD009299A7 /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D489CC1B033BAD009299A7 /* SingleVideoViewController.m */; };
@@ -102,13 +113,10 @@
 		4D69942118E22F000073680F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5E02695E3B9C9C321995A8EB /* Pods-youtube-player-ios-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube-player-ios-exampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-youtube-player-ios-exampleTests/Pods-youtube-player-ios-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		614CB957CD094425884C83E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		842333871B08549D00A99EBC /* Serendipity.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.karaoke.en.txt; sourceTree = "<group>"; };
-		842333881B08549D00A99EBC /* Serendipity.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.lyric.en.txt; sourceTree = "<group>"; };
-		842333891B08549D00A99EBC /* Serendipity.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.lyric.txt; sourceTree = "<group>"; };
-		8423338A1B08549D00A99EBC /* Serendipity.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Serendipity.translation.en.txt; sourceTree = "<group>"; };
-		842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.lyric.en.txt"; sourceTree = "<group>"; };
-		842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.lyric.txt"; sourceTree = "<group>"; };
-		842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ไกลแค่ไหนคือใกล้.translation.en.txt"; sourceTree = "<group>"; };
+		84178B341B0F626300C42CF9 /* ListRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRecordCell.h; sourceTree = "<group>"; };
+		84178B351B0F626300C42CF9 /* ListRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListRecordCell.m; sourceTree = "<group>"; };
+		84178B3E1B123C6300C42CF9 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		84178B3F1B123C6300C42CF9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		8423339A1B09B4FA00A99EBC /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		8423339B1B09B4FA00A99EBC /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		842333A11B09B51C00A99EBC /* LyricAddingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyricAddingViewController.h; sourceTree = "<group>"; };
@@ -119,10 +127,26 @@
 		842333A81B0A23A200A99EBC /* UserLyricsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLyricsViewController.m; sourceTree = "<group>"; };
 		842333AB1B0A9DB700A99EBC /* ListRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRecordViewController.h; sourceTree = "<group>"; };
 		842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListRecordViewController.m; sourceTree = "<group>"; };
-		842333B31B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ในหลวงของแผ่นดิน.lyric.en.txt"; sourceTree = "<group>"; };
-		842333B41B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ในหลวงของแผ่นดิน.lyric.txt"; sourceTree = "<group>"; };
-		842333BB1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ในหลวงของแผ่นดิน.translation.en.txt"; sourceTree = "<group>"; };
 		845F68471AFECFBB007ACB0C /* libPods-youtube-ios-player-helper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-youtube-ios-player-helper.a"; path = "Pods/../build/Debug-iphoneos/libPods-youtube-ios-player-helper.a"; sourceTree = "<group>"; };
+		84AF9E511C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.lyric.en.txt; sourceTree = "<group>"; };
+		84AF9E521C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.lyric.txt; sourceTree = "<group>"; };
+		84AF9E531C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.translation.en.txt; sourceTree = "<group>"; };
+		84AF9E571C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5fa_vF4mnGA.lyric.en.txt; sourceTree = "<group>"; };
+		84AF9E581C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5fa_vF4mnGA.lyric.txt; sourceTree = "<group>"; };
+		84AF9E591C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 5fa_vF4mnGA.translation.en.txt; sourceTree = "<group>"; };
+		84AF9E5A1C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.karaoke.en.txt; sourceTree = "<group>"; };
+		84AF9E5B1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.lyric.en.txt; sourceTree = "<group>"; };
+		84AF9E5C1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.lyric.txt; sourceTree = "<group>"; };
+		84AF9E5D1C4B87EA001A48D8 /* wjzQdQGtnF0.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wjzQdQGtnF0.translation.en.txt; sourceTree = "<group>"; };
+		84AF9E691C4B981E001A48D8 /* 4OrCA1OInoo.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4OrCA1OInoo.karaoke.en.txt; sourceTree = "<group>"; };
+		84AF9E6A1C4B981E001A48D8 /* 4OrCA1OInoo.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4OrCA1OInoo.translation.en.txt; sourceTree = "<group>"; };
+		84AF9E6D1C4B9E45001A48D8 /* 4OrCA1OInoo.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4OrCA1OInoo.lyric.en.txt; sourceTree = "<group>"; };
+		84AF9E6F1C4CA72E001A48D8 /* 4OrCA1OInoo.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 4OrCA1OInoo.lyric.txt; sourceTree = "<group>"; };
+		84AF9E721C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LIPyB7SgzKc.lyric.en.txt; sourceTree = "<group>"; };
+		84AF9E731C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LIPyB7SgzKc.lyric.txt; sourceTree = "<group>"; };
+		84AF9E741C4CBD9B001A48D8 /* LIPyB7SgzKc.translation.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LIPyB7SgzKc.translation.en.txt; sourceTree = "<group>"; };
+		84AF9E791C4CCFCC001A48D8 /* LIPyB7SgzKc.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LIPyB7SgzKc.karaoke.en.txt; sourceTree = "<group>"; };
+		84AF9E7B1C4CD452001A48D8 /* mTI_ngJEJuo.karaoke.en.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mTI_ngJEJuo.karaoke.en.txt; sourceTree = "<group>"; };
 		84B96C671B009B77001ACC2E /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		84D489C81B033A9D009299A7 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		84D489C91B033BAD009299A7 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
@@ -292,6 +316,8 @@
 				842333A81B0A23A200A99EBC /* UserLyricsViewController.m */,
 				842333AB1B0A9DB700A99EBC /* ListRecordViewController.h */,
 				842333AC1B0A9DB700A99EBC /* ListRecordViewController.m */,
+				84178B3E1B123C6300C42CF9 /* RootViewController.h */,
+				84178B3F1B123C6300C42CF9 /* RootViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -310,6 +336,8 @@
 		84D489C31B033A81009299A7 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				84178B341B0F626300C42CF9 /* ListRecordCell.h */,
+				84178B351B0F626300C42CF9 /* ListRecordCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -325,16 +353,25 @@
 		84D489D01B05E8D8009299A7 /* lyrics */ = {
 			isa = PBXGroup;
 			children = (
-				842333871B08549D00A99EBC /* Serendipity.karaoke.en.txt */,
-				842333881B08549D00A99EBC /* Serendipity.lyric.en.txt */,
-				842333891B08549D00A99EBC /* Serendipity.lyric.txt */,
-				8423338A1B08549D00A99EBC /* Serendipity.translation.en.txt */,
-				842333971B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt */,
-				842333931B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt */,
-				842333941B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt */,
-				842333B31B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt */,
-				842333B41B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt */,
-				842333BB1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt */,
+				84AF9E571C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt */,
+				84AF9E581C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt */,
+				84AF9E591C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt */,
+				84AF9E5A1C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt */,
+				84AF9E5B1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt */,
+				84AF9E5C1C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt */,
+				84AF9E5D1C4B87EA001A48D8 /* wjzQdQGtnF0.translation.en.txt */,
+				84AF9E511C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt */,
+				84AF9E521C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt */,
+				84AF9E531C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt */,
+				84AF9E7B1C4CD452001A48D8 /* mTI_ngJEJuo.karaoke.en.txt */,
+				84AF9E6F1C4CA72E001A48D8 /* 4OrCA1OInoo.lyric.txt */,
+				84AF9E6D1C4B9E45001A48D8 /* 4OrCA1OInoo.lyric.en.txt */,
+				84AF9E691C4B981E001A48D8 /* 4OrCA1OInoo.karaoke.en.txt */,
+				84AF9E6A1C4B981E001A48D8 /* 4OrCA1OInoo.translation.en.txt */,
+				84AF9E791C4CCFCC001A48D8 /* LIPyB7SgzKc.karaoke.en.txt */,
+				84AF9E721C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.en.txt */,
+				84AF9E731C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.txt */,
+				84AF9E741C4CBD9B001A48D8 /* LIPyB7SgzKc.translation.en.txt */,
 			);
 			path = lyrics;
 			sourceTree = "<group>";
@@ -456,19 +493,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				842333B61B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.txt in Resources */,
-				842333B51B0AF52600A99EBC /* ในหลวงของแผ่นดิน.lyric.en.txt in Resources */,
-				8423338F1B08549D00A99EBC /* Serendipity.lyric.txt in Resources */,
-				842333901B08549D00A99EBC /* Serendipity.translation.en.txt in Resources */,
+				84AF9E7A1C4CCFCC001A48D8 /* LIPyB7SgzKc.karaoke.en.txt in Resources */,
+				84AF9E561C4B85A1001A48D8 /* mTI_ngJEJuo.translation.en.txt in Resources */,
+				84AF9E6B1C4B981E001A48D8 /* 4OrCA1OInoo.karaoke.en.txt in Resources */,
+				84AF9E611C4B87EA001A48D8 /* wjzQdQGtnF0.karaoke.en.txt in Resources */,
 				4D69941E18E22EE10073680F /* Main.storyboard in Resources */,
-				8423338D1B08549D00A99EBC /* Serendipity.karaoke.en.txt in Resources */,
-				842333981B08D9C100A99EBC /* ไกลแค่ไหนคือใกล้.translation.en.txt in Resources */,
-				8423338E1B08549D00A99EBC /* Serendipity.lyric.en.txt in Resources */,
-				842333BC1B0AF7B900A99EBC /* ในหลวงของแผ่นดิน.translation.en.txt in Resources */,
+				84AF9E5F1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.txt in Resources */,
+				84AF9E7C1C4CD452001A48D8 /* mTI_ngJEJuo.karaoke.en.txt in Resources */,
+				84AF9E641C4B87EA001A48D8 /* wjzQdQGtnF0.translation.en.txt in Resources */,
+				84AF9E6E1C4B9E45001A48D8 /* 4OrCA1OInoo.lyric.en.txt in Resources */,
+				84AF9E781C4CBD9B001A48D8 /* LIPyB7SgzKc.translation.en.txt in Resources */,
+				84AF9E551C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.txt in Resources */,
 				4D6993FA18E22E0C0073680F /* Images.xcassets in Resources */,
-				842333951B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.en.txt in Resources */,
+				84AF9E701C4CA72E001A48D8 /* 4OrCA1OInoo.lyric.txt in Resources */,
+				84AF9E621C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.en.txt in Resources */,
 				4D6993EC18E22E0C0073680F /* InfoPlist.strings in Resources */,
-				842333961B08C93600A99EBC /* ไกลแค่ไหนคือใกล้.lyric.txt in Resources */,
+				84AF9E771C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.txt in Resources */,
+				84AF9E631C4B87EA001A48D8 /* wjzQdQGtnF0.lyric.txt in Resources */,
+				84AF9E541C4B85A1001A48D8 /* mTI_ngJEJuo.lyric.en.txt in Resources */,
+				84AF9E761C4CBD9B001A48D8 /* LIPyB7SgzKc.lyric.en.txt in Resources */,
+				84AF9E5E1C4B87EA001A48D8 /* 5fa_vF4mnGA.lyric.en.txt in Resources */,
+				84AF9E601C4B87EA001A48D8 /* 5fa_vF4mnGA.translation.en.txt in Resources */,
+				84AF9E6C1C4B981E001A48D8 /* 4OrCA1OInoo.translation.en.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,9 +602,11 @@
 				4D69941D18E22EE10073680F /* AppDelegate.m in Sources */,
 				84D489CE1B033BAD009299A7 /* SingleVideoViewController.m in Sources */,
 				8423339C1B09B4FA00A99EBC /* SettingViewController.m in Sources */,
+				84178B361B0F626300C42CF9 /* ListRecordCell.m in Sources */,
 				84D489DF1B05E9A2009299A7 /* Lyric.m in Sources */,
 				84D489CD1B033BAD009299A7 /* PlaylistViewController.m in Sources */,
 				842333A61B0A22A600A99EBC /* RecordViewController.m in Sources */,
+				84178B401B123C6300C42CF9 /* RootViewController.m in Sources */,
 				84D489E61B070032009299A7 /* LyricLang.m in Sources */,
 				842333A31B09B51C00A99EBC /* LyricAddingViewController.m in Sources */,
 			);
@@ -678,6 +726,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Naddao Thongsak (4P33DMV4ZK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Naddao Thongsak (4P33DMV4ZK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "youtube-player-ios-example/youtube-player-ios-example-Prefix.pch";
 				INFOPLIST_FILE = "youtube-player-ios-example/youtube-player-ios-example-Info.plist";
@@ -691,6 +741,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f209aca6-6346-4e6b-ab87-c8fd74472740";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -701,6 +752,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Naddao Thongsak (FMEC9E945H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Naddao Thongsak (FMEC9E945H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "youtube-player-ios-example/youtube-player-ios-example-Prefix.pch";
 				INFOPLIST_FILE = "youtube-player-ios-example/youtube-player-ios-example-Info.plist";
@@ -714,6 +767,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f209aca6-6346-4e6b-ab87-c8fd74472740";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

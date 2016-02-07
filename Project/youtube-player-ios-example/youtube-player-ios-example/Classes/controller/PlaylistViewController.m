@@ -71,15 +71,18 @@
         [self.playerView playVideo];
 //        [self loadingVideoLyric];
         [self startUpdateTimer];
+        [self clearAllData];
         
       
     } else if (sender == self.pauseButton) {
         [self.playerView pauseVideo];
         [self pauseTimer];
+        [self refreshData];
       
     } else if (sender == self.stopButton) {
       [self.playerView stopVideo];
       [self stopUpdateTimer];
+        [self clearAllData];
       
     } else if (sender == self.nextVideoButton) {
         [self resetTimer];
@@ -87,6 +90,7 @@
         [self appendStatusText:@"Loading next video in playlist\n"];
         [self.playerView nextVideo];
 //        [self loadingVideoLyric];
+        [self clearAllData];
         
         
       
@@ -96,37 +100,56 @@
         [self appendStatusText:@"Loading previous video in playlist\n"];
         [self.playerView previousVideo];
 //        [self loadingVideoLyric];
+        [self clearAllData];
         
         
     } else if (sender == self.btn_type_karaoke) {
         [self.btn_type_karaoke setSelected: !self.btn_type_karaoke.isSelected];
         self.lyric_type_selected = LyricKarakoke;
         if(self.btn_type_karaoke.isSelected){
+            [self __showOptionViewFromBtn:self.btn_type_karaoke];
             isKaraokeEnabled = TRUE;
+        }else{
+            [self __hideOptionViewFromBtn:self.btn_type_karaoke];
         }
+        [self refreshData];
         
     } else if (sender == self.btn_type_translation) {
         [self.btn_type_translation setSelected: !self.btn_type_translation.isSelected];
         self.lyric_type_selected = LyricTranslation;
         if(self.btn_type_translation.isSelected){
+            [self __showOptionViewFromBtn:self.btn_type_translation];
             isTranslationEnabled = TRUE;
+        }else{
+            [self __hideOptionViewFromBtn:self.btn_type_translation];
         }
         
         
     } else if (sender == self.btn_type_original) {
         [self.btn_type_original setSelected: !self.btn_type_original.isSelected];
         self.lyric_type_selected = LyricOriginal;
+        if(self.btn_type_original.isSelected){
+            [self __showOptionViewFromBtn:self.btn_type_original];
+          
+        }else{
+            [self __hideOptionViewFromBtn:self.btn_type_original];
+        }
+        [self refreshData];
    
     }else if (sender == self.btn_type_secret) {
         [self.btn_type_secret setSelected: !self.btn_type_secret.isSelected];
         self.lyric_type_selected = LyricSecret;
         if(self.btn_type_secret.isSelected){
+            [self __showOptionViewFromBtn:self.btn_type_secret];
             isSecretEnabled = TRUE;
+        }else{
+            [self __hideOptionViewFromBtn:self.btn_type_secret];
         }
+        [self refreshData];
         
     }
     
-    [self refreshData];
+    
 }
 
 #pragma mark - PlayerView Delegate
@@ -342,24 +365,49 @@
 - (void) loadingVideoLyric
 {
     NSLog(@"Current playlist index: %d", [self.playerView playlistIndex] );
-    if( [self.playerView playlistIndex] == 0 ){
-        [lyric searchDataWithTitle:@"ในหลวงของแผ่นดิน"
+    NSString *videoURL = [[self.playerView videoUrl] absoluteString];
+    NSLog(@"Video URL: %@", videoURL);
+    NSLog(@"%@", [self.playerView videoUrl]);
+    NSLog(@"%@", [self.playerView videoEmbedCode]);
+    
+    NSError* error = nil;
+    //v=[^&]*
+    //v=([^&]+)
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"v=([^&]+)" options:0 error:&error];
+    NSArray* matches = [regex matchesInString:videoURL options:0 range:NSMakeRange(0, [videoURL length])];
+    if(matches!=nil){
+        
+        NSTextCheckingResult *match = [matches objectAtIndex:0];
+        NSString* matchText = [videoURL substringWithRange:[match range]];
+        NSString* videoID = [matchText substringWithRange:NSMakeRange(2, [matchText length]-2)];
+        NSLog(@"match: %@", matchText);
+        NSLog(@"videoID: %@", videoID);
+        [lyric searchDataWithTitle:videoID
                          andArtist:@"-"
                     andDescription:@""
                            andType:LyricTranslation
                            andLang:@"en"];
-    }else if( [self.playerView playlistIndex] == 1 ){
-        [lyric searchDataWithTitle:@"Serendipity"
-                               andArtist:@"-"
-                          andDescription:@""
-                                 andType:LyricTranslation
-                                 andLang:@"en"];
-    }else if( [self.playerView playlistIndex] == 2 ){
-        [lyric searchDataWithTitle:@"ไกลแค่ไหนคือใกล้"
-                         andArtist:@"-"
-                    andDescription:@""
-                           andType:LyricTranslation
-                           andLang:@"en"];
+    
+//    if( [self.playerView playlistIndex] == 0 ){
+//        [lyric searchDataWithTitle:@"ในหลวงของแผ่นดิน"
+//                         andArtist:@"-"
+//                    andDescription:@""
+//                           andType:LyricTranslation
+//                           andLang:@"en"];
+//    }else if( [self.playerView playlistIndex] == 1 ){
+//        [lyric searchDataWithTitle:@"Serendipity"
+//                               andArtist:@"-"
+//                          andDescription:@""
+//                                 andType:LyricTranslation
+//                                 andLang:@"en"];
+//    }else if( [self.playerView playlistIndex] == 2 ){
+//        [lyric searchDataWithTitle:@"ไกลแค่ไหนคือใกล้"
+//                         andArtist:@"-"
+//                    andDescription:@""
+//                           andType:LyricTranslation
+//                           andLang:@"en"];
+//    }
+        
     }
 
 }
@@ -399,10 +447,10 @@
 {
     [lyric clearCurrentLyric];
     
-    self.textview_lyric.text = @"";
-    self.textview_karaoke.text = @"";
-    self.textview_translation.text = @"";
-    self.textview_secret.text = @"";
+    self.textview_lyric.text = @"...Lyrics...";
+    self.textview_karaoke.text = @"...Karaoke...";
+    self.textview_translation.text = @"...Translation...";
+    self.textview_secret.text = @"...Secret Lyrics...";
 
 }
 
@@ -442,5 +490,126 @@
     
     return langs;
 }
+
+- (void)__showOptionViewFromBtn:(UIButton*) btn
+{
+    self.textview_karaoke.hidden = NO;
+    if(btn == self.btn_type_karaoke){
+        self.constraint_textview_karaoke_height.constant = 29;
+        [self.textview_karaoke setNeedsUpdateConstraints];
+    }else if(btn == self.btn_type_translation){
+        self.constraint_textview_translation_height.constant = 29;
+        [self.textview_translation setNeedsUpdateConstraints];
+    }else if(btn == self.btn_type_original){
+        self.constraint_textview_original_height.constant = 29;
+        [self.textview_lyric setNeedsUpdateConstraints];
+    }else if(btn == self.btn_type_secret){
+        self.constraint_textview_secret_height.constant = 29;
+        [self.textview_secret setNeedsUpdateConstraints];
+    }
+    
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         [self.textview_karaoke layoutIfNeeded];
+                         [self.textview_secret layoutIfNeeded];
+                         [self.textview_translation layoutIfNeeded];
+                         [self.textview_lyric layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+}
+
+- (void)__hideOptionViewFromBtn:(UIButton*) btn
+{
+//    self.btn_option.selected = NO;
+    
+    
+    if(btn == self.btn_type_karaoke){
+        self.constraint_textview_karaoke_height.constant = 0;
+        [self.textview_karaoke setNeedsUpdateConstraints];
+    }else if(btn == self.btn_type_translation){
+        self.constraint_textview_translation_height.constant = 0;
+        [self.textview_translation setNeedsUpdateConstraints];
+    }else if(btn == self.btn_type_original){
+        self.constraint_textview_original_height.constant = 0;
+        [self.textview_lyric setNeedsUpdateConstraints];
+    }else if(btn == self.btn_type_secret){
+        self.constraint_textview_secret_height.constant = 0;
+        [self.textview_secret setNeedsUpdateConstraints];
+    }
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         
+                         if(btn == self.btn_type_karaoke){
+                             [self.textview_karaoke layoutIfNeeded];
+                         }else if(btn == self.btn_type_translation){
+                             [self.textview_translation layoutIfNeeded];
+                         }else if(btn == self.btn_type_original){
+                             [self.textview_lyric layoutIfNeeded];
+                         }else if(btn == self.btn_type_secret){
+                             [self.textview_secret layoutIfNeeded];
+                         }
+ 
+                         
+                     }
+                     completion:^(BOOL finished) {
+//                         self.btn_option.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+                         //self.textview_karaoke.hidden = YES;
+                     }];
+}
+
+//- (void)pushViewController:(UIViewController *)vc
+//                  animated:(BOOL)animated
+//{
+////    if (self.isTransitioningScreen) {
+////        return;
+////    }
+//    @synchronized(self) {
+////        self.isTransitioningScreen = YES;
+//        [self.vcList addObject:vc];
+//        [self addChildViewController:vc];
+//        [self.view_subview addSubview:vc.view];
+//        [vc didMoveToParentViewController:self];
+//        
+//        if (animated) {
+//            vc.view.frame = CGRectMake(self.view_subview.frame.size.width, 0, self.view_subview.bounds.size.width, self.view_subview.bounds.size.height);
+//            
+//            [UIView animateWithDuration:0.5
+//                             animations:^{
+//                                 vc.view.frame = self.view_subview.bounds;
+//                                 
+//                                 if (self.activeVC) {
+//                                     CGRect frame = self.activeVC.view.frame;
+//                                     frame.origin.x = -frame.size.width;
+//                                     self.activeVC.view.frame = frame;
+//                                 }
+//                             }
+//                             completion:^(BOOL finished) {
+//                                 if (self.activeVC) {
+//                                     [self.activeVC.view removeFromSuperview];
+//                                     [self.activeVC removeFromParentViewController];
+//                                 }
+//                                 
+//                                 self.activeVC = vc;
+//                                 
+//                                 self.isTransitioningScreen = NO;
+//                             }];
+//        } else {
+//            vc.view.frame = self.view_subview.bounds;
+//            
+//            if (self.activeVC) {
+//                [self.activeVC.view removeFromSuperview];
+//                [self.activeVC removeFromParentViewController];
+//            }
+//            
+//            self.activeVC = vc;
+//            
+//            self.isTransitioningScreen = NO;
+//        }
+//    }
+//}
 
 @end

@@ -6,8 +6,6 @@
  Copyright (c) 2558 B2Home. All rights reserved.
  */
 
-#define URL_YOUTUBE_PLAYLIST                @"PLEeo8yGA53ZIERNnmcUXwFtmXVjKPU0vX"
-//#define URL_YOUTUBE_PLAYLIST              @"PLEeo8yGA53ZIJTqKFOhZTT1E0Ptt5d_SG"
-//#define URL_YOUTUBE_PLAYLIST              @"PLEeo8yGA53ZKy7jSC2EnYZ9iFbCGgxmGo"
+#define URL_YOUTUBE_PLAYLIST                @"PLedwA7C4Wydme3Ya3FqOqrpuXQeyv4Tdp"
 #define CELL_USER_RECORD_ID                 @"RecordCellID"
 #define CELL_LIST_RECORD_ID                 @"ListRecordCellID"

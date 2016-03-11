@@ -122,10 +122,6 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
   [self stringFromEvaluatingJavaScript:command];
 }
 
-- (void)clearVideo {
-  [self stringFromEvaluatingJavaScript:@"player.clearVideo();"];
-}
-
 #pragma mark - Cueing methods
 
 - (void)cueVideoById:(NSString *)videoId

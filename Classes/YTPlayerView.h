@@ -271,13 +271,6 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (void)seekToSeconds:(float)seekToSeconds allowSeekAhead:(BOOL)allowSeekAhead;
 
-/**
- * Clears the loaded video from the player. Corresponds to this method from
- * the JavaScript API:
- *   https://developers.google.com/youtube/iframe_api_reference#clearVideo
- */
-- (void)clearVideo;
-
 #pragma mark - Queuing videos
 
 // Queueing functions for videos. These methods correspond to their JavaScript

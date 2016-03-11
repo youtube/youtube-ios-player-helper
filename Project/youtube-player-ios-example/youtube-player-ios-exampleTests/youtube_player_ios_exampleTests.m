@@ -149,12 +149,6 @@
   [mockWebView verify];
 }
 
-- (void)testClearVideo {
-  [[mockWebView expect] stringByEvaluatingJavaScriptFromString:@"player.clearVideo();"];
-  [playerView clearVideo];
-  [mockWebView verify];
-}
-
 - (void)testSeekTo {
   [[mockWebView expect] stringByEvaluatingJavaScriptFromString:@"player.seekTo(5.5, false);"];
   [playerView seekToSeconds:5.5 allowSeekAhead:NO];

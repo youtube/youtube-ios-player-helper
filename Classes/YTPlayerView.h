@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  *
  * @param playerView The YTPlayerView instance that has become ready.
  */
-- (void)playerViewDidBecomeReady:(YTPlayerView *)playerView;
+- (void)playerViewDidBecomeReady:(nonnull YTPlayerView *)playerView;
 
 /**
  * Callback invoked when player state has changed, e.g. stopped or started playback.
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playerView The YTPlayerView instance where playback state has changed.
  * @param state YTPlayerState designating the new playback state.
  */
-- (void)playerView:(YTPlayerView *)playerView didChangeToState:(YTPlayerState)state;
+- (void)playerView:(nonnull YTPlayerView *)playerView didChangeToState:(YTPlayerState)state;
 
 /**
  * Callback invoked when playback quality has changed.
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playerView The YTPlayerView instance where playback quality has changed.
  * @param quality YTPlaybackQuality designating the new playback quality.
  */
-- (void)playerView:(YTPlayerView *)playerView didChangeToQuality:(YTPlaybackQuality)quality;
+- (void)playerView:(nonnull YTPlayerView *)playerView didChangeToQuality:(YTPlaybackQuality)quality;
 
 /**
  * Callback invoked when an error has occured.
@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playerView The YTPlayerView instance where the error has occurred.
  * @param error YTPlayerError containing the error state.
  */
-- (void)playerView:(YTPlayerView *)playerView receivedError:(YTPlayerError)error;
+- (void)playerView:(nonnull YTPlayerView *)playerView receivedError:(YTPlayerError)error;
 
 /**
  * Callback invoked frequently when playBack is plaing.
@@ -98,14 +98,36 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playerView The YTPlayerView instance where the error has occurred.
  * @param playTime float containing curretn playback time.
  */
-- (void)playerView:(YTPlayerView *)playerView didPlayTime:(float)playTime;
+- (void)playerView:(nonnull YTPlayerView *)playerView didPlayTime:(float)playTime;
 
 /**
  * Callback invoked when setting up the webview to allow custom colours so it fits in
  * with app color schemes. If a transparent view is required specify clearColor and
  * the code will handle the opacity etc.
+ * 
+ * @param playerView The YTPlayerView instance where the error has occurred.
+ * @return A color object that represents the background color of the webview.
  */
-- (UIColor *)playerViewPreferredWebViewBackgroundColor:(YTPlayerView *)playerView;
+- (nonnull UIColor *)playerViewPreferredWebViewBackgroundColor:(nonnull YTPlayerView *)playerView;
+
+/**
+ * Callback invoked when initially loading the YouTube iframe to the webview to display a custom
+ * loading view while the player view is not ready. This loading view will be dismissed just before
+ * -playerViewDidBecomeReady: callback is invoked. The loading view will be automatically resized
+ * to cover the entire player view.
+ *
+ * The default implementation does not display any custom loading views so the player will display
+ * a blank view with a background color of (-playerViewPreferredWebViewBackgroundColor:).
+ * 
+ * Note that the custom loading view WILL NOT be displayed after iframe is loaded. It will be 
+ * handled by YouTube iframe API. This callback is just intended to tell users the view is actually
+ * doing something while iframe is being loaded, which will take some time if users are in poor networks.
+ *
+ * @param playerView The YTPlayerView instance where the error has occurred.
+ * @return A view object that will be displayed while YouTube iframe API is being loaded. 
+ *         Pass nil to display no custom loading view. Default implementation returns nil.
+ */
+- (nullable UIView *)playerViewPreferredInitialLoadingView:(nonnull YTPlayerView *)playerView;
 
 @end
 
@@ -118,10 +140,10 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 @interface YTPlayerView : UIView<UIWebViewDelegate>
 
-@property(nonatomic, strong, readonly) UIWebView *webView;
+@property(nonatomic, strong, nullable, readonly) UIWebView *webView;
 
 /** A delegate to be notified on playback events. */
-@property(nonatomic, weak) id<YTPlayerViewDelegate> delegate;
+@property(nonatomic, weak, nullable) id<YTPlayerViewDelegate> delegate;
 
 /**
  * This method loads the player with the given video ID.
@@ -135,7 +157,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param videoId The YouTube video ID of the video to load in the player view.
  * @return YES if player has been configured correctly, NO otherwise.
  */
-- (BOOL)loadWithVideoId:(NSString *)videoId;
+- (BOOL)loadWithVideoId:(nonnull NSString *)videoId;
 
 /**
  * This method loads the player with the given playlist ID.
@@ -150,7 +172,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playlistId The YouTube playlist ID of the playlist to load in the player view.
  * @return YES if player has been configured correctly, NO otherwise.
  */
-- (BOOL)loadWithPlaylistId:(NSString *)playlistId;
+- (BOOL)loadWithPlaylistId:(nonnull NSString *)playlistId;
 
 /**
  * This method loads the player with the given video ID and player variables. Player variables
@@ -173,7 +195,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playerVars An NSDictionary of player parameters.
  * @return YES if player has been configured correctly, NO otherwise.
  */
-- (BOOL)loadWithVideoId:(NSString *)videoId playerVars:(NSDictionary *)playerVars;
+- (BOOL)loadWithVideoId:(nonnull NSString *)videoId playerVars:(nullable NSDictionary *)playerVars;
 
 /**
  * This method loads the player with the given playlist ID and player variables. Player variables
@@ -197,9 +219,20 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param playerVars An NSDictionary of player parameters.
  * @return YES if player has been configured correctly, NO otherwise.
  */
-- (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars;
+- (BOOL)loadWithPlaylistId:(nonnull NSString *)playlistId playerVars:(nullable NSDictionary *)playerVars;
 
-- (BOOL)loadWithPlayerParams:(NSDictionary *)additionalPlayerParams;
+/**
+ * This method loads an iframe player with the given player parameters. Usually you may want to use
+ * -loadWithVideoId:playerVars: or -loadWithPlaylistId:playerVars: instead of this method does not handle
+ * video_id or playlist_id at all. The full list of parameters is defined at:
+ *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
+ *
+ * @param additionalPlayerParams An NSDictionary of parameters in addition to required parameters
+ *                               to instantiate the HTML5 player with. This differs depending on
+ *                               whether a single video or playlist is being loaded.
+ * @return YES if successful, NO if not.
+ */
+- (BOOL)loadWithPlayerParams:(nullable NSDictionary *)additionalPlayerParams;
 
 #pragma mark - Player controls
 
@@ -261,7 +294,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)cueVideoById:(NSString *)videoId
+- (void)cueVideoById:(nonnull NSString *)videoId
         startSeconds:(float)startSeconds
     suggestedQuality:(YTPlaybackQuality)suggestedQuality;
 
@@ -276,7 +309,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param endSeconds Time in seconds to end the video after it begins playing.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)cueVideoById:(NSString *)videoId
+- (void)cueVideoById:(nonnull NSString *)videoId
         startSeconds:(float)startSeconds
           endSeconds:(float)endSeconds
     suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -291,7 +324,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when it has loaded.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)loadVideoById:(NSString *)videoId
+- (void)loadVideoById:(nonnull NSString *)videoId
          startSeconds:(float)startSeconds
      suggestedQuality:(YTPlaybackQuality)suggestedQuality;
 
@@ -306,7 +339,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param endSeconds Time in seconds to end the video after it begins playing.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)loadVideoById:(NSString *)videoId
+- (void)loadVideoById:(nonnull NSString *)videoId
          startSeconds:(float)startSeconds
            endSeconds:(float)endSeconds
      suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -321,7 +354,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)cueVideoByURL:(NSString *)videoURL
+- (void)cueVideoByURL:(nonnull NSString *)videoURL
          startSeconds:(float)startSeconds
      suggestedQuality:(YTPlaybackQuality)suggestedQuality;
 
@@ -336,7 +369,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param endSeconds Time in seconds to end the video after it begins playing.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)cueVideoByURL:(NSString *)videoURL
+- (void)cueVideoByURL:(nonnull NSString *)videoURL
          startSeconds:(float)startSeconds
            endSeconds:(float)endSeconds
      suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -351,7 +384,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when it has loaded.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)loadVideoByURL:(NSString *)videoURL
+- (void)loadVideoByURL:(nonnull NSString *)videoURL
           startSeconds:(float)startSeconds
       suggestedQuality:(YTPlaybackQuality)suggestedQuality;
 
@@ -366,7 +399,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param endSeconds Time in seconds to end the video after it begins playing.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)loadVideoByURL:(NSString *)videoURL
+- (void)loadVideoByURL:(nonnull NSString *)videoURL
           startSeconds:(float)startSeconds
             endSeconds:(float)endSeconds
       suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -389,7 +422,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)cuePlaylistByPlaylistId:(NSString *)playlistId
+- (void)cuePlaylistByPlaylistId:(nonnull NSString *)playlistId
                           index:(int)index
                    startSeconds:(float)startSeconds
                suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -406,7 +439,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)cuePlaylistByVideos:(NSArray *)videoIds
+- (void)cuePlaylistByVideos:(nonnull NSArray *)videoIds
                       index:(int)index
                startSeconds:(float)startSeconds
            suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -423,7 +456,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)loadPlaylistByPlaylistId:(NSString *)playlistId
+- (void)loadPlaylistByPlaylistId:(nonnull NSString *)playlistId
                            index:(int)index
                     startSeconds:(float)startSeconds
                 suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -440,7 +473,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
-- (void)loadPlaylistByVideos:(NSArray *)videoIds
+- (void)loadPlaylistByVideos:(nonnull NSArray *)videoIds
                        index:(int)index
                 startSeconds:(float)startSeconds
             suggestedQuality:(YTPlaybackQuality)suggestedQuality;
@@ -508,7 +541,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  *
  * @return An NSArray containing available playback rates. nil if there is an error.
  */
-- (NSArray *)availablePlaybackRates;
+- (nullable NSArray *)availablePlaybackRates;
 
 #pragma mark - Setting playback behavior for playlists
 
@@ -595,9 +628,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getAvailableQualityLevels
  *
- * @return An NSArray containing available playback quality levels.
+ * @return An NSArray containing available playback quality levels. Returns nil if there is an error.
  */
-- (NSArray *)availableQualityLevels;
+- (nullable NSArray *)availableQualityLevels;
 
 #pragma mark - Retrieving video information
 
@@ -619,18 +652,18 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoUrl
  *
- * @return The YouTube.com URL for the video.
+ * @return The YouTube.com URL for the video. Returns nil if no video is loaded yet.
  */
-- (NSURL *)videoUrl;
+- (nullable NSURL *)videoUrl;
 
 /**
  * Returns the embed code for the current video. This method corresponds
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoEmbedCode
  *
- * @return The embed code for the current video.
+ * @return The embed code for the current video. Returns nil if no video is loaded yet.
  */
-- (NSString *)videoEmbedCode;
+- (nullable NSString *)videoEmbedCode;
 
 #pragma mark - Retrieving playlist information
 
@@ -645,7 +678,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  *
  * @return An NSArray containing all the video IDs in the current playlist. |nil| on error.
  */
-- (NSArray *)playlist;
+- (nullable NSArray *)playlist;
 
 /**
  * Returns the 0-based index of the currently playing item in the playlist.
@@ -656,6 +689,12 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (int)playlistIndex;
 
+#pragma mark - Exposed for Testing
+
+/**
+ * Removes the internal web view from this player view.
+ * Intended to use for testing, should not be used in production code.
+ */
 - (void)removeWebView;
 
 @end

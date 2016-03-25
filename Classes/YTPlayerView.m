@@ -60,6 +60,7 @@ NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtub
 NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.doubleclick.net/pagead/conversion/";
 NSString static *const kYTPlayerOAuthRegexPattern = @"^http(s)://accounts.google.com/o/oauth2/(.*)$";
 NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.googleapis.com/static/proxy.html(.*)$";
+NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googlesyndication.com/sodar/(.*).html$";
 
 @interface YTPlayerView()
 
@@ -621,6 +622,16 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
       [adRegex firstMatchInString:url.absoluteString
                         options:0
                           range:NSMakeRange(0, [url.absoluteString length])];
+    
+  NSRegularExpression *syndicationRegex =
+      [NSRegularExpression regularExpressionWithPattern:kYTPlayerSyndicationRegexPattern
+                                                options:NSRegularExpressionCaseInsensitive
+                                                  error:&error];
+
+  NSTextCheckingResult *syndicationMatch =
+      [syndicationRegex firstMatchInString:url.absoluteString
+                                   options:0
+                                     range:NSMakeRange(0, [url.absoluteString length])];
 
   NSRegularExpression *oauthRegex =
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerOAuthRegexPattern
@@ -640,7 +651,7 @@ NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.goo
                                   options:0
                                     range:NSMakeRange(0, [url.absoluteString length])];
 
-  if (ytMatch || adMatch || oauthMatch || staticProxyMatch) {
+  if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch) {
     return YES;
   } else {
     [[UIApplication sharedApplication] openURL:url];

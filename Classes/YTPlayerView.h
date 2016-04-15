@@ -93,6 +93,14 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 - (void)playerView:(nonnull YTPlayerView *)playerView receivedError:(YTPlayerError)error;
 
 /**
+ * Invoked when web access restrictions are enabled for the current device, and youtube.com is blocked.
+ * Check: Settings > General > Restrictions > Websites > Allowed Websites.
+ *
+ * @param error NSError containing the error state.
+ */
+- (void)playerViewAppleContentFilterBlockedPage:(NSError *)error;
+
+/**
  * Callback invoked frequently when playBack is plaing.
  *
  * @param playerView The YTPlayerView instance where the error has occurred.

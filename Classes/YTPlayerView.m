@@ -406,10 +406,21 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   return YES;
 }
 
+/**
+ * Handle errors, including x-apple-content-filter://blocked-page.
+ *
+ */
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-  if (self.initialLoadingView) {
-    [self.initialLoadingView removeFromSuperview];
-  }
+    if (self.initialLoadingView) {
+      [self.initialLoadingView removeFromSuperview];
+    }
+
+    NSDictionary *userInfo = [error userInfo];
+    if ([[userInfo objectForKey:@"NSErrorFailingURLStringKey"] isEqualToString:@"x-apple-content-filter://blocked-page"]) {
+        if ([self.delegate respondsToSelector:@selector(playerViewAppleContentFilterBlockedPage:)]) {
+            [self.delegate playerViewAppleContentFilterBlockedPage:(NSError *)error];
+        }
+    }
 }
 
 /**

@@ -400,9 +400,10 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   } else if ([request.URL.scheme isEqual:@"ytplayer"]) {
     [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
     return NO;
-  } else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
-    return [self handleHttpNavigationToUrl:request.URL];
   }
+//  else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
+//    return [self handleHttpNavigationToUrl:request.URL];
+//  }
   return YES;
 }
 

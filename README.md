@@ -4,7 +4,7 @@ YoutubePlayer-in-WKWebView is forked from [youtube-ios-player-helper](https://gi
 
 ## Changes from [youtube-ios-player-helper](https://github.com/youtube/youtube-ios-player-helper)
 
-- class prefix changed to WKYP from YP. `YTPlayerView` -> `WKYTPlayerView`
+- class prefix changed to WKYT from YT. `YTPlayerView` -> `WKYTPlayerView`
 - using WKWebView instead of UIWebView.
 - getting properties asynchronously.
 

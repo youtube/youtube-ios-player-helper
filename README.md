@@ -1,6 +1,6 @@
 # YoutubePlayer-in-WKWebView
 
-[![YoutubePlayer-in-WKWebView version](https://img.shields.io/cocoapods/v/YoutubePlayer-in-WKWebView.svg?style=plastic)](http://cocoadocs.org/docsets/YoutubePlayer-in-WKWebView) [![YoutubePlayer-in-WKWebView platform](https://img.shields.io/cocoapods/p/YoutubePlayer-in-WKWebView.svg?style=plastic)](http://cocoadocs.org/docsets/YoutubePlayer-in-WKWebView) [![ios 8.0](https://img.shields.io/badge/ios-8.0-blue.svg)](http://cocoadocs.org/docsets/YoutubePlayer-in-WKWebView) 
+[![YoutubePlayer-in-WKWebView version](https://img.shields.io/cocoapods/v/YoutubePlayer-in-WKWebView.svg?style=plastic)](http://cocoadocs.org/docsets/YoutubePlayer-in-WKWebView) [![YoutubePlayer-in-WKWebView platform](https://img.shields.io/cocoapods/p/YoutubePlayer-in-WKWebView.svg?style=plastic)](http://cocoadocs.org/docsets/YoutubePlayer-in-WKWebView) [![ios 8.0](https://img.shields.io/badge/ios-8.0-blue.svg?style=plastic)](http://cocoadocs.org/docsets/YoutubePlayer-in-WKWebView) 
 
 YoutubePlayer-in-WKWebView is forked from [youtube-ios-player-helper](https://github.com/youtube/youtube-ios-player-helper) For using WKWebView.
 

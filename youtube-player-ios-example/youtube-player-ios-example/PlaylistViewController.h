@@ -12,24 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <UIKit/UIKit.h>
+#import "WKYTPlayerView.h"
 
-#import "YTPlayerView.h"
+@interface PlaylistViewController : UIViewController<WKYTPlayerViewDelegate>
 
-@interface SingleVideoViewController : UIViewController<YTPlayerViewDelegate>
-
-@property(nonatomic, strong) IBOutlet YTPlayerView *playerView;
+@property(nonatomic, strong) IBOutlet WKYTPlayerView *playerView;
 @property(nonatomic, weak) IBOutlet UIButton *playButton;
 @property(nonatomic, weak) IBOutlet UIButton *pauseButton;
 @property(nonatomic, weak) IBOutlet UIButton *stopButton;
-@property(nonatomic, weak) IBOutlet UIButton *startButton;
-@property(nonatomic, weak) IBOutlet UIButton *reverseButton;
-@property(nonatomic, weak) IBOutlet UIButton *forwardButton;
+@property(nonatomic, weak) IBOutlet UIButton *nextVideoButton;
+@property(nonatomic, weak) IBOutlet UIButton *previousVideoButton;
 @property(nonatomic, weak) IBOutlet UITextView *statusTextView;
-
-@property(nonatomic, weak) IBOutlet UISlider *slider;
-
-- (IBAction)onSliderChange:(id)sender;
 
 - (IBAction)buttonPressed:(id)sender;
 

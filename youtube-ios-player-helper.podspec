@@ -1,24 +1,24 @@
 Pod::Spec.new do |s|
-  s.name              = "youtube-ios-player-helper"
-  s.version           = "0.1.6"
+  s.name              = "YoutubePlayer-in-WKWebView"
+  s.version           = "0.2.0"
   s.summary           = "Helper library for iOS developers that want to embed YouTube videos in
-                         their iOS apps with the iframe player API."
+                         their iOS apps with the iframe player API in WKWebView."
 
   s.description       = <<-DESC
                        Helper library for iOS developers that want to play YouTube videos in
                        their iOS apps with the iframe player API.
 
                        This library allows iOS developers to quickly embed YouTube videos within
-                       their applications via a custom UIView subclass, YTPlayerView.
+                       their applications via a custom UIView subclass, WKYTPlayerView.
                        This library provides:
 
-                       * A managed UIWebView instance that loads the HTML code for the iframe player
+                       * A managed WKWebView instance that loads the HTML code for the iframe player
                        * Objective-C wrapper functions for the JavaScript Player API
-                       * YTPlayerViewDelegate for handling YouTube player state changes natively in
+                       * WKYTPlayerViewDelegate for handling YouTube player state changes natively in
                          your Objective-C code
                        DESC
 
-  s.homepage           = "https://developers.google.com/youtube/v3/guides/ios_youtube_helper"
+  s.homepage           = "https://github.com/hmhv/YoutubePlayer-in-WKWebView"
   s.license            = {
                             :type => 'Apache',
                             :text => <<-LICENSE
@@ -37,18 +37,13 @@ Pod::Spec.new do |s|
                               limitations under the License.
                             LICENSE
                          }
-  s.author             = { "Ikai Lan" => "",
-                           "Ibrahim Ulukaya" => "ulukaya@google.com",
-                           "Yoshifumi Yamaguchi" => "yoshifumi@google.com" }
-  s.social_media_url   = "https://twitter.com/YouTubeDev"
-  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "0.1.6" }
+  s.author             = { "hmhv" => "admin@hmhv.info" }
+  s.source             = { :git => "https://github.com/hmhv/YoutubePlayer-in-WKWebView.git", :tag => "0.2.0" }
 
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Classes'
-  s.resources = "youtube-ios-player-helper/Assets.bundle"
+  s.source_files = 'WKYTPlayerView'
+  s.resources = "WKYTPlayerView/WKYTPlayerView.bundle"
 
-  s.ios.exclude_files = 'Classes/osx'
-  s.osx.exclude_files = 'Classes/ios'
 end

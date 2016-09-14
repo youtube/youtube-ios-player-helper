@@ -12,8 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-pod "youtube-ios-player-helper", :path => "../../youtube-ios-player-helper.podspec"
+platform :ios, '8.0'
+use_frameworks!
+install! 'cocoapods', :deterministic_uuids => false
 
-target "youtube-player-ios-exampleTests", :exclusive => true do
-    pod "OCMock", "3.1.2"
+def shared_pods
+  pod 'youtube-ios-player-helper', :path => '../../youtube-ios-player-helper.podspec'
+end
+
+target 'youtube-player-ios-example' do
+  shared_pods
+end
+
+target 'youtube-player-ios-exampleTests' do
+  shared_pods
+  pod 'OCMock', '3.1.2'
 end

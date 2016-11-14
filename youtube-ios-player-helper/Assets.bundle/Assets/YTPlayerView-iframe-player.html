@@ -76,9 +76,9 @@
     }
 
     function onPlayerError(event) {
-        if (event.data == 100) {
-            error = true;
-        }
+        // Ignore the next state change update by setting `error` to true,
+        // otherwise the location change won't be sent back to the UIWebView wrapper.
+        error = true;
         window.location.href = 'ytplayer://onError?data=' + event.data;
     }
     

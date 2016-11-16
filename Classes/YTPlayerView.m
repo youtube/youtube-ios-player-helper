@@ -762,8 +762,8 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   if ([playerParams objectForKey:@"webViewVars"]) {
     NSMutableDictionary *webViewVars = [[NSMutableDictionary alloc] init];
     [webViewVars addEntriesFromDictionary:[playerParams objectForKey:@"webViewVars"]];
-    BOOL allowsInlineMediaPlayback = [webViewVars objectForKey:@"allowsInlineMediaPlayback"] || YES;
-    BOOL allowsPictureInPictureMediaPlayback = [webViewVars objectForKey:@"allowsPictureInPictureMediaPlayback"] || YES;
+    BOOL allowsInlineMediaPlayback = [webViewVars objectForKey:@"allowsInlineMediaPlayback"] ? [[webViewVars objectForKey:@"allowsInlineMediaPlayback"] boolValue] : YES;
+    BOOL allowsPictureInPictureMediaPlayback = [webViewVars objectForKey:@"allowsPictureInPictureMediaPlayback"] ? [[webViewVars objectForKey:@"allowsPictureInPictureMediaPlayback"] boolValue] : YES;
     self.webView.allowsInlineMediaPlayback = allowsInlineMediaPlayback;
     self.webView.allowsPictureInPictureMediaPlayback = allowsPictureInPictureMediaPlayback;
   } else {

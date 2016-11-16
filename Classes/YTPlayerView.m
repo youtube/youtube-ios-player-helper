@@ -87,6 +87,17 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   return [self loadWithPlayerParams:playerParams];
 }
 
+- (BOOL)loadWithVideoId:(NSString *)videoId playerVars:(NSDictionary *)playerVars webViewVars:(NSDictionary *)webViewVars {
+  if (!playerVars) {
+    playerVars = @{};
+  }
+  if (!webViewVars) {
+    webViewVars = @{};
+  }
+  NSDictionary *playerParams = @{ @"videoId" : videoId, @"playerVars" : playerVars, @"webViewVars": webViewVars };
+  return [self loadWithPlayerParams:playerParams];
+}
+
 - (BOOL)loadWithPlaylistId:(NSString *)playlistId playerVars:(NSDictionary *)playerVars {
 
   // Mutable copy because we may have been passed an immutable config dictionary.
@@ -746,9 +757,20 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
   [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
   [self.webView setDelegate:self];
-  self.webView.allowsInlineMediaPlayback = YES;
   self.webView.mediaPlaybackRequiresUserAction = NO;
-  
+
+  if ([playerParams objectForKey:@"webViewVars"]) {
+    NSMutableDictionary *webViewVars = [[NSMutableDictionary alloc] init];
+    [webViewVars addEntriesFromDictionary:[playerParams objectForKey:@"webViewVars"]];
+    BOOL allowsInlineMediaPlayback = [webViewVars objectForKey:@"allowsInlineMediaPlayback"] || YES;
+    BOOL allowsPictureInPictureMediaPlayback = [webViewVars objectForKey:@"allowsPictureInPictureMediaPlayback"] || YES;
+    self.webView.allowsInlineMediaPlayback = allowsInlineMediaPlayback;
+    self.webView.allowsPictureInPictureMediaPlayback = allowsPictureInPictureMediaPlayback;
+  } else {
+    self.webView.allowsInlineMediaPlayback = YES;
+    self.webView.allowsPictureInPictureMediaPlayback = YES;
+  }
+
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
     UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
     if (initialLoadingView) {

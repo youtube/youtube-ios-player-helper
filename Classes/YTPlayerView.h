@@ -197,6 +197,8 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (BOOL)loadWithVideoId:(nonnull NSString *)videoId playerVars:(nullable NSDictionary *)playerVars;
 
+- (BOOL)loadWithVideoId:(nonnull NSString *)videoId playerVars:(nullable NSDictionary *)playerVars webViewVars:(nullable NSDictionary *)webviewVars;
+
 /**
  * This method loads the player with the given playlist ID and player variables. Player variables
  * specify optional parameters for video playback. For instance, to play a YouTube

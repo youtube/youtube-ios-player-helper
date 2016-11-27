@@ -991,7 +991,19 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
 }
 
 - (WKWebView *)createNewWebView {
+    
+    // WKWebView equivalent for UIWebView's scalesPageToFit
+    // http://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+    
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+    
     WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
+    
+    configuration.userContentController = wkUController;
+    
     configuration.allowsInlineMediaPlayback = YES;
     configuration.mediaPlaybackRequiresUserAction = NO;
     

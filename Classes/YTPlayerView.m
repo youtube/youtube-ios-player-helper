@@ -855,6 +855,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     webView.scrollView.scrollEnabled = NO;
     webView.scrollView.bounces = NO;
+    [webView setAllowsInlineMediaPlayback:false];
     
     if ([self.delegate respondsToSelector:@selector(playerViewPreferredWebViewBackgroundColor:)]) {
         webView.backgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor:self];

@@ -746,7 +746,10 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
   [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
   [self.webView setDelegate:self];
-  self.webView.allowsInlineMediaPlayback = YES;
+  
+  BOOL shouldPlayInline = [[playerParams objectForKey: @"playerVars"] objectForKey:@"playsinline"];
+  self.webView.allowsInlineMediaPlayback = shouldPlayInline;
+
   self.webView.mediaPlaybackRequiresUserAction = NO;
   
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {

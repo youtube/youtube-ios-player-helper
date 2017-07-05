@@ -217,11 +217,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
                           index:(int)index
                    startSeconds:(float)startSeconds
                suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
-  [self cuePlaylist:playlistIdString
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+    NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
+    NSNumber *indexValue = [NSNumber numberWithInt:index];
+    NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
+    NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
+    NSString *command = [NSString stringWithFormat:@"player.cuePlaylist({listType: 'playlist', list: %@,index: %@, startSeconds: %@, suggestedQuality: '%@'});",
+                         playlistIdString, indexValue, startSecondsValue, qualityValue];
+    [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)cuePlaylistByVideos:(NSArray *)videoIds
@@ -238,11 +240,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
                            index:(int)index
                     startSeconds:(float)startSeconds
                 suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
-  [self loadPlaylist:playlistIdString
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+    NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
+    NSNumber *indexValue = [NSNumber numberWithInt:index];
+    NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
+    NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
+    NSString *command = [NSString stringWithFormat:@"player.loadPlaylist({listType: 'playlist', list: %@, index: %@, startSeconds: %@, suggestedQuality: '%@'});",
+                         playlistIdString, indexValue, startSecondsValue, qualityValue];
+    [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)loadPlaylistByVideos:(NSArray *)videoIds
@@ -760,52 +764,6 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   }
   
   return YES;
-}
-
-/**
- * Private method for cueing both cases of playlist ID and array of video IDs. Cueing
- * a playlist does not start playback.
- *
- * @param cueingString A JavaScript string representing an array, playlist ID or list of
- *                     video IDs to play with the playlist player.
- * @param index 0-index position of video to start playback on.
- * @param startSeconds Seconds after start of video to begin playback.
- * @param suggestedQuality Suggested YTPlaybackQuality to play the videos.
- * @return The result of cueing the playlist.
- */
-- (void)cuePlaylist:(NSString *)cueingString
-               index:(int)index
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSNumber *indexValue = [NSNumber numberWithInt:index];
-  NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.cuePlaylist(%@, %@, %@, '%@');",
-      cueingString, indexValue, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
-}
-
-/**
- * Private method for loading both cases of playlist ID and array of video IDs. Loading
- * a playlist automatically starts playback.
- *
- * @param cueingString A JavaScript string representing an array, playlist ID or list of
- *                     video IDs to play with the playlist player.
- * @param index 0-index position of video to start playback on.
- * @param startSeconds Seconds after start of video to begin playback.
- * @param suggestedQuality Suggested YTPlaybackQuality to play the videos.
- * @return The result of cueing the playlist.
- */
-- (void)loadPlaylist:(NSString *)cueingString
-               index:(int)index
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSNumber *indexValue = [NSNumber numberWithInt:index];
-  NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.loadPlaylist(%@, %@, %@, '%@');",
-      cueingString, indexValue, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
 }
 
 /**

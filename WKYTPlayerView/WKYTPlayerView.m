@@ -466,6 +466,39 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
     [self stringFromEvaluatingJavaScript:command completionHandler:nil];
 }
 
+
+#pragma mark - Changing the player volume
+
+/**
+ * Mutes the player. Corresponds to this method from
+ * the JavaScript API:
+ *   https://developers.google.com/youtube/iframe_api_reference#mute
+ */
+
+- (void)mute
+{
+    [self stringFromEvaluatingJavaScript:@"player.mute();" completionHandler:nil];
+}
+
+- (void)unMute
+{
+    [self stringFromEvaluatingJavaScript:@"player.unMute();" completionHandler:nil];
+}
+
+- (void)isMuted:(void (^ __nullable)(BOOL isMuted, NSError * __nullable error))completionHandler
+{
+    [self stringFromEvaluatingJavaScript:@"player.isMuted();" completionHandler:^(NSString * _Nullable response, NSError * _Nullable error) {
+        if (completionHandler) {
+            if (error) {
+                completionHandler(0, error);
+            } else {
+                completionHandler([response boolValue], nil);
+            }
+        }
+    }];
+}
+
+
 #pragma mark - Helper methods
 
 - (void)getAvailableQualityLevels:(void (^ __nullable)(NSArray * __nullable availableQualityLevels, NSError * __nullable error))completionHandler

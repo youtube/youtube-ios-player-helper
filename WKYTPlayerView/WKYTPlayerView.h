@@ -683,6 +683,32 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  */
 - (void)getPlaylistIndex:(void (^ __nullable)(int playlistIndex, NSError * __nullable error))completionHandler;
 
+#pragma mark - Mute
+
+/**
+ * Mutes the player. Corresponds to this method from
+ * the JavaScript API:
+ *   https://developers.google.com/youtube/iframe_api_reference#mute
+ */
+- (void)mute;
+
+/**
+ * Unmutes the player. Corresponds to this method from
+ * the JavaScript API:
+ *   https://developers.google.com/youtube/iframe_api_reference#unMute
+ */
+- (void)unMute;
+
+/**
+ * Returns true if the player is muted, false if not.
+ * This method corresponds to the JavaScript API defined here:
+ *   https://developers.google.com/youtube/iframe_api_reference#getVolume
+ *
+ * @return true if the player is muted, false if not.
+ */
+- (void)isMuted:(void (^ __nullable)(BOOL isMuted, NSError * __nullable error))completionHandler;
+
+
 #pragma mark - Exposed for Testing
 
 /**

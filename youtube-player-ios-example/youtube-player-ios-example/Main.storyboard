@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O5e-ID-Usg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="O5e-ID-Usg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,7 +64,6 @@
                                         </state>
                                         <connections>
                                             <action selector="buttonPressed:" destination="mG0-8h-1a8" eventType="touchUpInside" id="apP-dj-jdk"/>
-                                            <action selector="buttonPressed:" destination="xdH-It-i5j" eventType="touchUpInside" id="pXv-BB-k5H"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAN-i4-3Cg">
@@ -74,11 +73,10 @@
                                         </state>
                                         <connections>
                                             <action selector="buttonPressed:" destination="mG0-8h-1a8" eventType="touchUpInside" id="B7D-Rs-YcX"/>
-                                            <action selector="buttonPressed:" destination="xdH-It-i5j" eventType="touchUpInside" id="mhT-tt-Hmy"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="black" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zu-eb-J9b">
-                                        <rect key="frame" x="8" y="46" width="327" height="222.5"/>
+                                        <rect key="frame" x="8" y="46" width="327" height="199"/>
                                         <color key="backgroundColor" red="0.8447265625" green="0.8447265625" blue="0.8447265625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -92,20 +90,42 @@
                                             <action selector="onSliderChange:" destination="xdH-It-i5j" eventType="touchUpInside" id="8mA-oB-Vkl"/>
                                         </connections>
                                     </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXD-hW-Tg2">
+                                        <rect key="frame" x="8" y="245" width="35" height="30"/>
+                                        <state key="normal" title="Mute">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="muteButtonPressed" destination="xdH-It-i5j" eventType="touchUpInside" id="ZbO-dm-imB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Akj-vF-z3X">
+                                        <rect key="frame" x="67" y="246" width="55" height="30"/>
+                                        <state key="normal" title="UnMute">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="unMuteButtonPressed" destination="xdH-It-i5j" eventType="touchUpInside" id="doM-hn-7Vj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Akj-vF-z3X" firstAttribute="leading" secondItem="QXD-hW-Tg2" secondAttribute="trailing" constant="24" id="0YM-pC-rC1"/>
                                     <constraint firstItem="OcO-Fm-Cbj" firstAttribute="top" secondItem="ApU-p1-3LI" secondAttribute="top" constant="8" id="3jq-lh-uv2"/>
-                                    <constraint firstAttribute="bottom" secondItem="4Zu-eb-J9b" secondAttribute="bottom" constant="8" id="HAl-Rb-FSb"/>
+                                    <constraint firstAttribute="bottom" secondItem="4Zu-eb-J9b" secondAttribute="bottom" constant="31.5" id="HAl-Rb-FSb"/>
                                     <constraint firstAttribute="trailing" secondItem="4Zu-eb-J9b" secondAttribute="trailing" constant="8" id="LkA-Ly-8xs"/>
                                     <constraint firstItem="HUZ-Xl-JMB" firstAttribute="leading" secondItem="PAN-i4-3Cg" secondAttribute="trailing" constant="8" id="MkP-bW-FiQ"/>
                                     <constraint firstAttribute="trailing" secondItem="HUZ-Xl-JMB" secondAttribute="trailing" constant="8" id="NUJ-Rz-K8W"/>
                                     <constraint firstItem="NxI-PQ-nR2" firstAttribute="leading" secondItem="ApU-p1-3LI" secondAttribute="leading" constant="8" id="QIM-aw-zgB"/>
+                                    <constraint firstAttribute="bottom" secondItem="Akj-vF-z3X" secondAttribute="bottom" constant="0.5" id="RIx-Kb-EeU"/>
                                     <constraint firstItem="4Zu-eb-J9b" firstAttribute="leading" secondItem="ApU-p1-3LI" secondAttribute="leading" constant="8" id="SRi-Vq-0ft"/>
                                     <constraint firstItem="HUZ-Xl-JMB" firstAttribute="top" secondItem="ApU-p1-3LI" secondAttribute="top" constant="8" id="TJx-en-38c"/>
                                     <constraint firstItem="NxI-PQ-nR2" firstAttribute="top" secondItem="ApU-p1-3LI" secondAttribute="top" constant="8" id="YcB-nm-3Vj"/>
                                     <constraint firstItem="4Zu-eb-J9b" firstAttribute="top" secondItem="PAN-i4-3Cg" secondAttribute="bottom" constant="8" id="cB1-U7-ggH"/>
                                     <constraint firstItem="PAN-i4-3Cg" firstAttribute="top" secondItem="ApU-p1-3LI" secondAttribute="top" constant="8" id="cL2-Fu-kIH"/>
+                                    <constraint firstItem="QXD-hW-Tg2" firstAttribute="leading" secondItem="ApU-p1-3LI" secondAttribute="leading" constant="8" id="eob-4Q-lLI"/>
+                                    <constraint firstAttribute="bottom" secondItem="QXD-hW-Tg2" secondAttribute="bottom" constant="1.5" id="g4S-mO-rJf"/>
                                     <constraint firstItem="PSd-py-U06" firstAttribute="top" secondItem="ApU-p1-3LI" secondAttribute="top" constant="8" id="gTp-wc-kcM"/>
                                     <constraint firstItem="4Zu-eb-J9b" firstAttribute="top" secondItem="PAN-i4-3Cg" secondAttribute="bottom" constant="8" id="jqX-m6-MKn"/>
                                     <constraint firstItem="4Zu-eb-J9b" firstAttribute="top" secondItem="HUZ-Xl-JMB" secondAttribute="bottom" constant="8" id="qKM-jN-gZ6"/>
@@ -144,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mG0-8h-1a8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1688" y="-267"/>
+            <point key="canvasLocation" x="-1688.8" y="-267.61619190404798"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="d40-Du-wYx">

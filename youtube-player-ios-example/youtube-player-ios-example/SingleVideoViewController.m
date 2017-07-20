@@ -103,6 +103,14 @@
     }
 }
 
+- (IBAction)muteButtonPressed {
+    [self.playerView mute];
+}
+
+- (IBAction)unMuteButtonPressed {
+    [self.playerView unMute];
+}
+
 /**
  * Private helper method to add player status in statusTextView and scroll view automatically.
  *

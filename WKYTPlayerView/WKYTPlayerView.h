@@ -509,8 +509,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * speeds, and 1.5 or 2.0 for faster speeds. This method corresponds to the
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaybackRate
- *
- * @return An integer value between 0 and 100 representing the current volume.
  */
 - (void)getPlaybackRate:(void (^ __nullable)(float playbackRate, NSError * __nullable error))completionHandler;
 
@@ -532,8 +530,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * WKYTPlayerView::setPlaybackRate. This method corresponds to the
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaybackRate
- *
- * @return An NSArray containing available playback rates. nil if there is an error.
  */
 - (void)getAvailablePlaybackRates:(void (^ __nullable)(NSArray * __nullable availablePlaybackRates, NSError * __nullable error))completionHandler;
 
@@ -569,8 +565,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoLoadedFraction
  *
- * @return A float value between 0 and 1 representing the percentage of the video
- *         already loaded.
  */
 - (void)getVideoLoadedFraction:(void (^ __nullable)(float videoLoadedFraction, NSError * __nullable error))completionHandler;
 
@@ -579,7 +573,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlayerState
  *
- * @return |WKYTPlayerState| representing the state of the player.
  */
 - (void)getPlayerState:(void (^ __nullable)(WKYTPlayerState playerState, NSError * __nullable error))completionHandler;
 
@@ -588,7 +581,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getCurrentTime
  *
- * @return Time in seconds since the video started playing.
  */
 - (void)getCurrentTime:(void (^ __nullable)(float currentTime, NSError * __nullable error))completionHandler;
 
@@ -603,7 +595,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaybackQuality
  *
- * @return WKYTPlaybackQuality representing the current playback quality.
  */
 - (void)getPlaybackQuality:(void (^ __nullable)(WKYTPlaybackQuality playbackQuality, NSError * __nullable error))completionHandler;
 
@@ -612,7 +603,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * |default|. This method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#setPlaybackQuality
  *
- * @param quality WKYTPlaybackQuality value to suggest for the player.
  */
 - (void)setPlaybackQuality:(WKYTPlaybackQuality)suggestedQuality;
 
@@ -622,7 +612,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getAvailableQualityLevels
  *
- * @return An NSArray containing available playback quality levels. Returns nil if there is an error.
  */
 - (void)getAvailableQualityLevels:(void (^ __nullable)(NSArray * __nullable availableQualityLevels, NSError * __nullable error))completionHandler;
 
@@ -637,7 +626,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getDuration
  *
- * @return Length of the video in seconds.
  */
 - (void)getDuration:(void (^ __nullable)(NSTimeInterval duration, NSError * __nullable error))completionHandler;
 
@@ -646,7 +634,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoUrl
  *
- * @return The YouTube.com URL for the video. Returns nil if no video is loaded yet.
  */
 - (void)getVideoUrl:(void (^ __nullable)(NSURL * __nullable videoUrl, NSError * __nullable error))completionHandler;
 
@@ -655,7 +642,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoEmbedCode
  *
- * @return The embed code for the current video. Returns nil if no video is loaded yet.
  */
 - (void)getVideoEmbedCode:(void (^ __nullable)(NSString * __nullable videoEmbedCode, NSError * __nullable error))completionHandler;
 
@@ -670,7 +656,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaylist
  *
- * @return An NSArray containing all the video IDs in the current playlist. |nil| on error.
  */
 - (void)getPlaylist:(void (^ __nullable)(NSArray * __nullable playlist, NSError * __nullable error))completionHandler;
 
@@ -679,7 +664,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * This method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaylistIndex
  *
- * @return The 0-based index of the currently playing item in the playlist.
  */
 - (void)getPlaylistIndex:(void (^ __nullable)(int playlistIndex, NSError * __nullable error))completionHandler;
 
@@ -704,7 +688,6 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * This method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVolume
  *
- * @return true if the player is muted, false if not.
  */
 - (void)isMuted:(void (^ __nullable)(BOOL isMuted, NSError * __nullable error))completionHandler;
 

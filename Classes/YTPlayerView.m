@@ -494,7 +494,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 /**
  * Convert a state value from the typed value to NSString.
  *
- * @param quality A |YTPlayerState| parameter.
+ * @param state A |YTPlayerState| parameter.
  * @return A string value to be used in the JavaScript bridge.
  */
 + (NSString *)stringForPlayerState:(YTPlayerState)state {

@@ -611,7 +611,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * |default|. This method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#setPlaybackQuality
  *
- * @param quality YTPlaybackQuality value to suggest for the player.
+ * @param suggestedQuality YTPlaybackQuality value to suggest for the player.
  */
 - (void)setPlaybackQuality:(YTPlaybackQuality)suggestedQuality;
 

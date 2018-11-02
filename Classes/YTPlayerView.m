@@ -494,7 +494,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 /**
  * Convert a state value from the typed value to NSString.
  *
- * @param quality A |YTPlayerState| parameter.
+ * @param state A |YTPlayerState| parameter.
  * @return A string value to be used in the JavaScript bridge.
  */
 + (NSString *)stringForPlayerState:(YTPlayerState)state {
@@ -771,7 +771,6 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
  * @param index 0-index position of video to start playback on.
  * @param startSeconds Seconds after start of video to begin playback.
  * @param suggestedQuality Suggested YTPlaybackQuality to play the videos.
- * @return The result of cueing the playlist.
  */
 - (void)cuePlaylist:(NSString *)cueingString
                index:(int)index
@@ -794,7 +793,6 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
  * @param index 0-index position of video to start playback on.
  * @param startSeconds Seconds after start of video to begin playback.
  * @param suggestedQuality Suggested YTPlaybackQuality to play the videos.
- * @return The result of cueing the playlist.
  */
 - (void)loadPlaylist:(NSString *)cueingString
                index:(int)index

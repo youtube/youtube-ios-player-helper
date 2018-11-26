@@ -722,7 +722,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   // Remove the existing webView to reset any state
   [self.webView removeFromSuperview];
   _webView = [self createNewWebView];
+  _webView.translatesAutoresizingMaskIntoConstraints = NO;
   [self addSubview:self.webView];
+
+  [self.topAnchor constraintEqualToAnchor:self.webView.topAnchor].active = YES;
+  [self.bottomAnchor constraintEqualToAnchor:self.webView.bottomAnchor].active = YES;
+  [self.leadingAnchor constraintEqualToAnchor:self.webView.leadingAnchor].active = YES;
+  [self.trailingAnchor constraintEqualToAnchor:self.webView.trailingAnchor].active = YES;
 
   NSError *error = nil;
   NSString *path = [[NSBundle bundleForClass:[YTPlayerView class]] pathForResource:@"YTPlayerView-iframe-player"
@@ -890,7 +896,16 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 }
 
 - (WKWebView *)createNewWebView {
+    // WKWebView equivalent for UIWebView's scalesPageToFit
+    // http://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+
     WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    config.userContentController = wkUController;
     config.applicationNameForUserAgent = @"app-embedded-web-view";
     config.allowsInlineMediaPlayback = YES;
     config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;

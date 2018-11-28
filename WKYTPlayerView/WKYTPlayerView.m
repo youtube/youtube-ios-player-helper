@@ -333,6 +333,10 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
             if (error) {
                 completionHandler(kWKYTPlayerStateUnknown, error);
             } else {
+                if ([response isKindOfClass: [NSNumber class]]) {
+                    NSNumber *value = (NSNumber *)response;
+                    response = [value stringValue];
+                }
                 completionHandler([WKYTPlayerView playerStateForString:response], nil);
             }
         }

@@ -333,6 +333,10 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
             if (error) {
                 completionHandler(kWKYTPlayerStateUnknown, error);
             } else {
+                if ([response isKindOfClass: [NSNumber class]]) {
+                    NSNumber *value = (NSNumber *)response;
+                    response = [value stringValue];
+                }
                 completionHandler([WKYTPlayerView playerStateForString:response], nil);
             }
         }
@@ -427,13 +431,28 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
             if (error) {
                 completionHandler(nil, error);
             } else {
-                NSData *playlistData = [response dataUsingEncoding:NSUTF8StringEncoding];
-                NSError *jsonDeserializationError;
-                NSArray *videoIds = [NSJSONSerialization JSONObjectWithData:playlistData
-                                                                    options:kNilOptions
-                                                                      error:&jsonDeserializationError];
-                if (jsonDeserializationError) {
-                    completionHandler(nil, jsonDeserializationError);
+
+                if ([response isKindOfClass:[NSNull class]]) {
+                    completionHandler(nil, nil);
+                    return;
+                }
+
+                NSArray *videoIds;
+
+                if ([response isKindOfClass:[NSArray class]])
+                {
+                    videoIds = (NSArray *)response;
+                }
+                else
+                {
+                    NSData *playlistData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                    NSError *jsonDeserializationError;
+                    videoIds = [NSJSONSerialization JSONObjectWithData:playlistData
+                                                                        options:kNilOptions
+                                                                        error:&jsonDeserializationError];
+                    if (jsonDeserializationError) {
+                        completionHandler(nil, jsonDeserializationError);
+                    }
                 }
 
                 completionHandler(videoIds, nil);

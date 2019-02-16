@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E02070022184870008651F6 /* YTPlayerView+Mute_unMute.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E0206FE22184870008651F6 /* YTPlayerView+Mute_unMute.h */; };
+		4E02070122184870008651F6 /* YTPlayerView+Mute_unMute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0206FF22184870008651F6 /* YTPlayerView+Mute_unMute.m */; };
 		B3C76A271B975ADB00F375B4 /* YTPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C76A251B975ADB00F375B4 /* YTPlayerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B3C76A281B975ADB00F375B4 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C76A261B975ADB00F375B4 /* YTPlayerView.m */; };
 		B3C76A2F1B975C0100F375B4 /* YouTubeiOSPlayerHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C76A2D1B975BD500F375B4 /* YouTubeiOSPlayerHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E0206FE22184870008651F6 /* YTPlayerView+Mute_unMute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YTPlayerView+Mute_unMute.h"; sourceTree = "<group>"; };
+		4E0206FF22184870008651F6 /* YTPlayerView+Mute_unMute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YTPlayerView+Mute_unMute.m"; sourceTree = "<group>"; };
 		B3C76A1A1B975AA700F375B4 /* YouTubeiOSPlayerHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YouTubeiOSPlayerHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3C76A1F1B975AA700F375B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3C76A251B975ADB00F375B4 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTPlayerView.h; path = Classes/YTPlayerView.h; sourceTree = SOURCE_ROOT; };
@@ -57,6 +61,8 @@
 				B3C76A261B975ADB00F375B4 /* YTPlayerView.m */,
 				B3C76A1F1B975AA700F375B4 /* Info.plist */,
 				B3C76A2D1B975BD500F375B4 /* YouTubeiOSPlayerHelper.h */,
+				4E0206FE22184870008651F6 /* YTPlayerView+Mute_unMute.h */,
+				4E0206FF22184870008651F6 /* YTPlayerView+Mute_unMute.m */,
 			);
 			path = "youtube-ios-player-helper";
 			sourceTree = "<group>";
@@ -68,6 +74,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E02070022184870008651F6 /* YTPlayerView+Mute_unMute.h in Headers */,
 				B3C76A271B975ADB00F375B4 /* YTPlayerView.h in Headers */,
 				B3C76A2F1B975C0100F375B4 /* YouTubeiOSPlayerHelper.h in Headers */,
 			);
@@ -142,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3C76A281B975ADB00F375B4 /* YTPlayerView.m in Sources */,
+				4E02070122184870008651F6 /* YTPlayerView+Mute_unMute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

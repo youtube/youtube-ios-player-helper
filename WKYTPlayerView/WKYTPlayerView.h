@@ -130,6 +130,13 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  */
 - (nullable UIView *)playerViewPreferredInitialLoadingView:(nonnull WKYTPlayerView *)playerView;
 
+/**
+ * Callback invoked when an api loading error has occured.
+ *
+ * @param playerView The WKYTPlayerView instance where the error has occurred.
+ */
+- (void)playerViewIframeAPIDidFailedToLoad:(nonnull WKYTPlayerView *)playerView;
+
 @end
 
 /**

@@ -759,6 +759,10 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
         if (self.initialLoadingView) {
             [self.initialLoadingView removeFromSuperview];
         }
+        
+        if ([self.delegate respondsToSelector:@selector(playerViewIframeAPIDidFailedToLoad:)]) {
+            [self.delegate playerViewIframeAPIDidFailedToLoad:self];
+        }
     }
 }
 

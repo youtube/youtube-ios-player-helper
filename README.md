@@ -33,7 +33,7 @@ To run the example project; clone the repo, and run `pod install` from the Proje
 YouTube-Player-iOS-Helper is available through [CocoaPods](http://cocoapods.org), to install
 it simply add the following line to your Podfile:
 
-    pod "YoutubePlayer-in-WKWebView", "~> 0.2.0"
+    pod "YoutubePlayer-in-WKWebView", "~> 0.3.0"
 
 After installing in your project and opening the workspace, to use the library:
 

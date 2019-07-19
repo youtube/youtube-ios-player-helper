@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * WKYTPlayerView::loadWithPlaylistId: or their variants to set the video or playlist
  * to populate the view with.
  */
-@interface WKYTPlayerView : UIView<WKNavigationDelegate>
+@interface WKYTPlayerView : UIView<WKNavigationDelegate, WKUIDelegate>
 
 @property(nonatomic, strong, nullable, readonly) WKWebView *webView;
 

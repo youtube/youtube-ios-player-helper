@@ -206,6 +206,30 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
 - (BOOL)loadWithVideoId:(nonnull NSString *)videoId playerVars:(nullable NSDictionary *)playerVars;
 
 /**
+ * This method loads the player with the given video ID and player variables. Player variables
+ * specify optional parameters for video playback. For instance, to play a YouTube
+ * video inline, the following playerVars dictionary would be used:
+ *
+ * @code
+ * @{ @"playsinline" : @1 };
+ * @endcode
+ *
+ * Note that when the documentation specifies a valid value as a number (typically 0, 1 or 2),
+ * both strings and integers are valid values. The full list of parameters is defined at:
+ *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
+ *
+ * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire UIWebView, use the
+ * WKYTPlayerView::cueVideoById:startSeconds:suggestedQuality: family of methods.
+ *
+ * @param videoId The YouTube video ID of the video to load in the player view.
+ * @param playerVars An NSDictionary of player parameters.
+ * @param path String with the path for HTML template used for viewing video.
+ * @return YES if player has been configured correctly, NO otherwise.
+ */
+- (BOOL)loadWithVideoId:(nonnull NSString *)videoId playerVars:(nullable NSDictionary *)playerVars templatePath:(nullable NSString *)path;
+
+/**
  * This method loads the player with the given playlist ID and player variables. Player variables
  * specify optional parameters for video playback. For instance, to play a YouTube
  * video inline, the following playerVars dictionary would be used:

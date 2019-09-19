@@ -158,8 +158,8 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * This is a convenience method for calling WKYTPlayerView::loadPlayerWithVideoId:withPlayerVars:
  * without player variables.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
+ * This method reloads the entire contents of the WKWebView and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire WKWebView, use the
  * WKYTPlayerView::cueVideoById:startSeconds:suggestedQuality: family of methods.
  *
  * @param videoId The YouTube video ID of the video to load in the player view.
@@ -172,8 +172,8 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * This is a convenience method for calling WKYTPlayerView::loadWithPlaylistId:withPlayerVars:
  * without player variables.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
+ * This method reloads the entire contents of the WKWebView and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire WKWebView, use the
  * WKYTPlayerView::cuePlaylistByPlaylistId:index:startSeconds:suggestedQuality:
  * family of methods.
  *
@@ -195,8 +195,8 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * both strings and integers are valid values. The full list of parameters is defined at:
  *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
+ * This method reloads the entire contents of the WKWebView and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire WKWebView, use the
  * WKYTPlayerView::cueVideoById:startSeconds:suggestedQuality: family of methods.
  *
  * @param videoId The YouTube video ID of the video to load in the player view.
@@ -218,8 +218,8 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * both strings and integers are valid values. The full list of parameters is defined at:
  *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
+ * This method reloads the entire contents of the WKWebView and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire WKWebView, use the
  * WKYTPlayerView::cueVideoById:startSeconds:suggestedQuality: family of methods.
  *
  * @param videoId The YouTube video ID of the video to load in the player view.
@@ -242,8 +242,8 @@ typedef NS_ENUM(NSInteger, WKYTPlayerError) {
  * both strings and integers are valid values. The full list of parameters is defined at:
  *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
+ * This method reloads the entire contents of the WKWebView and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire WKWebView, use the
  * WKYTPlayerView::cuePlaylistByPlaylistId:index:startSeconds:suggestedQuality:
  * family of methods.
  *

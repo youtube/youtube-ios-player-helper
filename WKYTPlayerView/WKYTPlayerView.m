@@ -703,7 +703,7 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
 /**
  * Private method to handle "navigation" to a callback URL of the format
  * ytplayer://action?data=someData
- * This is how the UIWebView communicates with the containing Objective-C code.
+ * This is how the WKWebView communicates with the containing Objective-C code.
  * Side effects of this method are that it calls methods on this class's delegate.
  *
  * @param url A URL of the format ytplayer://action?data=value.
@@ -788,7 +788,7 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
 - (BOOL)handleHttpNavigationToUrl:(NSURL *) url {
     // Usually this means the user has clicked on the YouTube logo or an error message in the
     // player. Most URLs should open in the browser. The only http(s) URL that should open in this
-    // UIWebView is the URL for the embed, which is of the format:
+    // WKWebView is the URL for the embed, which is of the format:
     //     http(s)://www.youtube.com/embed/[VIDEO ID]?[PARAMETERS]
     NSError *error = NULL;
     NSRegularExpression *ytRegex =
@@ -1075,8 +1075,8 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
 
 - (WKWebView *)createNewWebView {
     
-    // WKWebView equivalent for UIWebView's scalesPageToFit
-    // http://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
+    // WKWebView equivalent for UI Web View's scalesPageToFit
+    // 
     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
     
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];

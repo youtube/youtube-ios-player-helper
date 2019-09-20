@@ -104,23 +104,23 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 #pragma mark - Player methods
 
 - (void)playVideo {
-  [self stringFromEvaluatingJavaScript:@"player.playVideo();"];
+  [self evaluateJavaScript:@"player.playVideo();"];
 }
 
 - (void)pauseVideo {
   [self notifyDelegateOfYouTubeCallbackUrl:[NSURL URLWithString:[NSString stringWithFormat:@"ytplayer://onStateChange?data=%@", kYTPlayerStatePausedCode]]];
-  [self stringFromEvaluatingJavaScript:@"player.pauseVideo();"];
+  [self evaluateJavaScript:@"player.pauseVideo();"];
 }
 
 - (void)stopVideo {
-  [self stringFromEvaluatingJavaScript:@"player.stopVideo();"];
+  [self evaluateJavaScript:@"player.stopVideo();"];
 }
 
 - (void)seekToSeconds:(float)seekToSeconds allowSeekAhead:(BOOL)allowSeekAhead {
   NSNumber *secondsValue = [NSNumber numberWithFloat:seekToSeconds];
   NSString *allowSeekAheadValue = [self stringForJSBoolean:allowSeekAhead];
   NSString *command = [NSString stringWithFormat:@"player.seekTo(%@, %@);", secondsValue, allowSeekAheadValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Cueing methods
@@ -132,7 +132,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoById('%@', %@, '%@');",
       videoId, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)cueVideoById:(NSString *)videoId
@@ -143,7 +143,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoById({'videoId': '%@', 'startSeconds': %@, 'endSeconds': %@, 'suggestedQuality': '%@'});", videoId, startSecondsValue, endSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoById:(NSString *)videoId
@@ -153,7 +153,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoById('%@', %@, '%@');",
       videoId, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoById:(NSString *)videoId
@@ -164,7 +164,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoById({'videoId': '%@', 'startSeconds': %@, 'endSeconds': %@, 'suggestedQuality': '%@'});",videoId, startSecondsValue, endSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)cueVideoByURL:(NSString *)videoURL
@@ -174,7 +174,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, '%@');",
       videoURL, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)cueVideoByURL:(NSString *)videoURL
@@ -186,7 +186,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, %@, '%@');",
       videoURL, startSecondsValue, endSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoByURL:(NSString *)videoURL
@@ -196,7 +196,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, '%@');",
       videoURL, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoByURL:(NSString *)videoURL
@@ -208,7 +208,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, %@, '%@');",
       videoURL, startSecondsValue, endSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Cueing methods for lists
@@ -217,11 +217,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
                           index:(int)index
                    startSeconds:(float)startSeconds
                suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
-  [self cuePlaylist:playlistIdString
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+    NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
+    NSNumber *indexValue = [NSNumber numberWithInt:index];
+    NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
+    NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
+    NSString *command = [NSString stringWithFormat:@"player.cuePlaylist({listType: 'playlist', list: %@,index: %@, startSeconds: %@, suggestedQuality: '%@'});",
+                         playlistIdString, indexValue, startSecondsValue, qualityValue];
+    [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)cuePlaylistByVideos:(NSArray *)videoIds
@@ -238,11 +240,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
                            index:(int)index
                     startSeconds:(float)startSeconds
                 suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
-  [self loadPlaylist:playlistIdString
-                 index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+    NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
+    NSNumber *indexValue = [NSNumber numberWithInt:index];
+    NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
+    NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
+    NSString *command = [NSString stringWithFormat:@"player.loadPlaylist({listType: 'playlist', list: %@, index: %@, startSeconds: %@, suggestedQuality: '%@'});",
+                         playlistIdString, indexValue, startSecondsValue, qualityValue];
+    [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)loadPlaylistByVideos:(NSArray *)videoIds
@@ -264,7 +268,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 - (void)setPlaybackRate:(float)suggestedRate {
   NSString *command = [NSString stringWithFormat:@"player.setPlaybackRate(%f);", suggestedRate];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (NSArray *)availablePlaybackRates {
@@ -288,13 +292,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 - (void)setLoop:(BOOL)loop {
   NSString *loopPlayListValue = [self stringForJSBoolean:loop];
   NSString *command = [NSString stringWithFormat:@"player.setLoop(%@);", loopPlayListValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)setShuffle:(BOOL)shuffle {
   NSString *shufflePlayListValue = [self stringForJSBoolean:shuffle];
   NSString *command = [NSString stringWithFormat:@"player.setShuffle(%@);", shufflePlayListValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Playback status
@@ -321,7 +325,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 - (void)setPlaybackQuality:(YTPlaybackQuality)suggestedQuality {
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.setPlaybackQuality('%@');", qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Video information methods
@@ -363,17 +367,17 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 #pragma mark - Playing a video in a playlist
 
 - (void)nextVideo {
-  [self stringFromEvaluatingJavaScript:@"player.nextVideo();"];
+  [self evaluateJavaScript:@"player.nextVideo();"];
 }
 
 - (void)previousVideo {
-  [self stringFromEvaluatingJavaScript:@"player.previousVideo();"];
+  [self evaluateJavaScript:@"player.previousVideo();"];
 }
 
 - (void)playVideoAt:(int)index {
   NSString *command =
       [NSString stringWithFormat:@"player.playVideoAt(%@);", [NSNumber numberWithInt:index]];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Helper methods
@@ -392,24 +396,41 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   return levels;
 }
 
-- (BOOL)webView:(UIWebView *)webView
-    shouldStartLoadWithRequest:(NSURLRequest *)request
-                navigationType:(UIWebViewNavigationType)navigationType {
-  if ([request.URL.host isEqual: self.originURL.host]) {
-    return YES;
-  } else if ([request.URL.scheme isEqual:@"ytplayer"]) {
-    [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
-    return NO;
-  } else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
-    return [self handleHttpNavigationToUrl:request.URL];
-  }
-  return YES;
+#pragma mark - WKNavigationDelegate methods
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSURLRequest *request = navigationAction.request;
+    BOOL shouldLoad = YES;
+    if ([request.URL.host isEqual: self.originURL.host]) {
+        shouldLoad = YES;
+    } else if ([request.URL.scheme isEqual:@"ytplayer"]) {
+        [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
+        shouldLoad = NO;
+    } else if ([request.URL.scheme isEqual: @"http"] || [request.URL.scheme isEqual:@"https"]) {
+        shouldLoad = [self handleHttpNavigationToUrl:request.URL];
+    }
+    if (decisionHandler) {
+        WKNavigationActionPolicy policy = (shouldLoad ? WKNavigationActionPolicyAllow : WKNavigationActionPolicyCancel);
+        decisionHandler(policy);
+    }
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-  if (self.initialLoadingView) {
-    [self.initialLoadingView removeFromSuperview];
-  }
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    [self removeInitialLoadingViewIfNecessary];
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    [self removeInitialLoadingViewIfNecessary];
+}
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    [self removeInitialLoadingViewIfNecessary];
+}
+
+- (void)removeInitialLoadingViewIfNecessary {
+    if (self.initialLoadingView) {
+        [self.initialLoadingView removeFromSuperview];
+    }
 }
 
 /**
@@ -521,7 +542,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 /**
  * Private method to handle "navigation" to a callback URL of the format
  * ytplayer://action?data=someData
- * This is how the UIWebView communicates with the containing Objective-C code.
+ * This is how the WKWebView communicates with the containing Objective-C code.
  * Side effects of this method are that it calls methods on this class's delegate.
  *
  * @param url A URL of the format ytplayer://action?data=value.
@@ -602,7 +623,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 - (BOOL)handleHttpNavigationToUrl:(NSURL *) url {
   // Usually this means the user has clicked on the YouTube logo or an error message in the
   // player. Most URLs should open in the browser. The only http(s) URL that should open in this
-  // UIWebView is the URL for the embed, which is of the format:
+  // WKWebView is the URL for the embed, which is of the format:
   //     http(s)://www.youtube.com/embed/[VIDEO ID]?[PARAMETERS]
   NSError *error = NULL;
   NSRegularExpression *ytRegex =
@@ -705,7 +726,13 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   // Remove the existing webView to reset any state
   [self.webView removeFromSuperview];
   _webView = [self createNewWebView];
+  _webView.translatesAutoresizingMaskIntoConstraints = NO;
   [self addSubview:self.webView];
+
+  [self.topAnchor constraintEqualToAnchor:self.webView.topAnchor].active = YES;
+  [self.bottomAnchor constraintEqualToAnchor:self.webView.bottomAnchor].active = YES;
+  [self.leadingAnchor constraintEqualToAnchor:self.webView.leadingAnchor].active = YES;
+  [self.trailingAnchor constraintEqualToAnchor:self.webView.trailingAnchor].active = YES;
 
   NSError *error = nil;
   NSString *path = [[NSBundle bundleForClass:[YTPlayerView class]] pathForResource:@"YTPlayerView-iframe-player"
@@ -745,10 +772,8 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
   [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
-  [self.webView setDelegate:self];
-  self.webView.allowsInlineMediaPlayback = YES;
-  self.webView.mediaPlaybackRequiresUserAction = NO;
-  
+  [self.webView setNavigationDelegate:self];
+
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
     UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
     if (initialLoadingView) {
@@ -782,7 +807,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.cuePlaylist(%@, %@, %@, '%@');",
       cueingString, indexValue, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 /**
@@ -805,7 +830,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
   NSString *command = [NSString stringWithFormat:@"player.loadPlaylist(%@, %@, %@, '%@');",
       cueingString, indexValue, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 /**
@@ -831,7 +856,31 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
  * @return JavaScript response from evaluating code.
  */
 - (NSString *)stringFromEvaluatingJavaScript:(NSString *)jsToExecute {
-  return [self.webView stringByEvaluatingJavaScriptFromString:jsToExecute];
+    dispatch_semaphore_t sema4 = dispatch_semaphore_create(0);
+    __block NSString *resultString = nil;
+
+    [self.webView evaluateJavaScript:jsToExecute completionHandler:^(id result, NSError *error) {
+        if (error == nil && result != nil) {
+            resultString = [NSString stringWithFormat:@"%@", result];
+        }
+        dispatch_semaphore_signal(sema4);
+    }];
+    // WkWebView always calls completion handler on the main thread, so this keeps us from blocking ourselves.
+    // c.f. http://stackoverflow.com/questions/28388197/wkwebview-trying-to-query-javascript-synchronously-from-the-main-thread
+    while (dispatch_semaphore_wait(sema4, DISPATCH_TIME_NOW)) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    }
+    return resultString;
+}
+
+/**
+ * This evaluates javascript when no return value is needed. So therefore,
+ * we can use the normal asynchronous -[WKWebView evaluateJavaScript:completionHandler:] method,
+ * just with no completion handler.
+ */
+- (void)evaluateJavaScript:(NSString *)jsToExecute {
+    [self.webView evaluateJavaScript:jsToExecute completionHandler:nil];
 }
 
 /**
@@ -846,12 +895,25 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 #pragma mark - Exposed for Testing
 
-- (void)setWebView:(UIWebView *)webView {
+- (void)setWebView:(WKWebView *)webView {
   _webView = webView;
 }
 
-- (UIWebView *)createNewWebView {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.bounds];
+- (WKWebView *)createNewWebView {
+    // WKWebView equivalent for UIWebView's scalesPageToFit
+    // http://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+
+    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+    config.userContentController = wkUController;
+    config.applicationNameForUserAgent = @"app-embedded-web-view";
+    config.allowsInlineMediaPlayback = YES;
+    config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.bounds configuration:config];
     webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     webView.scrollView.scrollEnabled = NO;
     webView.scrollView.bounces = NO;

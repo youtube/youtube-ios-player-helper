@@ -19,7 +19,10 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   NSString *videoId = @"M7lc1UVf-VE";
-
+    
+  // for using custom html
+  NSString *templatePath = [[NSBundle mainBundle] pathForResource:@"custom_player" ofType:@"html"];
+  
   // For a full list of player parameters, see the documentation for the HTML5 player
   // at: https://developers.google.com/youtube/player_parameters?playerVersion=HTML5
   NSDictionary *playerVars = @{
@@ -30,7 +33,7 @@
       @"modestbranding" : @1
   };
   self.playerView.delegate = self;
-  [self.playerView loadWithVideoId:videoId playerVars:playerVars];
+  [self.playerView loadWithVideoId:videoId playerVars:playerVars templatePath:templatePath];
 
     
     

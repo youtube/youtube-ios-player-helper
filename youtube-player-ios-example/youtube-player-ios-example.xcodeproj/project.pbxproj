@@ -20,6 +20,7 @@
 		4D69941F18E22EE10073680F /* SingleVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69941A18E22EE10073680F /* SingleVideoViewController.m */; };
 		4D69942018E22EE10073680F /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69941C18E22EE10073680F /* PlaylistViewController.m */; };
 		4D69942218E22F000073680F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D69942118E22F000073680F /* main.m */; };
+		77D00D6D2335D1C200FCAC78 /* custom_player.html in Resources */ = {isa = PBXBuildFile; fileRef = 77D00D6C2335D1C200FCAC78 /* custom_player.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		4D69941C18E22EE10073680F /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		4D69942118E22F000073680F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		614CB957CD094425884C83E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		77D00D6C2335D1C200FCAC78 /* custom_player.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = custom_player.html; sourceTree = "<group>"; };
 		97FE8C7A7A914485BBD9A3D4 /* libPods-youtube-player-ios-exampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtube-player-ios-exampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				4D6993EA18E22E0C0073680F /* InfoPlist.strings */,
 				4D69942118E22F000073680F /* main.m */,
 				4D6993EF18E22E0C0073680F /* youtube-player-ios-example-Prefix.pch */,
+				77D00D6C2335D1C200FCAC78 /* custom_player.html */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -186,6 +190,7 @@
 			files = (
 				101DB4C91D031AAD003FCD03 /* Launch.storyboard in Resources */,
 				101DB4CE1D031C64003FCD03 /* WKYTPlayerView.bundle in Resources */,
+				77D00D6D2335D1C200FCAC78 /* custom_player.html in Resources */,
 				4D69941E18E22EE10073680F /* Main.storyboard in Resources */,
 				4D6993FA18E22E0C0073680F /* Images.xcassets in Resources */,
 				4D6993EC18E22E0C0073680F /* InfoPlist.strings in Resources */,

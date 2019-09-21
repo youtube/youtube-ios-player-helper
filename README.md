@@ -50,12 +50,9 @@ After installing in your project and opening the workspace, to use the library:
 ```
   6. Run your code!
 
-See the sample project for more advanced uses, including passing additional player parameters and
+See the sample project for more advanced uses, including passing additional player parameters, custom html and
 working with callbacks via WKYTPlayerViewDelegate.
 
-## Author
-
-hmhv
 
 ## License
 

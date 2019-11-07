@@ -486,7 +486,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   } else if ([stateString isEqualToString:kYTPlayerStateBufferingCode]) {
     state = kYTPlayerStateBuffering;
   } else if ([stateString isEqualToString:kYTPlayerStateCuedCode]) {
-    state = kYTPlayerStateQueued;
+    state = kYTPlayerStateCued;
   }
   return state;
 }
@@ -509,7 +509,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
       return kYTPlayerStatePausedCode;
     case kYTPlayerStateBuffering:
       return kYTPlayerStateBufferingCode;
-    case kYTPlayerStateQueued:
+    case kYTPlayerStateCued:
       return kYTPlayerStateCuedCode;
     default:
       return kYTPlayerStateUnknownCode;
@@ -557,7 +557,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
       } else if ([data isEqual:kYTPlayerStateBufferingCode]) {
         state = kYTPlayerStateBuffering;
       } else if ([data isEqual:kYTPlayerStateCuedCode]) {
-        state = kYTPlayerStateQueued;
+        state = kYTPlayerStateCued;
       } else if ([data isEqual:kYTPlayerStateUnstartedCode]) {
         state = kYTPlayerStateUnstarted;
       }

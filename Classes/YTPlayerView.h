@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, YTPlayerState) {
     kYTPlayerStatePlaying,
     kYTPlayerStatePaused,
     kYTPlayerStateBuffering,
-    kYTPlayerStateQueued,
+    kYTPlayerStateCued,
     kYTPlayerStateUnknown
 };
 

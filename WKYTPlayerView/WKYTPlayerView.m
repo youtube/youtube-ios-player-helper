@@ -356,12 +356,14 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
 
 - (void)getCurrentTime:(void (^ __nullable)(float currentTime, NSError * __nullable error))completionHandler
 {
-    [self stringFromEvaluatingJavaScript:@"player.getCurrentTime();" completionHandler:^(NSString * _Nullable response, NSError * _Nullable error) {
+    [self stringFromEvaluatingJavaScript:@"player.getCurrentTime();" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         if (completionHandler) {
             if (error) {
                 completionHandler(0, error);
-            } else {
+            } else if ([response respondsToSelector:@selector(floatValue)]) {
                 completionHandler([response floatValue], nil);
+            } else {
+                completionHandler(0, nil);
             }
         }
     }];
@@ -1049,8 +1051,8 @@ NSString static *const kWKYTPlayerSyndicationRegexPattern = @"^https://tpc.googl
  *
  * @param jsToExecute The JavaScript code in string format that we want to execute.
  */
-- (void)stringFromEvaluatingJavaScript:(NSString *)jsToExecute completionHandler:(void (^ __nullable)(NSString * __nullable response, NSError * __nullable error))completionHandler{
-    [self.webView evaluateJavaScript:jsToExecute completionHandler:^(NSString * _Nullable response, NSError * _Nullable error) {
+- (void)stringFromEvaluatingJavaScript:(NSString *)jsToExecute completionHandler:(void (^ __nullable)(id __nullable response, NSError * __nullable error))completionHandler{
+    [self.webView evaluateJavaScript:jsToExecute completionHandler:^(id _Nullable response, NSError * _Nullable error) {
         if (completionHandler) {
             completionHandler(response, error);
         }

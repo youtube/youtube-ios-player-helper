@@ -64,7 +64,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 @interface YTPlayerView()
 
-@property (nonatomic, strong) NSURL *originURL;
+@property (nonatomic) NSURL *originURL;
 @property (nonatomic, weak) UIView *initialLoadingView;
 
 @end
@@ -518,6 +518,14 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 #pragma mark - Private methods
 
+- (NSURL *)originURL {
+  if (!_originURL) {
+    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    _originURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", bundleId]];
+  }
+  return _originURL;
+}
+
 /**
  * Private method to handle "navigation" to a callback URL of the format
  * ytplayer://action?data=someData
@@ -691,12 +699,6 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   if ([playerParams objectForKey:@"playerVars"]) {
     NSMutableDictionary *playerVars = [[NSMutableDictionary alloc] init];
     [playerVars addEntriesFromDictionary:[playerParams objectForKey:@"playerVars"]];
-      
-    if (![playerVars objectForKey:@"origin"]) {
-        self.originURL = [NSURL URLWithString:@"about:blank"];
-    } else {
-        self.originURL = [NSURL URLWithString: [playerVars objectForKey:@"origin"]];
-    }
   } else {
     // This must not be empty so we can render a '{}' in the output JSON
     [playerParams setValue:[[NSDictionary alloc] init] forKey:@"playerVars"];

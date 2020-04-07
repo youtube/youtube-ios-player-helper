@@ -128,88 +128,76 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 #pragma mark - Cueing methods
 
 - (void)cueVideoById:(NSString *)videoId
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+        startSeconds:(float)startSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.cueVideoById('%@', %@, '%@');",
-      videoId, startSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.cueVideoById('%@', %@);",
+      videoId, startSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)cueVideoById:(NSString *)videoId
         startSeconds:(float)startSeconds
-          endSeconds:(float)endSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+          endSeconds:(float)endSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.cueVideoById({'videoId': '%@', 'startSeconds': %@, 'endSeconds': %@, 'suggestedQuality': '%@'});", videoId, startSecondsValue, endSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.cueVideoById({'videoId': '%@',"
+                       "'startSeconds': %@, 'endSeconds': %@});",
+                       videoId, startSecondsValue, endSecondsValue];
+  [self stringFromEvaluatingJavaScript:command];
+}
+
+- (void)loadVideoById:(NSString *)videoId
+         startSeconds:(float)startSeconds {
+  NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
+  NSString *command = [NSString stringWithFormat:@"player.loadVideoById('%@', %@);",
+      videoId, startSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)loadVideoById:(NSString *)videoId
          startSeconds:(float)startSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+           endSeconds:(float)endSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.loadVideoById('%@', %@, '%@');",
-      videoId, startSecondsValue, qualityValue];
+  NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
+  NSString *command = [NSString stringWithFormat:@"player.loadVideoById({'videoId': '%@',"
+                       "'startSeconds': %@, 'endSeconds': %@});",
+                       videoId, startSecondsValue, endSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
-- (void)loadVideoById:(NSString *)videoId
-         startSeconds:(float)startSeconds
-           endSeconds:(float)endSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+- (void)cueVideoByURL:(NSString *)videoURL
+         startSeconds:(float)startSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.loadVideoById({'videoId': '%@', 'startSeconds': %@, 'endSeconds': %@, 'suggestedQuality': '%@'});",videoId, startSecondsValue, endSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@);",
+      videoURL, startSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)cueVideoByURL:(NSString *)videoURL
          startSeconds:(float)startSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+           endSeconds:(float)endSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, '%@');",
-      videoURL, startSecondsValue, qualityValue];
+  NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
+  NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, %@);",
+      videoURL, startSecondsValue, endSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
-- (void)cueVideoByURL:(NSString *)videoURL
-         startSeconds:(float)startSeconds
-           endSeconds:(float)endSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+- (void)loadVideoByURL:(NSString *)videoURL
+          startSeconds:(float)startSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, %@, '%@');",
-      videoURL, startSecondsValue, endSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@);",
+      videoURL, startSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
 - (void)loadVideoByURL:(NSString *)videoURL
           startSeconds:(float)startSeconds
-      suggestedQuality:(YTPlaybackQuality)suggestedQuality {
-  NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, '%@');",
-      videoURL, startSecondsValue, qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
-}
-
-- (void)loadVideoByURL:(NSString *)videoURL
-          startSeconds:(float)startSeconds
-            endSeconds:(float)endSeconds
-      suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+            endSeconds:(float)endSeconds {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, %@, '%@');",
-      videoURL, startSecondsValue, endSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, %@);",
+      videoURL, startSecondsValue, endSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -217,44 +205,36 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 
 - (void)cuePlaylistByPlaylistId:(NSString *)playlistId
                           index:(int)index
-                   startSeconds:(float)startSeconds
-               suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+                   startSeconds:(float)startSeconds {
   NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
   [self cuePlaylist:playlistIdString
                  index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+          startSeconds:startSeconds];
 }
 
 - (void)cuePlaylistByVideos:(NSArray *)videoIds
                       index:(int)index
-               startSeconds:(float)startSeconds
-           suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+               startSeconds:(float)startSeconds {
   [self cuePlaylist:[self stringFromVideoIdArray:videoIds]
                  index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+          startSeconds:startSeconds];
 }
 
 - (void)loadPlaylistByPlaylistId:(NSString *)playlistId
                            index:(int)index
-                    startSeconds:(float)startSeconds
-                suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+                    startSeconds:(float)startSeconds {
   NSString *playlistIdString = [NSString stringWithFormat:@"'%@'", playlistId];
   [self loadPlaylist:playlistIdString
                  index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+          startSeconds:startSeconds];
 }
 
 - (void)loadPlaylistByVideos:(NSArray *)videoIds
                        index:(int)index
-                startSeconds:(float)startSeconds
-            suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+                startSeconds:(float)startSeconds {
   [self loadPlaylist:[self stringFromVideoIdArray:videoIds]
                  index:index
-          startSeconds:startSeconds
-      suggestedQuality:suggestedQuality];
+          startSeconds:startSeconds];
 }
 
 #pragma mark - Setting the playback rate
@@ -358,45 +338,6 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
       return;
     }
     completionHandler([result floatValue], nil);
-  }];
-}
-
-- (void)playbackQuality:(_Nullable YTPlaybackQualityCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getPlaybackQuality();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
-    if (!completionHandler) {
-      return;
-    }
-    if (error) {
-      completionHandler(kYTPlaybackQualityUnknown, error);
-      return;
-    }
-    completionHandler([YTPlayerView playbackQualityForString:result], nil);
-  }];
-}
-
-- (void)setPlaybackQuality:(YTPlaybackQuality)suggestedQuality {
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.setPlaybackQuality('%@');", qualityValue];
-  [self stringFromEvaluatingJavaScript:command];
-}
-
-- (void)availableQualityLevels:(_Nullable YTArrayCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getAvailableQualityLevels().toString();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
-    if (!completionHandler) {
-      return;
-    }
-    if (error) {
-      completionHandler(nil, error);
-    }
-    NSArray *rawQualityValues = [result componentsSeparatedByString:@","];
-    NSMutableArray *levels = [[NSMutableArray alloc] init];
-    for (NSString *rawQualityValue in rawQualityValues) {
-      YTPlaybackQuality quality = [YTPlayerView playbackQualityForString:rawQualityValue];
-      [levels addObject:@(quality)];
-    }
-    completionHandler(levels, nil);
   }];
 }
 
@@ -529,33 +470,6 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 }
 
 /**
- * Convert a |YTPlaybackQuality| value from the typed value to NSString.
- *
- * @param quality A |YTPlaybackQuality| parameter.
- * @return An |NSString| value to be used in the JavaScript bridge.
- */
-+ (NSString *)stringForPlaybackQuality:(YTPlaybackQuality)quality {
-  switch (quality) {
-    case kYTPlaybackQualitySmall:
-      return kYTPlaybackQualitySmallQuality;
-    case kYTPlaybackQualityMedium:
-      return kYTPlaybackQualityMediumQuality;
-    case kYTPlaybackQualityLarge:
-      return kYTPlaybackQualityLargeQuality;
-    case kYTPlaybackQualityHD720:
-      return kYTPlaybackQualityHD720Quality;
-    case kYTPlaybackQualityHD1080:
-      return kYTPlaybackQualityHD1080Quality;
-    case kYTPlaybackQualityHighRes:
-      return kYTPlaybackQualityHighResQuality;
-    case kYTPlaybackQualityAuto:
-      return kYTPlaybackQualityAutoQuality;
-    default:
-      return kYTPlaybackQualityUnknownQuality;
-  }
-}
-
-/**
  * Convert a state value from NSString to the typed enum value.
  *
  * @param stateString A string representing player state. Ex: "-1", "0", "1".
@@ -577,31 +491,6 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
     state = kYTPlayerStateCued;
   }
   return state;
-}
-
-/**
- * Convert a state value from the typed value to NSString.
- *
- * @param quality A |YTPlayerState| parameter.
- * @return A string value to be used in the JavaScript bridge.
- */
-+ (NSString *)stringForPlayerState:(YTPlayerState)state {
-  switch (state) {
-    case kYTPlayerStateUnstarted:
-      return kYTPlayerStateUnstartedCode;
-    case kYTPlayerStateEnded:
-      return kYTPlayerStateEndedCode;
-    case kYTPlayerStatePlaying:
-      return kYTPlayerStatePlayingCode;
-    case kYTPlayerStatePaused:
-      return kYTPlayerStatePausedCode;
-    case kYTPlayerStateBuffering:
-      return kYTPlayerStateBufferingCode;
-    case kYTPlayerStateCued:
-      return kYTPlayerStateCuedCode;
-    default:
-      return kYTPlayerStateUnknownCode;
-  }
 }
 
 #pragma mark - WKNavigationDelegate
@@ -887,18 +776,15 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
  *                     video IDs to play with the playlist player.
  * @param index 0-index position of video to start playback on.
  * @param startSeconds Seconds after start of video to begin playback.
- * @param suggestedQuality Suggested YTPlaybackQuality to play the videos.
  * @return The result of cueing the playlist.
  */
 - (void)cuePlaylist:(NSString *)cueingString
                index:(int)index
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+        startSeconds:(float)startSeconds {
   NSNumber *indexValue = [NSNumber numberWithInt:index];
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.cuePlaylist(%@, %@, %@, '%@');",
-      cueingString, indexValue, startSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.cuePlaylist(%@, %@, %@);",
+      cueingString, indexValue, startSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 
@@ -910,18 +796,15 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
  *                     video IDs to play with the playlist player.
  * @param index 0-index position of video to start playback on.
  * @param startSeconds Seconds after start of video to begin playback.
- * @param suggestedQuality Suggested YTPlaybackQuality to play the videos.
  * @return The result of cueing the playlist.
  */
 - (void)loadPlaylist:(NSString *)cueingString
                index:(int)index
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality {
+        startSeconds:(float)startSeconds {
   NSNumber *indexValue = [NSNumber numberWithInt:index];
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
-  NSString *qualityValue = [YTPlayerView stringForPlaybackQuality:suggestedQuality];
-  NSString *command = [NSString stringWithFormat:@"player.loadPlaylist(%@, %@, %@, '%@');",
-      cueingString, indexValue, startSecondsValue, qualityValue];
+  NSString *command = [NSString stringWithFormat:@"player.loadPlaylist(%@, %@, %@);",
+      cueingString, indexValue, startSecondsValue];
   [self stringFromEvaluatingJavaScript:command];
 }
 

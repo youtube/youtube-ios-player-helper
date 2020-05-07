@@ -695,14 +695,16 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   }
 
   [playerParams setValue:playerCallbacks forKey:@"events"];
-
-  if ([playerParams objectForKey:@"playerVars"]) {
-    NSMutableDictionary *playerVars = [[NSMutableDictionary alloc] init];
-    [playerVars addEntriesFromDictionary:[playerParams objectForKey:@"playerVars"]];
-  } else {
-    // This must not be empty so we can render a '{}' in the output JSON
-    [playerParams setValue:[[NSDictionary alloc] init] forKey:@"playerVars"];
+  
+  NSMutableDictionary *playerVars = [[playerParams objectForKey:@"playerVars"] mutableCopy];
+  if (!playerVars) {
+    // playerVars must not be empty so we can render a '{}' in the output JSON
+    playerVars = [NSMutableDictionary dictionary];
   }
+  // We always want to ovewrite the origin to self.originURL, not just for
+  // the webView.baseURL
+  [playerVars setObject:self.originURL.absoluteString forKey:@"origin"];
+  [playerParams setValue:playerVars forKey:@"playerVars"];
 
   // Remove the existing webView to reset any state
   [self.webView removeFromSuperview];
@@ -746,7 +748,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
       [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
-  [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
+  [self.webView loadHTMLString:embedHTML baseURL:self.originURL];
   [self.webView setDelegate:self];
   self.webView.allowsInlineMediaPlayback = YES;
   self.webView.mediaPlaybackRequiresUserAction = NO;

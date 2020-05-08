@@ -64,7 +64,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 @interface YTPlayerView() <WKNavigationDelegate>
 
-@property (nonatomic, strong) NSURL *originURL;
+@property (nonatomic) NSURL *originURL;
 @property (nonatomic, weak) UIView *initialLoadingView;
 
 @end
@@ -538,6 +538,14 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 
 #pragma mark - Private methods
 
+- (NSURL *)originURL {
+  if (!_originURL) {
+    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    _originURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", bundleId]];
+  }
+  return _originURL;
+}
+
 /**
  * Private method to handle "navigation" to a callback URL of the format
  * ytplayer://action?data=someData
@@ -707,20 +715,16 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   }
 
   [playerParams setValue:playerCallbacks forKey:@"events"];
-
-  if ([playerParams objectForKey:@"playerVars"]) {
-    NSMutableDictionary *playerVars = [[NSMutableDictionary alloc] init];
-    [playerVars addEntriesFromDictionary:[playerParams objectForKey:@"playerVars"]];
-      
-    if (![playerVars objectForKey:@"origin"]) {
-        self.originURL = [NSURL URLWithString:@"about:blank"];
-    } else {
-        self.originURL = [NSURL URLWithString: [playerVars objectForKey:@"origin"]];
-    }
-  } else {
-    // This must not be empty so we can render a '{}' in the output JSON
-    [playerParams setValue:[[NSDictionary alloc] init] forKey:@"playerVars"];
+  
+  NSMutableDictionary *playerVars = [[playerParams objectForKey:@"playerVars"] mutableCopy];
+  if (!playerVars) {
+    // playerVars must not be empty so we can render a '{}' in the output JSON
+    playerVars = [NSMutableDictionary dictionary];
   }
+  // We always want to ovewrite the origin to self.originURL, not just for
+  // the webView.baseURL
+  [playerVars setObject:self.originURL.absoluteString forKey:@"origin"];
+  [playerParams setValue:playerVars forKey:@"playerVars"];
 
   // Remove the existing webview to reset any state
   [self.webView removeFromSuperview];
@@ -764,9 +768,10 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
       [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
   NSString *embedHTML = [NSString stringWithFormat:embedHTMLTemplate, playerVarsJsonString];
+
   [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
   self.webView.navigationDelegate = self;
-  
+
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
     UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
     if (initialLoadingView) {

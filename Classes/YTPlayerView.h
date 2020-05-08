@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class YTPlayerView;
 
@@ -23,7 +24,7 @@ typedef NS_ENUM(NSInteger, YTPlayerState) {
     kYTPlayerStatePlaying,
     kYTPlayerStatePaused,
     kYTPlayerStateBuffering,
-    kYTPlayerStateQueued,
+    kYTPlayerStateCued,
     kYTPlayerStateUnknown
 };
 
@@ -50,6 +51,17 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
     // 150 have been collapsed into |kYTPlayerErrorNotEmbeddable|.
     kYTPlayerErrorUnknown
 };
+
+/** Completion handlers for player API calls. */
+typedef void (^YTIntCompletionHandler)(int result, NSError *_Nullable error);
+typedef void (^YTFloatCompletionHandler)(float result, NSError *_Nullable error);
+typedef void (^YTDoubleCompletionHandler)(double result, NSError *_Nullable error);
+typedef void (^YTStringCompletionHandler)(NSString *_Nullable result, NSError *_Nullable error);
+typedef void (^YTArrayCompletionHandler)(NSArray *_Nullable result, NSError *_Nullable error);
+typedef void (^YTURLCompletionHandler)(NSURL *_Nullable result, NSError *_Nullable error);
+typedef void (^YTPlayerStateCompletionHandler)(YTPlayerState result, NSError *_Nullable error);
+typedef void (^YTPlaybackQualityCompletionHandler)(YTPlaybackQuality result,
+                                                   NSError *_Nullable error);
 
 /**
  * A delegate for ViewControllers to respond to YouTube player events outside
@@ -138,9 +150,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * YTPlayerView::loadWithPlaylistId: or their variants to set the video or playlist
  * to populate the view with.
  */
-@interface YTPlayerView : UIView<UIWebViewDelegate>
+@interface YTPlayerView : UIView
 
-@property(nonatomic, strong, nullable, readonly) UIWebView *webView;
+@property(nonatomic, nullable, readonly) WKWebView *webView;
 
 /** A delegate to be notified on playback events. */
 @property(nonatomic, weak, nullable) id<YTPlayerViewDelegate> delegate;
@@ -150,9 +162,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * This is a convenience method for calling YTPlayerView::loadPlayerWithVideoId:withPlayerVars:
  * without player variables.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
- * YTPlayerView::cueVideoById:startSeconds:suggestedQuality: family of methods.
+ * This method reloads the entire contents of the webview and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire webview, use the
+ * YTPlayerView::cueVideoById:startSeconds: family of methods.
  *
  * @param videoId The YouTube video ID of the video to load in the player view.
  * @return YES if player has been configured correctly, NO otherwise.
@@ -164,9 +176,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * This is a convenience method for calling YTPlayerView::loadWithPlaylistId:withPlayerVars:
  * without player variables.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
- * YTPlayerView::cuePlaylistByPlaylistId:index:startSeconds:suggestedQuality:
+ * This method reloads the entire contents of the webview and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire webview, use the
+ * YTPlayerView::cuePlaylistByPlaylistId:index:startSeconds:
  * family of methods.
  *
  * @param playlistId The YouTube playlist ID of the playlist to load in the player view.
@@ -187,9 +199,9 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * both strings and integers are valid values. The full list of parameters is defined at:
  *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
- * YTPlayerView::cueVideoById:startSeconds:suggestedQuality: family of methods.
+ * This method reloads the entire contents of the webview and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire webview, use the
+ * YTPlayerView::cueVideoById:startSeconds: family of methods.
  *
  * @param videoId The YouTube video ID of the video to load in the player view.
  * @param playerVars An NSDictionary of player parameters.
@@ -210,16 +222,17 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * both strings and integers are valid values. The full list of parameters is defined at:
  *   https://developers.google.com/youtube/player_parameters?playerVersion=HTML5.
  *
- * This method reloads the entire contents of the UIWebView and regenerates its HTML contents.
- * To change the currently loaded video without reloading the entire UIWebView, use the
- * YTPlayerView::cuePlaylistByPlaylistId:index:startSeconds:suggestedQuality:
+ * This method reloads the entire contents of the webview and regenerates its HTML contents.
+ * To change the currently loaded video without reloading the entire webview, use the
+ * YTPlayerView::cuePlaylistByPlaylistId:index:startSeconds:
  * family of methods.
  *
  * @param playlistId The YouTube playlist ID of the playlist to load in the player view.
  * @param playerVars An NSDictionary of player parameters.
  * @return YES if player has been configured correctly, NO otherwise.
  */
-- (BOOL)loadWithPlaylistId:(nonnull NSString *)playlistId playerVars:(nullable NSDictionary *)playerVars;
+- (BOOL)loadWithPlaylistId:(nonnull NSString *)playlistId
+                playerVars:(nullable NSDictionary *)playerVars;
 
 /**
  * This method loads an iframe player with the given player parameters. Usually you may want to use
@@ -271,205 +284,178 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  */
 - (void)seekToSeconds:(float)seekToSeconds allowSeekAhead:(BOOL)allowSeekAhead;
 
-#pragma mark - Queuing videos
+#pragma mark - Cueing videos
 
-// Queueing functions for videos. These methods correspond to their JavaScript
+// Cueing functions for videos. These methods correspond to their JavaScript
 // equivalents as documented here:
 //   https://developers.google.com/youtube/iframe_api_reference#Queueing_Functions
 
 /**
- * Cues a given video by its video ID for playback starting at the given time and with the
- * suggested quality. Cueing loads a video, but does not start video playback. This method
+ * Cues a given video by its video ID for playback starting at the given time.
+ * Cueing loads a video, but does not start video playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#cueVideoById
  *
  * @param videoId A video ID to cue.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)cueVideoById:(nonnull NSString *)videoId
-        startSeconds:(float)startSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+        startSeconds:(float)startSeconds;
 
 /**
- * Cues a given video by its video ID for playback starting and ending at the given times
- * with the suggested quality. Cueing loads a video, but does not start video playback. This
+ * Cues a given video by its video ID for playback starting and ending at the given times.
+ * Cueing loads a video, but does not start video playback. This
  * method corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#cueVideoById
  *
  * @param videoId A video ID to cue.
  * @param startSeconds Time in seconds to start the video when playVideo() is called.
  * @param endSeconds Time in seconds to end the video after it begins playing.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)cueVideoById:(nonnull NSString *)videoId
         startSeconds:(float)startSeconds
-          endSeconds:(float)endSeconds
-    suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+          endSeconds:(float)endSeconds;
 
 /**
- * Loads a given video by its video ID for playback starting at the given time and with the
- * suggested quality. Loading a video both loads it and begins playback. This method
+ * Loads a given video by its video ID for playback starting at the given time.
+ * Loading a video both loads it and begins playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#loadVideoById
  *
  * @param videoId A video ID to load and begin playing.
  * @param startSeconds Time in seconds to start the video when it has loaded.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)loadVideoById:(nonnull NSString *)videoId
-         startSeconds:(float)startSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+         startSeconds:(float)startSeconds;
 
 /**
- * Loads a given video by its video ID for playback starting and ending at the given times
- * with the suggested quality. Loading a video both loads it and begins playback. This method
+ * Loads a given video by its video ID for playback starting and ending at the given times.
+ * Loading a video both loads it and begins playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#loadVideoById
  *
  * @param videoId A video ID to load and begin playing.
  * @param startSeconds Time in seconds to start the video when it has loaded.
  * @param endSeconds Time in seconds to end the video after it begins playing.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)loadVideoById:(nonnull NSString *)videoId
          startSeconds:(float)startSeconds
-           endSeconds:(float)endSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+           endSeconds:(float)endSeconds;
 
 /**
- * Cues a given video by its URL on YouTube.com for playback starting at the given time
- * and with the suggested quality. Cueing loads a video, but does not start video playback.
+ * Cues a given video by its URL on YouTube.com for playback starting at the given time.
+ * Cueing loads a video, but does not start video playback.
  * This method corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#cueVideoByUrl
  *
  * @param videoURL URL of a YouTube video to cue for playback.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)cueVideoByURL:(nonnull NSString *)videoURL
-         startSeconds:(float)startSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+         startSeconds:(float)startSeconds;
 
 /**
- * Cues a given video by its URL on YouTube.com for playback starting at the given time
- * and with the suggested quality. Cueing loads a video, but does not start video playback.
+ * Cues a given video by its URL on YouTube.com for playback starting at the given time.
+ * Cueing loads a video, but does not start video playback.
  * This method corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#cueVideoByUrl
  *
  * @param videoURL URL of a YouTube video to cue for playback.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
  * @param endSeconds Time in seconds to end the video after it begins playing.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)cueVideoByURL:(nonnull NSString *)videoURL
          startSeconds:(float)startSeconds
-           endSeconds:(float)endSeconds
-     suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+           endSeconds:(float)endSeconds;
 
 /**
- * Loads a given video by its video ID for playback starting at the given time
- * with the suggested quality. Loading a video both loads it and begins playback. This method
+ * Loads a given video by its video ID for playback starting at the given time.
+ * Loading a video both loads it and begins playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#loadVideoByUrl
  *
  * @param videoURL URL of a YouTube video to load and play.
  * @param startSeconds Time in seconds to start the video when it has loaded.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)loadVideoByURL:(nonnull NSString *)videoURL
-          startSeconds:(float)startSeconds
-      suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+          startSeconds:(float)startSeconds;
 
 /**
- * Loads a given video by its video ID for playback starting and ending at the given times
- * with the suggested quality. Loading a video both loads it and begins playback. This method
+ * Loads a given video by its video ID for playback starting and ending at the given times.
+ * Loading a video both loads it and begins playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#loadVideoByUrl
  *
  * @param videoURL URL of a YouTube video to load and play.
  * @param startSeconds Time in seconds to start the video when it has loaded.
  * @param endSeconds Time in seconds to end the video after it begins playing.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)loadVideoByURL:(nonnull NSString *)videoURL
           startSeconds:(float)startSeconds
-            endSeconds:(float)endSeconds
-      suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+            endSeconds:(float)endSeconds;
 
-#pragma mark - Queuing functions for playlists
+#pragma mark - Cueing functions for playlists
 
-// Queueing functions for playlists. These methods correspond to
+// Cueing functions for playlists. These methods correspond to
 // the JavaScript methods defined here:
 //    https://developers.google.com/youtube/js_api_reference#Playlist_Queueing_Functions
 
 /**
  * Cues a given playlist with the given ID. The |index| parameter specifies the 0-indexed
- * position of the first video to play, starting at the given time and with the
- * suggested quality. Cueing loads a playlist, but does not start video playback. This method
- * corresponds with its JavaScript API equivalent as documented here:
+ * position of the first video to play, starting at the given time. Cueing loads a playlist,
+ * but does not start video playback. This method corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#cuePlaylist
  *
  * @param playlistId Playlist ID of a YouTube playlist to cue.
  * @param index A 0-indexed position specifying the first video to play.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)cuePlaylistByPlaylistId:(nonnull NSString *)playlistId
                           index:(int)index
-                   startSeconds:(float)startSeconds
-               suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+                   startSeconds:(float)startSeconds;
 
 /**
  * Cues a playlist of videos with the given video IDs. The |index| parameter specifies the
- * 0-indexed position of the first video to play, starting at the given time and with the
- * suggested quality. Cueing loads a playlist, but does not start video playback. This method
+ * 0-indexed position of the first video to play, starting at the given time.
+ * Cueing loads a playlist, but does not start video playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#cuePlaylist
  *
  * @param videoIds An NSArray of video IDs to compose the playlist of.
  * @param index A 0-indexed position specifying the first video to play.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)cuePlaylistByVideos:(nonnull NSArray *)videoIds
                       index:(int)index
-               startSeconds:(float)startSeconds
-           suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+               startSeconds:(float)startSeconds;
 
 /**
  * Loads a given playlist with the given ID. The |index| parameter specifies the 0-indexed
- * position of the first video to play, starting at the given time and with the
- * suggested quality. Loading a playlist starts video playback. This method
+ * position of the first video to play, starting at the given time. Loading a playlist starts video playback. This method
  * corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#loadPlaylist
  *
  * @param playlistId Playlist ID of a YouTube playlist to cue.
  * @param index A 0-indexed position specifying the first video to play.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)loadPlaylistByPlaylistId:(nonnull NSString *)playlistId
                            index:(int)index
-                    startSeconds:(float)startSeconds
-                suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+                    startSeconds:(float)startSeconds;
 
 /**
  * Loads a playlist of videos with the given video IDs. The |index| parameter specifies the
- * 0-indexed position of the first video to play, starting at the given time and with the
- * suggested quality. Loading a playlist starts video playback. This method
- * corresponds with its JavaScript API equivalent as documented here:
+ * 0-indexed position of the first video to play, starting at the given time. Loading a playlist starts video playback.
+ * This method corresponds with its JavaScript API equivalent as documented here:
  *    https://developers.google.com/youtube/iframe_api_reference#loadPlaylist
  *
  * @param videoIds An NSArray of video IDs to compose the playlist of.
  * @param index A 0-indexed position specifying the first video to play.
  * @param startSeconds Time in seconds to start the video when YTPlayerView::playVideo is called.
- * @param suggestedQuality YTPlaybackQuality value suggesting a playback quality.
  */
 - (void)loadPlaylistByVideos:(nonnull NSArray *)videoIds
                        index:(int)index
-                startSeconds:(float)startSeconds
-            suggestedQuality:(YTPlaybackQuality)suggestedQuality;
+                startSeconds:(float)startSeconds;
 
 #pragma mark - Playing a video in a playlist
 
@@ -508,10 +494,10 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * speeds, and 1.5 or 2.0 for faster speeds. This method corresponds to the
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaybackRate
- *
- * @return An integer value between 0 and 100 representing the current volume.
+ * @param completionHandler async callback block that contains a float value representing the current value
+ * or an error.
  */
-- (float)playbackRate;
+- (void)playbackRate:(_Nullable YTFloatCompletionHandler)completionHandler;
 
 /**
  * Sets the playback rate. The default value is 1.0, which represents a video
@@ -532,9 +518,10 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaybackRate
  *
- * @return An NSArray containing available playback rates. nil if there is an error.
+ * @param completionHandler async callback block that contains an array containing the available
+ * playback rates or an error.
  */
-- (nullable NSArray *)availablePlaybackRates;
+- (void)availablePlaybackRates:(_Nullable YTArrayCompletionHandler)completionHandler;
 
 #pragma mark - Setting playback behavior for playlists
 
@@ -568,62 +555,28 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoLoadedFraction
  *
- * @return A float value between 0 and 1 representing the percentage of the video
- *         already loaded.
+ * @param completionHandler async callback block that contains a float number with the result or an error.
  */
-- (float)videoLoadedFraction;
+- (void)videoLoadedFraction:(_Nullable YTFloatCompletionHandler)completionHandler;
 
 /**
  * Returns the state of the player. This method corresponds to the
  * JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlayerState
  *
- * @return |YTPlayerState| representing the state of the player.
+ * @param completionHandler async callback block that contains a YTPlayerState enum value
+ * with the current player state or an error.
  */
-- (YTPlayerState)playerState;
+- (void)playerState:(_Nullable YTPlayerStateCompletionHandler)completionHandler;
 
 /**
  * Returns the elapsed time in seconds since the video started playing. This
  * method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getCurrentTime
  *
- * @return Time in seconds since the video started playing.
+ * @param completionHandler async callback block that contains float number with the result or an error.
  */
-- (float)currentTime;
-
-#pragma mark - Playback quality
-
-// Playback quality. These methods correspond to the JavaScript
-// methods defined here:
-//   https://developers.google.com/youtube/js_api_reference#Playback_quality
-
-/**
- * Returns the playback quality. This method corresponds to the
- * JavaScript API defined here:
- *   https://developers.google.com/youtube/iframe_api_reference#getPlaybackQuality
- *
- * @return YTPlaybackQuality representing the current playback quality.
- */
-- (YTPlaybackQuality)playbackQuality;
-
-/**
- * Suggests playback quality for the video. It is recommended to leave this setting to
- * |default|. This method corresponds to the JavaScript API defined here:
- *   https://developers.google.com/youtube/iframe_api_reference#setPlaybackQuality
- *
- * @param quality YTPlaybackQuality value to suggest for the player.
- */
-- (void)setPlaybackQuality:(YTPlaybackQuality)suggestedQuality;
-
-/**
- * Gets a list of the valid playback quality values, useful in conjunction with
- * YTPlayerView::setPlaybackQuality. This method corresponds to the
- * JavaScript API defined here:
- *   https://developers.google.com/youtube/iframe_api_reference#getAvailableQualityLevels
- *
- * @return An NSArray containing available playback quality levels. Returns nil if there is an error.
- */
-- (nullable NSArray *)availableQualityLevels;
+- (void)currentTime:(_Nullable YTFloatCompletionHandler)completionHandler;
 
 #pragma mark - Retrieving video information
 
@@ -636,27 +589,29 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getDuration
  *
- * @return Length of the video in seconds.
+ * @param completionHandler async callback block that contains a double number
+ * with the duration of the video or an error.
  */
-- (NSTimeInterval)duration;
+- (void)duration:(_Nullable YTDoubleCompletionHandler)completionHandler;
 
 /**
  * Returns the YouTube.com URL for the video. This method corresponds
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoUrl
  *
- * @return The YouTube.com URL for the video. Returns nil if no video is loaded yet.
+ * @param completionHandler async callback block that contains the video URL as NSURL or an error.
  */
-- (nullable NSURL *)videoUrl;
+- (void)videoUrl:(_Nullable YTURLCompletionHandler)completionHandler;
 
 /**
  * Returns the embed code for the current video. This method corresponds
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getVideoEmbedCode
  *
- * @return The embed code for the current video. Returns nil if no video is loaded yet.
+ * @param completionHandler async callback block that contains a string with the current video
+ * embed code or an error.
  */
-- (nullable NSString *)videoEmbedCode;
+- (void)videoEmbedCode:(_Nullable YTStringCompletionHandler)completionHandler;
 
 #pragma mark - Retrieving playlist information
 
@@ -669,18 +624,20 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  * to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaylist
  *
- * @return An NSArray containing all the video IDs in the current playlist. |nil| on error.
+ * @param completionHandler async callback block that contains an array of video IDs in the playlist
+ * or an error.
  */
-- (nullable NSArray *)playlist;
+- (void)playlist:(_Nullable YTArrayCompletionHandler)completionHandler;
 
 /**
  * Returns the 0-based index of the currently playing item in the playlist.
  * This method corresponds to the JavaScript API defined here:
  *   https://developers.google.com/youtube/iframe_api_reference#getPlaylistIndex
  *
- * @return The 0-based index of the currently playing item in the playlist.
+ * @param completionHandler async callback block that contains the int value of the current playing item
+ * in a playlist or an error.
  */
-- (int)playlistIndex;
+- (void)playlistIndex:(_Nullable YTIntCompletionHandler)completionHandler;
 
 #pragma mark - Exposed for Testing
 

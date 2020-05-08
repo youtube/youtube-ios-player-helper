@@ -46,14 +46,18 @@
 }
 
 - (void)playerView:(YTPlayerView *)playerView didPlayTime:(float)playTime {
-    float progress = playTime/self.playerView.duration;
+  [self.playerView duration:^(double result, NSError * _Nullable error) {
+    float progress = playTime/result;
     [self.slider setValue:progress];
+  }];
 }
 
 - (IBAction)onSliderChange:(id)sender {
-    float seekToTime = self.playerView.duration * self.slider.value;
+  [self.playerView duration:^(double result, NSError * _Nullable error) {
+    float seekToTime = result * self.slider.value;
     [self.playerView seekToSeconds:seekToTime allowSeekAhead:YES];
     [self appendStatusText:[NSString stringWithFormat:@"Seeking to time: %.0f seconds\n", seekToTime]];
+  }];
 }
 
 - (IBAction)buttonPressed:(id)sender {
@@ -65,13 +69,17 @@
   } else if (sender == self.pauseButton) {
     [self.playerView pauseVideo];
   } else if (sender == self.reverseButton) {
-    float seekToTime = self.playerView.currentTime - 30.0;
-    [self.playerView seekToSeconds:seekToTime allowSeekAhead:YES];
-    [self appendStatusText:[NSString stringWithFormat:@"Seeking to time: %.0f seconds\n", seekToTime]];
+    [self.playerView currentTime:^(float result, NSError * _Nullable error) {
+      float seekToTime = result - 30.0;
+      [self.playerView seekToSeconds:seekToTime allowSeekAhead:YES];
+      [self appendStatusText:[NSString stringWithFormat:@"Seeking to time: %.0f seconds\n", seekToTime]];
+    }];
   } else if (sender == self.forwardButton) {
-    float seekToTime = self.playerView.currentTime + 30.0;
-    [self.playerView seekToSeconds:seekToTime allowSeekAhead:YES];
-    [self appendStatusText:[NSString stringWithFormat:@"Seeking to time: %.0f seconds\n", seekToTime]];
+    [self.playerView currentTime:^(float result, NSError * _Nullable error) {
+      float seekToTime = result + 30.0;
+      [self.playerView seekToSeconds:seekToTime allowSeekAhead:YES];
+      [self appendStatusText:[NSString stringWithFormat:@"Seeking to time: %.0f seconds\n", seekToTime]];
+    }];
   } else if (sender == self.startButton) {
     [self.playerView seekToSeconds:0 allowSeekAhead:YES];
     [self appendStatusText:@"Seeking to beginning\n"];

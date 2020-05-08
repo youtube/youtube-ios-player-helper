@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "YTPlayerView.h"
+#import <youtube_ios_player_helper/YTPlayerView.h>
 
 @interface SingleVideoViewController : UIViewController<YTPlayerViewDelegate>
 

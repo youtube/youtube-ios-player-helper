@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "YTPlayerView.h"
+#import <youtube_ios_player_helper/YTPlayerView.h>
 
 @interface PlaylistViewController : UIViewController<YTPlayerViewDelegate>
 

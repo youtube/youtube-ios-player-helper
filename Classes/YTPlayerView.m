@@ -62,8 +62,6 @@ NSString static *const kYTPlayerOAuthRegexPattern = @"^http(s)://accounts.google
 NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.googleapis.com/static/proxy.html(.*)$";
 NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googlesyndication.com/sodar/(.*).html$";
 
-NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
-
 @interface YTPlayerView() <WKNavigationDelegate>
 
 @property (nonatomic, strong) NSURL *originURL;
@@ -106,23 +104,23 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 #pragma mark - Player methods
 
 - (void)playVideo {
-  [self stringFromEvaluatingJavaScript:@"player.playVideo();"];
+  [self evaluateJavaScript:@"player.playVideo();"];
 }
 
 - (void)pauseVideo {
   [self notifyDelegateOfYouTubeCallbackUrl:[NSURL URLWithString:[NSString stringWithFormat:@"ytplayer://onStateChange?data=%@", kYTPlayerStatePausedCode]]];
-  [self stringFromEvaluatingJavaScript:@"player.pauseVideo();"];
+  [self evaluateJavaScript:@"player.pauseVideo();"];
 }
 
 - (void)stopVideo {
-  [self stringFromEvaluatingJavaScript:@"player.stopVideo();"];
+  [self evaluateJavaScript:@"player.stopVideo();"];
 }
 
 - (void)seekToSeconds:(float)seekToSeconds allowSeekAhead:(BOOL)allowSeekAhead {
   NSNumber *secondsValue = [NSNumber numberWithFloat:seekToSeconds];
   NSString *allowSeekAheadValue = [self stringForJSBoolean:allowSeekAhead];
   NSString *command = [NSString stringWithFormat:@"player.seekTo(%@, %@);", secondsValue, allowSeekAheadValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Cueing methods
@@ -132,7 +130,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoById('%@', %@);",
       videoId, startSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)cueVideoById:(NSString *)videoId
@@ -143,7 +141,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSString *command = [NSString stringWithFormat:@"player.cueVideoById({'videoId': '%@',"
                        "'startSeconds': %@, 'endSeconds': %@});",
                        videoId, startSecondsValue, endSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoById:(NSString *)videoId
@@ -151,7 +149,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoById('%@', %@);",
       videoId, startSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoById:(NSString *)videoId
@@ -162,7 +160,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSString *command = [NSString stringWithFormat:@"player.loadVideoById({'videoId': '%@',"
                        "'startSeconds': %@, 'endSeconds': %@});",
                        videoId, startSecondsValue, endSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)cueVideoByURL:(NSString *)videoURL
@@ -170,7 +168,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@);",
       videoURL, startSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)cueVideoByURL:(NSString *)videoURL
@@ -180,7 +178,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
   NSString *command = [NSString stringWithFormat:@"player.cueVideoByUrl('%@', %@, %@);",
       videoURL, startSecondsValue, endSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoByURL:(NSString *)videoURL
@@ -188,7 +186,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@);",
       videoURL, startSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)loadVideoByURL:(NSString *)videoURL
@@ -198,7 +196,7 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
   NSNumber *endSecondsValue = [NSNumber numberWithFloat:endSeconds];
   NSString *command = [NSString stringWithFormat:@"player.loadVideoByUrl('%@', %@, %@);",
       videoURL, startSecondsValue, endSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Cueing methods for lists
@@ -240,8 +238,8 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 #pragma mark - Setting the playback rate
 
 - (void)playbackRate:(_Nullable YTFloatCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getPlaybackRate();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getPlaybackRate();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
@@ -249,18 +247,21 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
       completionHandler(-1, error);
       return;
     }
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
+    }
     completionHandler([result floatValue], nil);
   }];
 }
 
 - (void)setPlaybackRate:(float)suggestedRate {
   NSString *command = [NSString stringWithFormat:@"player.setPlaybackRate(%f);", suggestedRate];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)availablePlaybackRates:(_Nullable YTArrayCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getAvailablePlaybackRates();"
-                     completionHandler:^(NSString *_Nullable result, NSError * _Nullable error) {
+  [self evaluateJavaScript:@"player.getAvailablePlaybackRates();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
@@ -268,16 +269,10 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
       completionHandler(nil, error);
       return;
     }
-    NSData *playbackRateData = [result dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonDeserializationError;
-    NSArray *playbackRates = [NSJSONSerialization JSONObjectWithData:playbackRateData
-                                                             options:kNilOptions
-                                                               error:&jsonDeserializationError];
-    if (jsonDeserializationError) {
-      completionHandler(nil, jsonDeserializationError);
-      return;
+    if (!result || ![result isKindOfClass:[NSArray class]]) {
+      completionHandler(nil, nil);
     }
-    completionHandler(playbackRates, nil);
+    completionHandler(result, nil);
   }];
 }
 
@@ -286,36 +281,38 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 - (void)setLoop:(BOOL)loop {
   NSString *loopPlayListValue = [self stringForJSBoolean:loop];
   NSString *command = [NSString stringWithFormat:@"player.setLoop(%@);", loopPlayListValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 - (void)setShuffle:(BOOL)shuffle {
   NSString *shufflePlayListValue = [self stringForJSBoolean:shuffle];
   NSString *command = [NSString stringWithFormat:@"player.setShuffle(%@);", shufflePlayListValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Playback status
 
 - (void)videoLoadedFraction:(_Nullable YTFloatCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getVideoLoadedFraction();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getVideoLoadedFraction();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
-
     if (error) {
       completionHandler(-1, error);
       return;
     }
-
-    completionHandler([result floatValue], error);
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
+      return;
+    }
+    completionHandler([result floatValue], nil);
   }];
 }
 
 - (void)playerState:(_Nullable YTPlayerStateCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getPlayerState();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getPlayerState();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
@@ -323,18 +320,27 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
       completionHandler(kYTPlayerStateUnknown, error);
       return;
     }
-    completionHandler([YTPlayerView playerStateForString:result], nil);
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(kYTPlayerStateUnknown, error);
+      return;
+    }
+    YTPlayerState state = [result intValue];
+    completionHandler(state, nil);
   }];
 }
 
 - (void)currentTime:(_Nullable YTFloatCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getCurrentTime();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getCurrentTime();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
     if (error) {
       completionHandler(-1, error);
+      return;
+    }
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
       return;
     }
     completionHandler([result floatValue], nil);
@@ -344,8 +350,8 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 #pragma mark - Video information methods
 
 - (void)duration:(_Nullable YTDoubleCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getDuration();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getDuration();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
@@ -353,33 +359,42 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
       completionHandler(-1, error);
       return;
     }
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
+    }
     completionHandler([result doubleValue], nil);
   }];
 }
 
 - (void)videoUrl:(_Nullable YTURLCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getVideoUrl();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getVideoUrl();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
     if (error) {
       completionHandler(nil, error);
       return;
+    }
+    if (!result || ![result isKindOfClass:[NSString class]]) {
+      completionHandler(nil, nil);
     }
     completionHandler([NSURL URLWithString:result], nil);
   }];
 }
 
 - (void)videoEmbedCode:(_Nullable YTStringCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getVideoEmbedCode();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getVideoEmbedCode();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
     if (error) {
       completionHandler(nil, error);
       return;
+    }
+    if (!result || ![result isKindOfClass:[NSString class]]) {
+      completionHandler(nil, nil);
     }
     completionHandler(result, nil);
   }];
@@ -388,36 +403,33 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 #pragma mark - Playlist methods
 
 - (void)playlist:(_Nullable YTArrayCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getPlaylist();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getPlaylist();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
     if (error) {
       completionHandler(nil, error);
     }
-    NSData *playlistData = [result dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonDeserializationError;
-    NSArray *videoIds = [NSJSONSerialization JSONObjectWithData:playlistData
-                                                        options:kNilOptions
-                                                          error:&jsonDeserializationError];
-    if (jsonDeserializationError) {
-      completionHandler(nil, jsonDeserializationError);
-      return;
+    if (!result || ![result isKindOfClass:[NSArray class]]) {
+      completionHandler(nil, nil);
     }
-    completionHandler(videoIds, nil);
+    completionHandler(result, nil);
   }];
 }
 
 - (void)playlistIndex:(_Nullable YTIntCompletionHandler)completionHandler {
-  [self stringFromEvaluatingJavaScript:@"player.getPlaylistIndex();"
-                     completionHandler:^(NSString *_Nullable result, NSError *_Nullable error) {
+  [self evaluateJavaScript:@"player.getPlaylistIndex();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
     if (!completionHandler) {
       return;
     }
     if (error) {
       completionHandler(-1, error);
       return;
+    }
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
     }
     completionHandler([result intValue], nil);
   }];
@@ -426,17 +438,17 @@ NSErrorDomain static const kYTNoStringErrorDomain = @"NoStringErrorDomain";
 #pragma mark - Playing a video in a playlist
 
 - (void)nextVideo {
-  [self stringFromEvaluatingJavaScript:@"player.nextVideo();"];
+  [self evaluateJavaScript:@"player.nextVideo();"];
 }
 
 - (void)previousVideo {
-  [self stringFromEvaluatingJavaScript:@"player.previousVideo();"];
+  [self evaluateJavaScript:@"player.previousVideo();"];
 }
 
 - (void)playVideoAt:(int)index {
   NSString *command =
       [NSString stringWithFormat:@"player.playVideoAt(%@);", [NSNumber numberWithInt:index]];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 #pragma mark - Helper methods
@@ -785,7 +797,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *command = [NSString stringWithFormat:@"player.cuePlaylist(%@, %@, %@);",
       cueingString, indexValue, startSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 /**
@@ -805,7 +817,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   NSNumber *startSecondsValue = [NSNumber numberWithFloat:startSeconds];
   NSString *command = [NSString stringWithFormat:@"player.loadPlaylist(%@, %@, %@);",
       cueingString, indexValue, startSecondsValue];
-  [self stringFromEvaluatingJavaScript:command];
+  [self evaluateJavaScript:command];
 }
 
 /**
@@ -829,8 +841,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
  *
  * @param jsToExecute The JavaScript code in string format that we want to execute.
  */
-- (void)stringFromEvaluatingJavaScript:(NSString *)jsToExecute {
-  [self stringFromEvaluatingJavaScript:jsToExecute completionHandler:nil];
+- (void)evaluateJavaScript:(NSString *)jsToExecute {
+  [self evaluateJavaScript:jsToExecute completionHandler:nil];
 }
 
 /**
@@ -839,29 +851,24 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
  * @param jsToExecute The JavaScript code in string format that we want to execute.
  * @param completionHandler A block to invoke when script evaluation completes or fails.
  */
-- (void)stringFromEvaluatingJavaScript:(NSString *)jsToExecute
-                     completionHandler:(_Nullable YTStringCompletionHandler)completionHandler {
+- (void)evaluateJavaScript:(NSString *)jsToExecute
+         completionHandler:(void(^)(id _Nullable result, NSError *_Nullable error))completionHandler {
   [_webView evaluateJavaScript:jsToExecute
              completionHandler:^(id _Nullable result, NSError *_Nullable error) {
     if (!completionHandler) {
       return;
     }
-
     if (error) {
       completionHandler(nil, error);
       return;
     }
-    if (![result isKindOfClass:[NSString class]]) {
-      NSDictionary *errorUserInfo = @{
-        NSLocalizedDescriptionKey: @"The returned JS result is an unsupported object.",
-      };
-      NSError *error = [[NSError alloc] initWithDomain:kYTNoStringErrorDomain code:100
-                                              userInfo:errorUserInfo];
-      completionHandler(nil, error);
+    if (!result || [result isKindOfClass:[NSNull class]]) {
+      // we can consider this an empty result
+      completionHandler(nil, nil);
       return;
     }
 
-    completionHandler((NSString *)result, nil);
+    completionHandler(result, nil);
   }];
 }
 

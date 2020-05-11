@@ -249,6 +249,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSNumber class]]) {
       completionHandler(0, nil);
+      return;
     }
     completionHandler([result floatValue], nil);
   }];
@@ -271,6 +272,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSArray class]]) {
       completionHandler(nil, nil);
+      return;
     }
     completionHandler(result, nil);
   }];
@@ -361,6 +363,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSNumber class]]) {
       completionHandler(0, nil);
+      return;
     }
     completionHandler([result doubleValue], nil);
   }];
@@ -378,6 +381,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSString class]]) {
       completionHandler(nil, nil);
+      return;
     }
     completionHandler([NSURL URLWithString:result], nil);
   }];
@@ -395,6 +399,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSString class]]) {
       completionHandler(nil, nil);
+      return;
     }
     completionHandler(result, nil);
   }];
@@ -413,6 +418,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSArray class]]) {
       completionHandler(nil, nil);
+      return;
     }
     completionHandler(result, nil);
   }];
@@ -430,6 +436,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     }
     if (!result || ![result isKindOfClass:[NSNumber class]]) {
       completionHandler(0, nil);
+      return;
     }
     completionHandler([result intValue], nil);
   }];

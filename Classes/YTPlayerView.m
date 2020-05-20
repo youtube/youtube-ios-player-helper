@@ -518,7 +518,10 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
 decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   NSURLRequest *request = navigationAction.request;
-  if ([request.URL.host isEqual: self.originURL.host]) {
+  // In case either the request or originURL are not lowercase we force them here.
+  // If we don't and we don't enter the first if statement the logic will try to open
+  // a browser.
+  if ([[request.URL.host lowercaseString] isEqualToString:[self.originURL.host lowercaseString]]) {
     decisionHandler(WKNavigationActionPolicyAllow);
     return;
   } else if ([request.URL.scheme isEqual:@"ytplayer"]) {
@@ -548,7 +551,8 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 - (NSURL *)originURL {
   if (!_originURL) {
     NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-    _originURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", bundleId]];
+    NSString *stringURL = [[NSString stringWithFormat:@"http://%@", bundleId] lowercaseString];
+    _originURL = [NSURL URLWithString:stringURL];
   }
   return _originURL;
 }

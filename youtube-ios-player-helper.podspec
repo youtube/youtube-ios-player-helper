@@ -43,7 +43,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = "https://twitter.com/YouTubeDev"
   s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "0.1.6" }
 
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '10.0'
   s.requires_arc = true
 
   s.source_files = 'Classes'

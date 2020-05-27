@@ -686,7 +686,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
                                   options:0
                                     range:NSMakeRange(0, [url.absoluteString length])];
 
-  if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch) {
+if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch || [url.absoluteString.lowercaseString containsString:self.originURL.absoluteString.lowercaseString] ) {
     return YES;
   } else {
     [[UIApplication sharedApplication] openURL:url];

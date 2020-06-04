@@ -518,13 +518,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
 decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   NSURLRequest *request = navigationAction.request;
-  // In case either the request or originURL are not lowercase we force them here.
-  // If we don't and we don't enter the first if statement the logic will try to open
-  // a browser.
-  if ([[request.URL.host lowercaseString] isEqualToString:[self.originURL.host lowercaseString]]) {
-    decisionHandler(WKNavigationActionPolicyAllow);
-    return;
-  } else if ([request.URL.scheme isEqual:@"ytplayer"]) {
+  if ([request.URL.scheme isEqual:@"ytplayer"]) {
     [self notifyDelegateOfYouTubeCallbackUrl:request.URL];
     decisionHandler(WKNavigationActionPolicyCancel);
     return;
@@ -638,7 +632,14 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   }
 }
 
-- (BOOL)handleHttpNavigationToUrl:(NSURL *) url {
+- (BOOL)handleHttpNavigationToUrl:(NSURL *)url {
+  // When loading the webView for the first time, webView tries loading the originURL
+  // since it is set as the webView.baseURL.
+  // In that case we want to let it load itself in the webView instead of trying
+  // to load it in a browser.
+  if ([[url.host lowercaseString] isEqualToString:[self.originURL.host lowercaseString]]) {
+    return YES;
+  }
   // Usually this means the user has clicked on the YouTube logo or an error message in the
   // player. Most URLs should open in the browser. The only http(s) URL that should open in this
   // webview is the URL for the embed, which is of the format:

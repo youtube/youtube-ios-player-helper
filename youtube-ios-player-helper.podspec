@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name              = "youtube-ios-player-helper"
-  s.version           = "0.1.6"
+  s.version           = "1.0.0"
   s.summary           = "Helper library for iOS developers that want to embed YouTube videos in
                          their iOS apps with the iframe player API."
 
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
                        their applications via a custom UIView subclass, YTPlayerView.
                        This library provides:
 
-                       * A managed UIWebView instance that loads the HTML code for the iframe player
+                       * A managed WebView instance that loads the HTML code for the iframe player
                        * Objective-C wrapper functions for the JavaScript Player API
                        * YTPlayerViewDelegate for handling YouTube player state changes natively in
                          your Objective-C code
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
                            "Ibrahim Ulukaya" => "ulukaya@google.com",
                            "Yoshifumi Yamaguchi" => "yoshifumi@google.com" }
   s.social_media_url   = "https://twitter.com/YouTubeDev"
-  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "0.1.6" }
+  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "1.0.0" }
 
   s.platform     = :ios, '10.0'
   s.requires_arc = true

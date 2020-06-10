@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
                        their applications via a custom UIView subclass, YTPlayerView.
                        This library provides:
 
-                       * A managed UIWebView instance that loads the HTML code for the iframe player
+                       * A managed WebView instance that loads the HTML code for the iframe player
                        * Objective-C wrapper functions for the JavaScript Player API
                        * YTPlayerViewDelegate for handling YouTube player state changes natively in
                          your Objective-C code

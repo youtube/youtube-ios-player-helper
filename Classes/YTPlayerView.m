@@ -326,7 +326,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
       completionHandler(kYTPlayerStateUnknown, error);
       return;
     }
-    YTPlayerState state = [result intValue];
+    YTPlayerState state = [YTPlayerView playerStateForString:[result stringValue]];
     completionHandler(state, nil);
   }];
 }
@@ -579,22 +579,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     }
   } else if ([action isEqual:kYTPlayerCallbackOnStateChange]) {
     if ([self.delegate respondsToSelector:@selector(playerView:didChangeToState:)]) {
-      YTPlayerState state = kYTPlayerStateUnknown;
-
-      if ([data isEqual:kYTPlayerStateEndedCode]) {
-        state = kYTPlayerStateEnded;
-      } else if ([data isEqual:kYTPlayerStatePlayingCode]) {
-        state = kYTPlayerStatePlaying;
-      } else if ([data isEqual:kYTPlayerStatePausedCode]) {
-        state = kYTPlayerStatePaused;
-      } else if ([data isEqual:kYTPlayerStateBufferingCode]) {
-        state = kYTPlayerStateBuffering;
-      } else if ([data isEqual:kYTPlayerStateCuedCode]) {
-        state = kYTPlayerStateCued;
-      } else if ([data isEqual:kYTPlayerStateUnstartedCode]) {
-        state = kYTPlayerStateUnstarted;
-      }
-
+      YTPlayerState state = [YTPlayerView playerStateForString:data];
       [self.delegate playerView:self didChangeToState:state];
     }
   } else if ([action isEqual:kYTPlayerCallbackOnPlaybackQualityChange]) {

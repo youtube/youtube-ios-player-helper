@@ -76,7 +76,7 @@ task :release do
   sh "git tag -a #{spec_version} -m 'Release #{spec_version}'"
   sh "git push origin master"
   sh "git push origin --tags"
-  sh "pod push master #{podspec_path}"
+  sh "pod trunk push #{podspec_path}"
 end
 
 # @return [Pod::Version] The version as reported by the Podspec.
@@ -158,5 +158,6 @@ end
 def replace_version_number(new_version_number)
   text = File.read(podspec_path)
   text.gsub!(/(s.version( )*= ")#{spec_version}(")/, "\\1#{new_version_number}\\3")
+  text.gsub!(/(s.source( )*= \{ :git => "https:\/\/github.com\/youtube\/youtube-ios-player-helper\.git", :tag => ")#{spec_version}(")/, "\\1#{new_version_number}\\3")
   File.open(podspec_path, "w") { |file| file.puts text }
 end

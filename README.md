@@ -36,9 +36,9 @@ working with callbacks via YTPlayerViewDelegate.
 
 ## Author
 
-Ikai Lan
-Ibrahim Ulukaya
-Yoshifumi Yamaguchi
+- Ikai Lan
+- Ibrahim Ulukaya
+- Yoshifumi Yamaguchi
 
 ## License
 

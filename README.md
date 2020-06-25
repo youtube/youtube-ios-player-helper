@@ -37,8 +37,8 @@ working with callbacks via YTPlayerViewDelegate.
 ## Author
 
 Ikai Lan
-Ibrahim Ulukaya, ulukaya@google.com
-Yoshifumi Yamaguchi, yoshifumi@google.com
+Ibrahim Ulukaya
+Yoshifumi Yamaguchi
 
 ## License
 

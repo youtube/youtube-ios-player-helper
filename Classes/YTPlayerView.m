@@ -679,9 +679,13 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch) {
     return YES;
   } else {
-    [[UIApplication sharedApplication] openURL:url
-                                       options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO}
-                             completionHandler:nil];
+    if (@available(iOS 10.0, *)) {
+      [[UIApplication sharedApplication] openURL:url
+                                         options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO}
+                               completionHandler:nil];
+    } else {
+      [[UIApplication sharedApplication] openURL:url];
+    }
     return NO;
   }
 }
@@ -893,7 +897,11 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 - (WKWebView *)createNewWebView {
   WKWebViewConfiguration *webViewConfiguration = [[WKWebViewConfiguration alloc] init];
   webViewConfiguration.allowsInlineMediaPlayback = YES;
-  webViewConfiguration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
+  if (@available(iOS 10.0, *)) {
+    webViewConfiguration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
+  } else {
+    webViewConfiguration.requiresUserActionForMediaPlayback = NO;
+  }
   WKWebView *webView = [[WKWebView alloc] initWithFrame:self.bounds
                                           configuration:webViewConfiguration];
   webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);

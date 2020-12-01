@@ -76,7 +76,7 @@
         window.location.href = 'ytplayer://onPlaybackQualityChange?data=' + event.data;
     }
 
-    function onPlayerError(event) {
+    function onError(event) {
         if (event.data == 100) {
             error = true;
         }

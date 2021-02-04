@@ -62,7 +62,7 @@ NSString static *const kYTPlayerOAuthRegexPattern = @"^http(s)://accounts.google
 NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.googleapis.com/static/proxy.html(.*)$";
 NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googlesyndication.com/sodar/(.*).html$";
 
-@interface YTPlayerView() <WKNavigationDelegate>
+@interface YTPlayerView() <WKNavigationDelegate, WKUIDelegate>
 
 @property (nonatomic) NSURL *originURL;
 @property (nonatomic, weak) UIView *initialLoadingView;
@@ -540,6 +540,20 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
   }
 }
 
+#pragma mark - WKUIDelegate
+
+- (WKWebView *)webView:(WKWebView *)webView
+createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
+   forNavigationAction:(WKNavigationAction *)navigationAction
+        windowFeatures:(WKWindowFeatures *)windowFeatures {
+  // Handle navigation actions initiated by Javascript.
+  [[UIApplication sharedApplication] openURL:navigationAction.request.URL
+                                     options:@{}
+                           completionHandler:nil];
+  // Returning nil results in canceling the navigation, which has already been handled above.
+  return nil;
+}
+
 #pragma mark - Private methods
 
 - (NSURL *)originURL {
@@ -770,6 +784,7 @@ decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
 
   [self.webView loadHTMLString:embedHTML baseURL: self.originURL];
   self.webView.navigationDelegate = self;
+  self.webView.UIDelegate = self;
 
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
     UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];

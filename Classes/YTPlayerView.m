@@ -714,7 +714,7 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
         @"onReady" : @"onReady",
         @"onStateChange" : @"onStateChange",
         @"onPlaybackQualityChange" : @"onPlaybackQualityChange",
-        @"onError" : @"onPlayerError"
+        @"onError" : @"onError"
   };
   NSMutableDictionary *playerParams = [[NSMutableDictionary alloc] init];
   if (additionalPlayerParams) {

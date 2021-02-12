@@ -756,6 +756,13 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
                                                      ofType:@"html"
                                                 inDirectory:@"Assets"];
   }
+
+  // React-Native's bundler can only put resources files in the main bundle directory
+  if (!path) {
+      path = [[NSBundle bundleForClass:[YTPlayerView class]] pathForResource:@"YTPlayerView-iframe-player"
+                                                                      ofType:@"html"
+                                                                 inDirectory:nil];
+  }
     
   NSString *embedHTMLTemplate =
       [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];

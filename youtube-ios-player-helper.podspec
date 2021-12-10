@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name              = "youtube-ios-player-helper"
-  s.version           = "1.0.3"
+  s.version           = "1.0.4"
   s.summary           = "Helper library for iOS developers that want to embed YouTube videos in
                          their iOS apps with the iframe player API."
 
@@ -38,10 +38,10 @@ Pod::Spec.new do |s|
                             LICENSE
                          }
   s.author             = { "Ikai Lan" => "",
-                           "Ibrahim Ulukaya" => "ulukaya@google.com",
-                           "Yoshifumi Yamaguchi" => "yoshifumi@google.com" }
+                           "Ibrahim Ulukaya" => "",
+                           "Yoshifumi Yamaguchi" => "" }
   s.social_media_url   = "https://twitter.com/YouTubeDev"
-  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "1.0.3" }
+  s.source             = { :git => "https://github.com/youtube/youtube-ios-player-helper.git", :tag => "1.0.4" }
 
   s.platform     = :ios, '10.0'
   s.requires_arc = true

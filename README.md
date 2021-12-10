@@ -3,11 +3,9 @@
 [![Version](https://cocoapod-badges.herokuapp.com/v/youtube-ios-player-helper/badge.png)](https://cocoapods.org/pods/youtube-ios-player-helper)
 [![Platform](https://cocoapod-badges.herokuapp.com/p/youtube-ios-player-helper/badge.png)](https://cocoapods.org/pods/youtube-ios-player-helper)
 
-## Usage
+## Overview
 
 To run the example project; clone the repo, and run `pod install` from the Project directory first.  For a simple tutorial see this Google Developers article - [Using the YouTube Helper Library to embed YouTube videos in your iOS application](https://developers.google.com/youtube/v3/guides/ios_youtube_helper).
-
-## Requirements
 
 ## Installation
 ### CocoaPods
@@ -19,7 +17,7 @@ the library, add the following line to your Podfile and replace "x.y.z" with the
 ### Swift Package Manager 
 Add the following line to the dependencies in your `Package.swift`:
 ```swift
-.package("https://github.com/youtube/youtube-ios-player-helper.git", from: "1.0.3")
+.package("https://github.com/youtube/youtube-ios-player-helper.git", from: "x.y.z")
 ```
 Add `YouTubeiOSPlayerHelper` to your target's dependencies.
 ```swift
@@ -49,7 +47,7 @@ After installing in your project, to use the library:
 See the sample project for more advanced uses, including passing additional player parameters and
 working with callbacks via YTPlayerViewDelegate.
 
-## Author
+## Original Authors
 
 - Ikai Lan
 - Ibrahim Ulukaya

@@ -46,9 +46,12 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '10.0'
   s.requires_arc = true
 
-  s.source_files = 'Classes'
-  s.resources = "youtube-ios-player-helper/Assets.bundle"
+  s.source_files = "Sources/**/*.{h,m}"
+  
+  s.resource_bundle = {
+    'Assets' => ['Sources/Assets/*.html']
+  }
 
-  s.ios.exclude_files = 'Classes/osx'
-  s.osx.exclude_files = 'Classes/ios'
+  s.ios.exclude_files = 'Sources/osx'
+  s.osx.exclude_files = 'Sources/ios'
 end

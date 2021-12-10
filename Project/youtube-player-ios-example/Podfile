@@ -20,6 +20,6 @@ target "youtube-player-ios-example" do
   pod "youtube-ios-player-helper", :path => "../../youtube-ios-player-helper.podspec"
 
   target "youtube-player-ios-exampleTests" do
-    pod "OCMock", "3.1.2"
+    pod "OCMock", "3.7.1"
   end
 end

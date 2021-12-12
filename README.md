@@ -2,6 +2,7 @@
 
 [![Version](https://cocoapod-badges.herokuapp.com/v/youtube-ios-player-helper/badge.png)](https://cocoapods.org/pods/youtube-ios-player-helper)
 [![Platform](https://cocoapod-badges.herokuapp.com/p/youtube-ios-player-helper/badge.png)](https://cocoapods.org/pods/youtube-ios-player-helper)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## Overview
 

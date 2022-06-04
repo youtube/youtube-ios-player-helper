@@ -279,6 +279,34 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   }];
 }
 
+#if TARGET_OS_OSX
+#pragma mark - Setting the player volume
+
+- (void)setVolume:(float)volume {
+  NSNumber *volumeValue = [NSNumber numberWithFloat:volume];
+  NSString *command = [NSString stringWithFormat:@"player.setVolume('%@');", volumeValue];
+  [self evaluateJavaScript:command];
+}
+
+- (void)getVolume:(_Nullable YTFloatCompletionHandler)completionHandler {
+  [self evaluateJavaScript:@"player.getVolume();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+    if (!completionHandler) {
+      return;
+    }
+    if (error) {
+      completionHandler(-1, error);
+      return;
+    }
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
+      return;
+    }
+    completionHandler([result floatValue], nil);
+  }];
+}
+#endif
+
 #pragma mark - Setting playback behavior for playlists
 
 - (void)setLoop:(BOOL)loop {

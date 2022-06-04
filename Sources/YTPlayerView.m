@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import "YTPlayerView.h"
+#import <TargetConditionals.h>
 
 // These are instances of NSString because we get them from parsing a URL. It would be silly to
 // convert these into an integer just to have to convert the URL query string value into an integer
@@ -65,7 +66,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 @interface YTPlayerView() <WKNavigationDelegate, WKUIDelegate>
 
 @property (nonatomic) NSURL *originURL;
-@property (nonatomic, weak) UIView *initialLoadingView;
+@property (nonatomic, weak) YTView *initialLoadingView;
 
 @end
 
@@ -277,6 +278,34 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     completionHandler(result, nil);
   }];
 }
+
+#if TARGET_OS_OSX
+#pragma mark - Setting the player volume
+
+- (void)setVolume:(float)volume {
+  NSNumber *volumeValue = [NSNumber numberWithFloat:volume];
+  NSString *command = [NSString stringWithFormat:@"player.setVolume('%@');", volumeValue];
+  [self evaluateJavaScript:command];
+}
+
+- (void)getVolume:(_Nullable YTFloatCompletionHandler)completionHandler {
+  [self evaluateJavaScript:@"player.getVolume();"
+         completionHandler:^(id  _Nullable result, NSError * _Nullable error) {
+    if (!completionHandler) {
+      return;
+    }
+    if (error) {
+      completionHandler(-1, error);
+      return;
+    }
+    if (!result || ![result isKindOfClass:[NSNumber class]]) {
+      completionHandler(0, nil);
+      return;
+    }
+    completionHandler([result floatValue], nil);
+  }];
+}
+#endif
 
 #pragma mark - Setting playback behavior for playlists
 
@@ -547,9 +576,13 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
    forNavigationAction:(WKNavigationAction *)navigationAction
         windowFeatures:(WKWindowFeatures *)windowFeatures {
   // Handle navigation actions initiated by Javascript.
+#if TARGET_OS_OSX
+  [[NSWorkspace sharedWorkspace] openURL:navigationAction.request.URL];
+#elif TARGET_OS_IOS
   [[UIApplication sharedApplication] openURL:navigationAction.request.URL
                                      options:@{}
                            completionHandler:nil];
+#endif
   // Returning nil results in canceling the navigation, which has already been handled above.
   return nil;
 }
@@ -693,9 +726,13 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
   if (ytMatch || adMatch || oauthMatch || staticProxyMatch || syndicationMatch) {
     return YES;
   } else {
+#if TARGET_OS_OSX
+    [[NSWorkspace sharedWorkspace] openURL:url];
+#elif TARGET_OS_IOS
     [[UIApplication sharedApplication] openURL:url
                                        options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO}
                              completionHandler:nil];
+#endif
     return NO;
   }
 }
@@ -785,10 +822,10 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
   self.webView.UIDelegate = self;
 
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredInitialLoadingView:)]) {
-    UIView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
+    YTView *initialLoadingView = [self.delegate playerViewPreferredInitialLoadingView:self];
     if (initialLoadingView) {
       initialLoadingView.frame = self.bounds;
-      initialLoadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+      initialLoadingView.autoresizingMask = YTViewAutoresizingFlexibleWidth | YTViewAutoresizingFlexibleHeight;
       [self addSubview:initialLoadingView];
       self.initialLoadingView = initialLoadingView;
     }
@@ -905,18 +942,22 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
 
 - (WKWebView *)createNewWebView {
   WKWebViewConfiguration *webViewConfiguration = [[WKWebViewConfiguration alloc] init];
+#if TARGET_OS_IOS
   webViewConfiguration.allowsInlineMediaPlayback = YES;
+#endif
   webViewConfiguration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
   WKWebView *webView = [[WKWebView alloc] initWithFrame:self.bounds
-                                          configuration:webViewConfiguration];
-  webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+                                           configuration:webViewConfiguration];
+  webView.autoresizingMask = (YTViewAutoresizingFlexibleWidth | YTViewAutoresizingFlexibleHeight);
+#if TARGET_OS_IOS
   webView.scrollView.scrollEnabled = NO;
   webView.scrollView.bounces = NO;
+#endif
 
   if ([self.delegate respondsToSelector:@selector(playerViewPreferredWebViewBackgroundColor:)]) {
-    webView.backgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor:self];
-    if (webView.backgroundColor == [UIColor clearColor]) {
-      webView.opaque = NO;
+    webView.platformBackgroundColor = [self.delegate playerViewPreferredWebViewBackgroundColor:self];
+    if (webView.platformBackgroundColor == [YTColor clearColor]) {
+      webView.platformOpaque = NO;
     }
   }
   return webView;

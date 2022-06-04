@@ -5,7 +5,7 @@
 
 ## Overview
 
-To run the example project; clone the repo, and run `pod install` from the Project directory first.  For a simple tutorial see this Google Developers article - [Using the YouTube Helper Library to embed YouTube videos in your iOS application](https://developers.google.com/youtube/v3/guides/ios_youtube_helper).
+To run the example project; clone the repo, and run `pod install` from the Project directory first.  For a simple tutorial see this Google Developers article - [Using the YouTube Helper Library to embed YouTube videos in your iOS and macOS application](https://developers.google.com/youtube/v3/guides/ios_youtube_helper).
 
 ## Installation
 ### CocoaPods
@@ -31,8 +31,8 @@ Add `YouTubeiOSPlayerHelper` to your target's dependencies.
 ## Usage
 After installing in your project, to use the library:
 
-  1. Drag a UIView the desired size of your player onto your Storyboard.
-  2. Change the UIView's class in the Identity Inspector tab to YTPlayerView
+  1. Drag a UIView/NSView the desired size of your player onto your Storyboard.
+  2. Change the UIView/NSView's class in the Identity Inspector tab to YTPlayerView
   3. Import "YTPlayerView.h" in your ViewController.
   4. Add the following property to your ViewController's header file:
 ```objc

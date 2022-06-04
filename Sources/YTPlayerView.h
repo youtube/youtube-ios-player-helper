@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <UIKit/UIKit.h>
+#import "TargetConditionals.h"
+#import "PlatformSpecific/PlatformSpecific.h"
 #import <WebKit/WebKit.h>
 
 @class YTPlayerView;
@@ -120,7 +121,7 @@ typedef void (^YTPlaybackQualityCompletionHandler)(YTPlaybackQuality result,
  * @param playerView The YTPlayerView instance where the error has occurred.
  * @return A color object that represents the background color of the webview.
  */
-- (nonnull UIColor *)playerViewPreferredWebViewBackgroundColor:(nonnull YTPlayerView *)playerView;
+- (nonnull YTColor *)playerViewPreferredWebViewBackgroundColor:(nonnull YTPlayerView *)playerView;
 
 /**
  * Callback invoked when initially loading the YouTube iframe to the webview to display a custom
@@ -139,7 +140,7 @@ typedef void (^YTPlaybackQualityCompletionHandler)(YTPlaybackQuality result,
  * @return A view object that will be displayed while YouTube iframe API is being loaded. 
  *         Pass nil to display no custom loading view. Default implementation returns nil.
  */
-- (nullable UIView *)playerViewPreferredInitialLoadingView:(nonnull YTPlayerView *)playerView;
+- (nullable YTView *)playerViewPreferredInitialLoadingView:(nonnull YTPlayerView *)playerView;
 
 @end
 
@@ -150,7 +151,7 @@ typedef void (^YTPlaybackQualityCompletionHandler)(YTPlaybackQuality result,
  * YTPlayerView::loadWithPlaylistId: or their variants to set the video or playlist
  * to populate the view with.
  */
-@interface YTPlayerView : UIView
+@interface YTPlayerView : YTView
 
 @property(nonatomic, nullable, readonly) WKWebView *webView;
 

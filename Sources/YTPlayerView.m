@@ -56,7 +56,7 @@ NSString static *const kYTPlayerCallbackOnPlayTime = @"onPlayTime";
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIframeAPIReady";
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIFailedToLoad = @"onYouTubeIframeAPIFailedToLoad";
 
-NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtube.com/embed/(.*)$";
+NSString static *const kYTPlayerEmbedUrlRegexPattern = @"^http(s)://(www.)youtubeeducation.com/embed/(.*)$";
 NSString static *const kYTPlayerAdUrlRegexPattern = @"^http(s)://pubads.g.doubleclick.net/pagead/conversion/";
 NSString static *const kYTPlayerOAuthRegexPattern = @"^http(s)://accounts.google.com/o/oauth2/(.*)$";
 NSString static *const kYTPlayerStaticProxyRegexPattern = @"^https://content.googleapis.com/static/proxy.html(.*)$";
@@ -83,7 +83,11 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   if (!playerVars) {
     playerVars = @{};
   }
-  NSDictionary *playerParams = @{ @"videoId" : videoId, @"playerVars" : playerVars };
+    NSDictionary *playerParams = @{ @"videoId" : videoId,
+                                    @"host": @"https://www.youtubeeducation.com",
+//                                    @"embedConfig": @{@"contentFilter": @(0)},
+                                    @"playerVars" : playerVars };
+
   return [self loadWithPlayerParams:playerParams];
 }
 
@@ -558,9 +562,8 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
 
 - (NSURL *)originURL {
   if (!_originURL) {
-    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-    NSString *stringURL = [[NSString stringWithFormat:@"http://%@", bundleId] lowercaseString];
-    _originURL = [NSURL URLWithString:stringURL];
+      NSString *stringURL = self.serverBaseUrl;
+      _originURL = [NSURL URLWithString:stringURL];
   }
   return _originURL;
 }

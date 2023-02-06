@@ -562,9 +562,7 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
 
 - (NSURL *)originURL {
   if (!_originURL) {
-//    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-//    NSString *stringURL = [[NSString stringWithFormat:@"http://%@", bundleId] lowercaseString];
-      NSString *stringURL = @"https://stg.sphero-dev.com/";
+      NSString *stringURL = self.serverBaseUrl;
       _originURL = [NSURL URLWithString:stringURL];
   }
   return _originURL;

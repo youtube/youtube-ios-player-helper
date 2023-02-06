@@ -153,7 +153,7 @@ typedef void (^YTPlaybackQualityCompletionHandler)(YTPlaybackQuality result,
 @interface YTPlayerView : UIView
 
 @property(nonatomic, nullable, readonly) WKWebView *webView;
-@property(nonatomic, atomic) NSString *serverBaseUrl;
+@property(nonatomic, nullable, strong) NSString *serverBaseUrl;
 
 /** A delegate to be notified on playback events. */
 @property(nonatomic, weak, nullable) id<YTPlayerViewDelegate> delegate;

@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
                            "Ibrahim Ulukaya" => "",
                            "Yoshifumi Yamaguchi" => "" }
   s.social_media_url   = "https://twitter.com/YouTubeDev"
-  s.source             = { :git => "https://github.com/JonathanSphero/youtube-ios-player-helper", :tag => "1.0.4" }
+  s.source             = { :git => "https://github.com/JonathanSphero/youtube-ios-player-helper", :tag => "1.0.4.fork" }
 
   s.platform     = :ios, '10.0'
   s.requires_arc = true

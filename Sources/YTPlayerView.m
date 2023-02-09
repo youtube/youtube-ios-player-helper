@@ -85,6 +85,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
   }
     NSDictionary *playerParams = @{ @"videoId" : videoId,
                                     @"host": @"https://www.youtubeeducation.com",
+                                    @"embedConfig": @{@"contentFilter": @(1)},
                                     @"playerVars" : playerVars };
 
   return [self loadWithPlayerParams:playerParams];

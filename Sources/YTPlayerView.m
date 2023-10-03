@@ -547,9 +547,12 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
    forNavigationAction:(WKNavigationAction *)navigationAction
         windowFeatures:(WKWindowFeatures *)windowFeatures {
   // Handle navigation actions initiated by Javascript.
-  [[UIApplication sharedApplication] openURL:navigationAction.request.URL
-                                     options:@{}
-                           completionHandler:nil];
+  NSURL *url = navigationAction.request.URL;
+  if (url != nil) {
+      [[UIApplication sharedApplication] openURL:url
+                                         options:@{}
+                               completionHandler:nil];
+  }
   // Returning nil results in canceling the navigation, which has already been handled above.
   return nil;
 }
@@ -636,7 +639,12 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
   // since it is set as the webView.baseURL.
   // In that case we want to let it load itself in the webView instead of trying
   // to load it in a browser.
-  if ([[url.host lowercaseString] isEqualToString:[self.originURL.host lowercaseString]]) {
+  NSString *originalUrlHost = self.originURL.host;
+  if (originalUrlHost == nil) {
+    return NO;
+  }
+  
+  if ([[url.host lowercaseString] isEqualToString:[originalUrlHost lowercaseString]]) {
     return YES;
   }
   // Usually this means the user has clicked on the YouTube logo or an error message in the
@@ -648,45 +656,50 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerEmbedUrlRegexPattern
                                                 options:NSRegularExpressionCaseInsensitive
                                                   error:&error];
+  NSString *urlString = url.absoluteString;
+  if (urlString == nil) {
+    return NO;
+  }
+  
   NSTextCheckingResult *ytMatch =
-      [ytRegex firstMatchInString:url.absoluteString
+    [ytRegex firstMatchInString:urlString
                         options:0
                           range:NSMakeRange(0, [url.absoluteString length])];
-    
+
   NSRegularExpression *adRegex =
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerAdUrlRegexPattern
                                                 options:NSRegularExpressionCaseInsensitive
                                                   error:&error];
   NSTextCheckingResult *adMatch =
-      [adRegex firstMatchInString:url.absoluteString
+    [adRegex firstMatchInString:urlString
                         options:0
                           range:NSMakeRange(0, [url.absoluteString length])];
-    
+
   NSRegularExpression *syndicationRegex =
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerSyndicationRegexPattern
                                                 options:NSRegularExpressionCaseInsensitive
                                                   error:&error];
 
   NSTextCheckingResult *syndicationMatch =
-      [syndicationRegex firstMatchInString:url.absoluteString
+      [syndicationRegex firstMatchInString:urlString
                                    options:0
                                      range:NSMakeRange(0, [url.absoluteString length])];
 
   NSRegularExpression *oauthRegex =
       [NSRegularExpression regularExpressionWithPattern:kYTPlayerOAuthRegexPattern
-                                              options:NSRegularExpressionCaseInsensitive
-                                                error:&error];
+                                                options:NSRegularExpressionCaseInsensitive
+                                                  error:&error];
   NSTextCheckingResult *oauthMatch =
-    [oauthRegex firstMatchInString:url.absoluteString
+    [oauthRegex firstMatchInString:urlString
                            options:0
                              range:NSMakeRange(0, [url.absoluteString length])];
-    
+
   NSRegularExpression *staticProxyRegex =
     [NSRegularExpression regularExpressionWithPattern:kYTPlayerStaticProxyRegexPattern
                                               options:NSRegularExpressionCaseInsensitive
                                                 error:&error];
   NSTextCheckingResult *staticProxyMatch =
-    [staticProxyRegex firstMatchInString:url.absoluteString
+     [staticProxyRegex firstMatchInString:urlString
                                   options:0
                                     range:NSMakeRange(0, [url.absoluteString length])];
 
@@ -736,13 +749,14 @@ createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration
   }
   // We always want to ovewrite the origin to self.originURL, not just for
   // the webView.baseURL
-  [playerVars setObject:self.originURL.absoluteString forKey:@"origin"];
+  [playerVars setObject:self.originURL.absoluteString ?:@"" forKey:@"origin"];
   [playerParams setValue:playerVars forKey:@"playerVars"];
 
   // Remove the existing webview to reset any state
   [self.webView removeFromSuperview];
-  _webView = [self createNewWebView];
-  [self addSubview:self.webView];
+  WKWebView *webView = [self createNewWebView];
+  _webView = webView;
+  [self addSubview:webView];
 
   NSError *error = nil;
   NSString *path = [[NSBundle bundleForClass:[YTPlayerView class]] pathForResource:@"YTPlayerView-iframe-player"
